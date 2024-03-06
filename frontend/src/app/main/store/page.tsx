@@ -1,9 +1,5 @@
 function StorePage() {
-  return (
-    <main>
-      스토어페이지
-    </main>
-  )
+  return <main>스토어페이지</main>
 }
 
-export default StorePage;
+export default StorePage
