@@ -5,13 +5,9 @@ interface Props {
 function MainLayout({ children }: Props) {
   return (
     <>
-      <header>
-        해더
-      </header>
+      <header>해더</header>
       {children}
-      <nav>
-        네비게이션 바
-      </nav>
+      <nav>네비게이션 바</nav>
     </>
   )
 }

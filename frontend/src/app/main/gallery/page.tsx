@@ -1,9 +1,5 @@
 function GalleryPage() {
-  return(
-    <main>
-      갤러리 페이지
-    </main>
-  )
+  return <main>갤러리 페이지</main>
 }
 
-export default GalleryPage;
+export default GalleryPage

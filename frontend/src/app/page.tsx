@@ -1,9 +1,5 @@
 function LandingPage() {
-  return (
-    <main>
-      랜딩페이지
-    </main>
-  );
+  return <main>랜딩페이지</main>
 }
 
-export default LandingPage;
+export default LandingPage
