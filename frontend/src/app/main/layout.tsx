@@ -11,3 +11,5 @@ function MainLayout({ children }: Props) {
     </>
   )
 }
+
+export default MainLayout
