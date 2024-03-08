@@ -39,8 +39,8 @@ function LandingPage() {
     } else if (device === 'iphone') {
       return (
         <p>
-          <Image src={downloadIcon} alt={'dowloadIcon'} style={imgStyle} />
-          을 클릭하여 홈 화면에 추가하기를 통해 설치를 해주세요
+          <Image src={downloadIcon} alt={'dowloadIcon'} style={imgStyle} />을
+          클릭하여 홈 화면에 추가하기를 통해 설치를 해주세요
         </p>
       )
     }
