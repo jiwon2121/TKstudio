@@ -2,7 +2,7 @@
 
 import React, { useRef, useEffect, useState } from 'react'
 
-const CameraComponent = () => {
+function CameraComponent() {
   const videoRef = useRef<HTMLVideoElement>(null)
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const [capturedImage, setCapturedImage] = useState<string | null>(null)
@@ -49,29 +49,44 @@ const CameraComponent = () => {
       context?.drawImage(video, 0, 0, videoWidth, videoHeight)
 
       // Canvas에서 이미지 데이터를 가져와서 base64 형식으로 저장
-      const imageData = canvas.toDataURL('image/png')
-      setCapturedImage(imageData)
+      canvas.toBlob((blob : any) => {
+        // Blob URL 생성
+        const blobUrl = URL.createObjectURL(blob);
+        setCapturedImage(blobUrl)
+        localStorage.setItem('img', blobUrl)
+        // Blob URL을 사용하여 새 페이지로 이동
+        window.location.href = `/main/create`;
+      }, 'image/*');
+
+
+
     }
   }
 
   return (
     <>
       <h2>카메라</h2>
-      <video
+      {/* <video
         ref={videoRef}
         autoPlay
         playsInline
         muted
         style={{ width: '100%', maxWidth: '600px' }}
-      />
-      <button onClick={captureImage}>사진 찍기</button>
+      /> */}
       {capturedImage && (
         <img
-          src={capturedImage}
-          alt="Captured"
-          style={{ maxWidth: '100%', marginTop: '10px' }}
+        src={capturedImage}
+        alt="Captured"
+        hidden />
+        )}
+       <video
+        ref={videoRef}
+        autoPlay
+        playsInline
+        muted
+        style={{ width: '100%', maxWidth: '600px' }}
         />
-      )}
+      <button onClick={captureImage}>사진 찍기</button>
       <canvas ref={canvasRef} style={{ display: 'none' }} />
     </>
   )
