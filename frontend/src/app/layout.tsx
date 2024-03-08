@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import StyledComponentsRegistry from './lib/registry'
 
 export const metadata: Metadata = {
   manifest: '/manifest.json',
@@ -103,7 +104,9 @@ export default function RootLayout({
         />
         <meta name="theme-color" content="#FDFFFD" />
       </head>
-      <body suppressHydrationWarning={true}>{children}</body>
+      <body suppressHydrationWarning={true} style={{ margin: '0' }}>
+        <StyledComponentsRegistry>{children}</StyledComponentsRegistry>
+      </body>
     </html>
   )
 }
