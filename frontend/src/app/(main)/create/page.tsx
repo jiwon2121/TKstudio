@@ -1,5 +1,6 @@
 'use client'
 
+import OptionList from './_components/optionList'
 import Link from 'next/link'
 import React, { ChangeEvent, useEffect, useRef, useState } from 'react'
 
@@ -53,7 +54,9 @@ function CreatePage() {
   }
 
   return (
-    <main style={{display:'flex', flexDirection:'column', alignItems:'center'}}>
+    <main
+      style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}
+    >
       <input
         ref={imgInputRef}
         type="file"
@@ -75,14 +78,14 @@ function CreatePage() {
       />
       <dialog
         ref={modalRef}
-        style={{width:'150px', padding:'0px', textAlign:'center'}}
+        style={{ width: '150px', padding: '0px', textAlign: 'center' }}
       >
         <div
           style={{
             textDecoration: 'none',
             color: 'black',
             padding: '20px',
-            borderBottom:'solid black'
+            borderBottom: 'solid black',
           }}
           onClick={handleImageInputClick}
         >
@@ -93,7 +96,7 @@ function CreatePage() {
             textDecoration: 'none',
             color: 'black',
             padding: '20px',
-            borderBottom:'solid black'    
+            borderBottom: 'solid black',
           }}
           onClick={handleImageInputClick2}
         >
@@ -104,7 +107,6 @@ function CreatePage() {
             textDecoration: 'none',
             color: 'black',
             padding: '20px',
-
           }}
           onClick={() => modalRef.current?.close()}
         >
@@ -113,7 +115,7 @@ function CreatePage() {
       </dialog>
 
       <div
-        style={{ width: '80%', maxWidth:'400px', margin: '20px'}}
+        style={{ width: '80%', maxWidth: '400px', margin: '20px' }}
         onClick={handleShowModal}
       >
         {!image && (
@@ -154,6 +156,9 @@ function CreatePage() {
         >
           카메라 페이지
         </Link>
+      </div>
+      <div>
+        <OptionList />
       </div>
     </main>
   )
