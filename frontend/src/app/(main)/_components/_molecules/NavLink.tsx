@@ -1,11 +1,11 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import styled from 'styled-components'
-import { Black } from '@/assets/styles/pallete'
-import HomeIcon from '@/assets/icons/home.svg'
-import CreateIcon from '@/assets/icons/aperture.svg'
-import GalleryIcon from '@/assets/icons/images.svg'
-import StoreIcon from '@/assets/icons/store.svg'
+import { Black } from '@@/assets/styles/pallete'
+import HomeIcon from '@@/assets/icons/home.svg'
+import CreateIcon from '@@/assets/icons/aperture.svg'
+import GalleryIcon from '@@/assets/icons/images.svg'
+import StoreIcon from '@@/assets/icons/store.svg'
 
 interface Props {
   to: 'home' | 'create' | 'gallery' | 'store'
