@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { White, MainGreen } from '@/assets/styles/pallete'
+import { White, MainGreen } from '@@/assets/styles/pallete'
 
 interface Props {
   $width?: string
@@ -11,6 +11,7 @@ interface Props {
   $margin?: string
   $padding?: string
   $cursor?: string
+  $fontSize?: string
 }
 
 const Button = styled.button<Props>`
@@ -21,10 +22,11 @@ const Button = styled.button<Props>`
   background-color: ${(props) =>
     props.$backgroundColor ? props.$backgroundColor : MainGreen};
   border-radius: ${(props) =>
-    props.$borderRadius ? props.$borderRadius : '10px'};
+    props.$borderRadius ? props.$borderRadius : '8px'};
   margin: ${(props) => (props.$margin ? props.$margin : 'none')};
-  padding: ${(props) => (props.$padding ? props.$padding : 'none')};
+  padding: ${(props) => (props.$padding ? props.$padding : '5px 10px')};
   cursor: ${(props) => (props.$cursor ? props.$cursor : 'pointer')};
+  font-size: ${(props) => (props.$fontSize ? props.$fontSize : '1rem')};
 `
 
 export default Button
