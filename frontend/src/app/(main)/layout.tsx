@@ -1,3 +1,6 @@
+import Nav from './_components/Nav'
+import Header from './_components/Header'
+
 interface Props {
   children: React.ReactNode
 }
@@ -5,9 +8,9 @@ interface Props {
 function MainLayout({ children }: Props) {
   return (
     <>
-      <header>해더</header>
+      <Header />
       {children}
-      <nav>네비게이션 바</nav>
+      <Nav />
     </>
   )
 }

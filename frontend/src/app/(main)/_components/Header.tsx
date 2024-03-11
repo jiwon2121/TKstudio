@@ -1,0 +1,23 @@
+'use client'
+
+import Image from 'next/image'
+import Logo from '@/assets/icons/header-logo.svg'
+import styled from 'styled-components'
+
+const HeaderWrapper = styled.header`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 50px;
+`
+
+function Header() {
+  return (
+    <HeaderWrapper>
+      <Image src={Logo} width={160} height={40} alt="logo" />
+    </HeaderWrapper>
+  )
+}
+
+export default Header
