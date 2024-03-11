@@ -2,7 +2,7 @@
 
 import Image from 'next/image'
 import { useState, useEffect } from 'react'
-import downloadIcon from '@/assets/icons/download.svg'
+import downloadIcon from '@@/assets/icons/download.svg'
 
 function LandingPage() {
   const imgStyle = { width: '1.5rem', height: 'auto', aspectRatio: '1/1' }
