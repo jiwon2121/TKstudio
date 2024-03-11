@@ -1,5 +1,14 @@
+import OptionList from "./_components/optionList"
+
+
 function CreatePage() {
-  return <main>사진 생성 페이지</main>
+  return (
+    <div>
+      <OptionList/>
+      
+    </div> 
+
+  )
 }
 
 export default CreatePage

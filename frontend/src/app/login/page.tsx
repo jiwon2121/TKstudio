@@ -2,6 +2,24 @@
 
 import kakaologin from "@/assets/images/kakaologin.png"
 import Image from "next/image"
+import styled from 'styled-components'
+
+
+const MainWrapper = styled.div`
+    width: 90vw;
+    height: 98vh;
+    border: 1px solid black;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+`
+const TextWrapper = styled.p`
+    font-weight: bold;
+    font-size: 3rem;
+`
+
 
 const Login = function() {
     const REST_API_KEY = process.env.NEXT_PUBLIC_KAKAO_REST_KEY
@@ -11,11 +29,14 @@ const Login = function() {
   
     return(
 
-        <div>
-        <a href={url}>
-            <Image alt='카톡로그인' src={ kakaologin }></Image>
+        <MainWrapper>
+            <TextWrapper>
+                딸깍사진관
+            </TextWrapper>
+            <a href={url}>
+                <Image alt='카톡로그인' src={ kakaologin }></Image>
             </a>
-        </div>
+        </MainWrapper>
             ) 
     
 }
