@@ -3,7 +3,7 @@
 import NavLink from './_molecules/NavLink'
 import NavMargin from './_molecules/NavMargin'
 import styled from 'styled-components'
-import { White, Black } from '@/assets/styles/pallete'
+import { White, Black } from '@@/assets/styles/pallete'
 
 const NavWrapper = styled.nav`
   position: fixed;
