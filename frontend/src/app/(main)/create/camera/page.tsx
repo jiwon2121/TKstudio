@@ -53,13 +53,13 @@ function CameraComponent() {
         // Blob URL 생성
         const blobUrl = URL.createObjectURL(blob);
         setCapturedImage(blobUrl)
-        localStorage.setItem('img', blobUrl)
+
         // Blob URL을 사용하여 새 페이지로 이동
-        window.location.href = `/main/create`;
+        // window.location.href = `/create?image=${blobUrl}`;
+
+        localStorage.setItem('img', blobUrl)
+        window.location.href = `/create`;
       }, 'image/*');
-
-
-
     }
   }
 
