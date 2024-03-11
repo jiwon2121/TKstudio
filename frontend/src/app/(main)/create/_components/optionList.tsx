@@ -28,7 +28,7 @@ const Content = styled.div`
 
 interface Category {
     name: string;
-    contents: string[];
+    contents: Array<string>;
   }
 
 const OptionList = function () {
