@@ -6,7 +6,7 @@ const withPWA = withPWAInit({
 })
 
 export default withPWA({
-  reactStrictMode: true,
+  reactStrictMode: false,
   compiler: {
     styledComponents: true,
   },
