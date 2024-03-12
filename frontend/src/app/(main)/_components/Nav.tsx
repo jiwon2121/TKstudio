@@ -21,7 +21,7 @@ const NavWrapper = styled.nav`
 function Nav() {
   return (
     <>
-      <NavMargin>&nbsp;</NavMargin>
+      <NavMargin>{' '}</NavMargin>
       <NavWrapper>
         <NavLink to="home" />
         <NavLink to="create" />

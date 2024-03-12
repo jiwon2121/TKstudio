@@ -13,7 +13,6 @@ function LandingPage() {
   function handleBeforeInstallPrompt(event: any) {
     event.preventDefault()
     setDeferredPrompt(event)
-    console.log(event)
   }
 
   function handleInstallClick() {
