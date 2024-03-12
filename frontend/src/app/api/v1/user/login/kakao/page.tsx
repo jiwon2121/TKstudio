@@ -18,7 +18,7 @@ interface ResponseType {
     const loginHandler = useCallback(
         async (code : any) => {
             try {
-                const response = await fetch('http://localhost:8080/api/v1/user/login/kakao', {
+                const response = await fetch(`${process.env.NEXT_PUBLIC_BACK_URL}/api/v1/user/login/kakao`, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -32,11 +32,19 @@ interface ResponseType {
 
                 if (response.ok) {
                     // 성공적으로 응답을 받은 경우
-                    const authToken = response.headers.get('Authorization'); // 'Authorization' 헤더에서 토큰 값 가져오기
-                    console.log('Authorization Header:', authToken);
+                    const accessToken = response.headers.get('accessToken'); // 'Authorization' 헤더에서 토큰 값 가져오기
+                    const refreshToken = response.headers.get('refreshToken');
+                    
+                    if (accessToken && refreshToken ) {
+                      localStorage.setItem('accessToken', `Bearer ${accessToken}`);
+                      localStorage.setItem('refreshToken', `Bearer ${refreshToken}`);
+                    }
+                    else{
+                      console.error('토큰 값이 없습니다')
+                    }
 
                     // 쿠키에 저장하거나 필요한 작업 수행
-                    // router.push('/');
+                    router.push('/home');
                 } else {
                     // 실패한 경우에 대한 처리
                     console.error('Request failed:', responseData.error);
