@@ -51,3 +51,5 @@ next-env.d.ts
 .ionide
 
 .env
+sw.js
+sw.js.map
