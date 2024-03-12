@@ -11,7 +11,7 @@ interface Props {
   $margin?: string
   $padding?: string
   $cursor?: string
-  $fontSize?: string
+  $fontSize?: 'auto' | 'default' | 'none' | 'pointer'
 }
 
 const Button = styled.button<Props>`
