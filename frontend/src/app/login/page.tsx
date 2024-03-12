@@ -1,6 +1,6 @@
 "use client"
 
-import kakaologin from "@/assets/images/kakaologin.png"
+import kakaologin from "@@/assets/images/kakaologin.png"
 import Image from "next/image"
 import styled from 'styled-components'
 
