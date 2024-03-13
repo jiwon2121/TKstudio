@@ -10,6 +10,7 @@ interface Props {
   origin?: boolean
   src: string | StaticImageData
   alt: string
+  onClick?: () => void
 }
 
 interface WrapperProps {
@@ -33,6 +34,7 @@ function ImageWrapper({
   origin,
   alt,
   src,
+  onClick = () => {},
 }: Props) {
   const wrapperProps = origin
     ? {
@@ -42,7 +44,12 @@ function ImageWrapper({
       }
     : { $width, $height, $aspectRatio }
   return (
-    <Wrapper {...wrapperProps}>
+    <Wrapper
+      {...wrapperProps}
+      onClick={() => {
+        onClick()
+      }}
+    >
       <Image alt={alt} src={src} fill style={{ objectFit: 'cover' }} />
     </Wrapper>
   )
