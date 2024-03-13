@@ -15,7 +15,7 @@ const HeaderWrapper = styled.header`
 function Header() {
   return (
     <HeaderWrapper>
-      <Image src={Logo} width={160} height={40} alt="logo" />
+      <Logo />
     </HeaderWrapper>
   )
 }

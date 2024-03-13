@@ -1,11 +1,9 @@
 'use client'
 
-import Image from 'next/image'
 import { useState, useEffect } from 'react'
-import downloadIcon from '@@/assets/icons/download.svg'
+import DownloadIcon from '@@/assets/icons/download.svg'
 
 function LandingPage() {
-  const imgStyle = { width: '1.5rem', height: 'auto', aspectRatio: '1/1' }
   const [device, setDevice] = useState<string | null>(null)
   const [deferredPrompt, setDeferredPrompt] = useState<any>(null)
 
@@ -38,8 +36,8 @@ function LandingPage() {
     } else if (device === 'iphone') {
       return (
         <p>
-          <Image src={downloadIcon} alt={'dowloadIcon'} style={imgStyle} />을
-          클릭하여 홈 화면에 추가하기를 통해 설치를 해주세요
+          <DownloadIcon width="1.5rem" height="1.5rem" />을 클릭하여 홈 화면에
+          추가하기를 통해 설치를 해주세요
         </p>
       )
     }
