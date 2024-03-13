@@ -3,6 +3,7 @@ import Button from '@/components/Button'
 import ImageWrapper from '@/components/ImageWrapper'
 import { useRouter } from 'next/navigation'
 import styled from 'styled-components'
+import { MainRed } from '@@/assets/styles/pallete'
 
 const MainWrapper = styled.main`
   display: flex;
@@ -68,7 +69,7 @@ const Result = function () {
         </Button>
         <Button
           onClick={handleDelete}
-          $backgroundColor="red"
+          $backgroundColor={MainRed}
           $width="80px"
           $margin="20px"
         >
