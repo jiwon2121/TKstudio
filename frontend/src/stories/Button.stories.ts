@@ -1,7 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
-// import { Button } from './Button';
-import Button from '../components/Button'
+import Button from '@/components/Button'
 import {
   MainGreen,
   MainOrange,
@@ -23,6 +22,9 @@ const meta = {
   tags: ['autodocs'],
   // More on argTypes: https://storybook.js.org/docs/api/argtypes
   argTypes: {
+    children: {
+      description: '자식 컴포넌트',
+    },
     $backgroundColor: {
       control: {
         type: 'color',
@@ -37,8 +39,8 @@ const meta = {
       },
       description: '버튼 배경색',
       table: {
-        type: { summary: 'string'},
-        defaultValue: { summary: 'MainGreen', detail: MainGreen},
+        type: { summary: 'string' },
+        defaultValue: { summary: 'MainGreen', detail: MainGreen },
       },
     },
     $color: {
@@ -56,7 +58,76 @@ const meta = {
       description: '글자색',
       table: {
         type: { summary: 'string' },
-        defaultValue: { summary: 'White', detail: White},
+        defaultValue: { summary: 'White', detail: White },
+      },
+    },
+    $width: {
+      control: {
+        type: 'text',
+      },
+      description: '너비',
+      table: {
+        type: { summary: 'string' },
+        defaultValue: { summary: 'auto' },
+      },
+    },
+    $height: {
+      control: {
+        type: 'text',
+      },
+      description: '높이',
+      table: {
+        type: { summary: 'string' },
+        defaultValue: { summary: 'auto' },
+      },
+    },
+    $border: {
+      control: {
+        type: 'text',
+      },
+      description: 'border',
+      table: {
+        type: { summary: 'string' },
+        defaultValue: { summary: 'none' },
+      },
+    },
+    $borderRadius: {
+      control: {
+        type: 'text',
+      },
+      description: 'borderRadius',
+      table: {
+        type: { summary: 'string' },
+        defaultValue: { summary: '8px' },
+      },
+    },
+    $margin: {
+      control: {
+        type: 'text',
+      },
+      description: 'margin',
+      table: {
+        type: { summary: 'string' },
+        defaultValue: { summary: 'none' },
+      },
+    },
+    $padding: {
+      control: {
+        type: 'text',
+      },
+      description: 'padding',
+      table: {
+        type: { summary: 'string' },
+        defaultValue: { summary: '5px 10px' },
+      },
+    },
+    $cursor: {
+      control: 'select',
+      options: ['auto', 'default', 'none', 'pointer'],
+      description: 'cursor',
+      table: {
+        type: { summary: "'auto' | 'default' | 'none' | 'pointer'" },
+        defaultValue: { summary: 'pointer' },
       },
     },
   },

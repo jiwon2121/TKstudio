@@ -6,8 +6,23 @@ const withPWA = withPWAInit({
 })
 
 export default withPWA({
-  reactStrictMode: true,
+  reactStrictMode: false,
   compiler: {
     styledComponents: true,
+  },
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: '*',
+      },
+    ],
+  },
+  webpack(config) {
+    config.module.rules.push({
+      test: /\.svg$/i,
+      use: ['@svgr/webpack'],
+    })
+    return config
   },
 })
