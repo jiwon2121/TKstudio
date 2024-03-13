@@ -1,12 +1,11 @@
 'use client'
 
 import OptionList from './_components/optionList'
-import React, { ChangeEvent, FormEvent, useRef, useState } from 'react'
+import { ChangeEvent, FormEvent, useRef, useState } from 'react'
 
 import styled from 'styled-components'
 import Button from '@/components/Button'
-import { White, MainGreen } from '@@/assets/styles/pallete'
-import { Main } from 'next/document'
+import { MainGreen } from '@@/assets/styles/pallete'
 
 const ImgRequestForm = styled.form`
   display: flex;
@@ -38,24 +37,18 @@ const OriginalImg = styled.img`
   object-fit: cover;
 `
 
-const CreatePageButton = styled(Button)`
-  height: 60px;
-  width: 300px;
-  font-size: 20px;
-  font-weight: bolder;
-  margin-top:10px;
-  &:active {
-    background-color: ${White};
-    color: ${MainGreen};
-    border: solid ${MainGreen};
-  }
-`
+const CreatePageButton = {
+  $height: '60px',
+  $width: '300px',
+  $fontWeight: 'bolder',
+  $margin: '10px',
+}
 
 function CreatePage() {
   const [image, setImage] = useState<string | null>(null)
   const imgInputRef = useRef<HTMLInputElement>(null)
 
-  const changeInput = (event: ChangeEvent<HTMLInputElement>) => {
+  function changeInput(event: ChangeEvent<HTMLInputElement>) {
     const file = event.target.files?.[0]
     if (file) {
       const reader = new FileReader()
@@ -66,11 +59,12 @@ function CreatePage() {
     }
   }
 
-  const handleImageInputClick = () => {
+  function handleImageInputClick(event: any) {
+    event?.preventDefault()
     imgInputRef.current?.click()
   }
 
-  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+  function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
     if (!image) {
       alert('사진을 첨부해주세요')
@@ -95,11 +89,13 @@ function CreatePage() {
           {!image && <UploadSquare>사진을 추가해주세요</UploadSquare>}
           {image && <OriginalImg src={image} alt="imgInput" />}
         </ImgContainer>
-          <CreatePageButton onClick={handleImageInputClick} type='button'>사진 {image ? '변경' : '추가'}</CreatePageButton>
+        <Button {...CreatePageButton} onClick={handleImageInputClick}>
+          사진 {image ? '변경' : '추가'}
+        </Button>
         <div>
           <OptionList />
         </div>
-        <CreatePageButton>딸깍</CreatePageButton>
+        <Button {...CreatePageButton}>딸깍</Button>
       </ImgRequestForm>
     </main>
   )

@@ -1,6 +1,12 @@
 import styled from 'styled-components'
 import { White, MainGreen } from '@@/assets/styles/pallete'
 
+interface Active {
+  $backgroundColor?: string
+  $color?: string
+  $boxShadow: string
+}
+
 interface Props {
   $width?: string
   $height?: string
@@ -12,6 +18,7 @@ interface Props {
   $padding?: string
   $cursor?: string
   $fontSize?: 'auto' | 'default' | 'none' | 'pointer'
+  $active?: Active
 }
 
 const Button = styled.button<Props>`
@@ -27,6 +34,18 @@ const Button = styled.button<Props>`
   padding: ${(props) => (props.$padding ? props.$padding : '5px 10px')};
   cursor: ${(props) => (props.$cursor ? props.$cursor : 'pointer')};
   font-size: ${(props) => (props.$fontSize ? props.$fontSize : '1rem')};
+  &:active {
+    background-color: ${(props) =>
+      props.$active?.$backgroundColor
+        ? props.$active?.$backgroundColor
+        : White};
+    color: ${(props) =>
+      props.$active?.$color ? props.$active?.$color : MainGreen};
+    box-shadow: ${(props) =>
+      props.$active?.$boxShadow
+        ? props.$active.$boxShadow
+        : `0 0 0 2px ${MainGreen} inset`};
+  }
 `
 
 export default Button
