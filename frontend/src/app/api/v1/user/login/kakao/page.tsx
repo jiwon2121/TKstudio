@@ -1,6 +1,5 @@
 'use client'
-
-import { useSearchParams, useRouter } from 'next/navigation'
+import { useRouter } from 'next/navigation'
 
 import { useCallback, useEffect, useState } from 'react'
 
@@ -10,7 +9,6 @@ interface ResponseType {
 }
 
 const Redirect = function () {
-  const params = useSearchParams()
   const router = useRouter()
   const [isLoading, setIsLoading] = useState(true)
   const [result, setResult] = useState('')
@@ -61,15 +59,14 @@ const Redirect = function () {
   )
 
   useEffect(() => {
+    const params = new URLSearchParams(window.location.search)
     const code = params.get('code')
     console.log('Auth Code:', code)
     setResult(String(code))
     if (code) {
       loginHandler(code)
     }
-  }, [])
-
-  console.log('Result:', result)
+  }, [loginHandler])
 
   return <div>{result ? '로그인중입니다' : '다시 시도해주세요'}</div>
 }
