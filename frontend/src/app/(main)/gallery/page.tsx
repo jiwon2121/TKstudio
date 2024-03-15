@@ -3,14 +3,14 @@
 import { useEffect, useState } from 'react'
 import ImageWrapper from '@/components/ImageWrapper'
 import sampleImage from '@@/assets/images/sample.png'
-import Spinner from '@@/assets/icons/spinner.svg'
+import Spinner from '@/components/Spinner'
 import Link from 'next/link'
 import Grid from './_components/Grid'
 
 function GalleryPage() {
   const [target, setTarget] = useState<HTMLElement | null>(null)
   const [page, setPage] = useState<number | null>(1)
-  const [isLoading, setIsLoading] = useState<boolean>(false)
+  const [isLoading, setIsLoading] = useState<boolean>(true)
   const [pictures, setPictures] = useState<Array<number>>([])
 
   const renderPictures = () => {
@@ -82,7 +82,7 @@ function GalleryPage() {
       </Grid>
       {isLoading ? (
         <div style={{ verticalAlign: 'middle' }}>
-          <Spinner height="4rem" />
+          <Spinner />
         </div>
       ) : null}
       {page ? <div ref={setTarget} /> : null}

@@ -1,15 +1,24 @@
 'use client'
 
 import { useState, useEffect } from 'react'
+import { useRouter } from 'next/navigation'
 
 function StartPage() {
   const [device, setDevice] = useState<string | null>(null)
-
+  const router = useRouter()
   function renderMessage() {
     if (device === 'web') {
       return <p>모바일 환경에서 접속해 주세요</p>
     } else if (device === 'android' || device === 'iphone') {
-      return <button>시작하기</button>
+      return (
+        <button
+          onClick={() => {
+            router.push('/login')
+          }}
+        >
+          시작하기
+        </button>
+      )
     }
   }
 

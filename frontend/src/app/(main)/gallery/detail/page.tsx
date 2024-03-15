@@ -11,6 +11,7 @@ import IconWrapper from './_components/IconWrapper'
 import Image from 'next/image'
 
 function Detail() {
+  const router = useRouter()
   const searchParams = useSearchParams().get('a')
   // const dl = useRef<HTMLAnchorElement>(null)
 
@@ -23,7 +24,6 @@ function Detail() {
     console.log(dl)
     dl.click()
     dl.remove()
-    // console.log(dl)
   }
 
   const handleShare = async (file: File) => {
@@ -44,7 +44,7 @@ function Detail() {
       <IconWrapper>
         <EmptyButton
           onClick={() => {
-            handleDownload()
+            router.push('/gallery/detail/download')
           }}
         >
           <DownloadIcon width="1.5rem" height="1.5rem" />
