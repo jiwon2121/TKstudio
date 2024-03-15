@@ -104,7 +104,10 @@ export default function RootLayout({
         />
         <meta name="theme-color" content="#FDFFFD" />
       </head>
-      <body suppressHydrationWarning={true} style={{ margin: '0' }}>
+      <body
+        suppressHydrationWarning={true}
+        style={{ margin: '0', minHeight: '100vh' }}
+      >
         <StyledComponentsRegistry>{children}</StyledComponentsRegistry>
       </body>
     </html>
