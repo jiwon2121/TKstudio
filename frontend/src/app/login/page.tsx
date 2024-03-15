@@ -5,16 +5,20 @@ import kakaologin from '@@/assets/images/kakaologin.png'
 import Image from 'next/image'
 import { useEffect } from 'react'
 import styled from 'styled-components'
+import { MainGreen } from '@@/assets/styles/pallete'
+import Logo from '@@/assets/icons/logo-big.svg'
 
-const MainWrapper = styled.div`
+const MainWrapper = styled.main`
   width: 90vw;
-  height: 98vh;
-  border: 1px solid black;
+  height: 80vh;
+  border: 2px solid ${MainGreen};
   border-radius: 10px;
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
   align-items: center;
+  box-sizing: border-box;
+  margin: 10vh auto;
 `
 const TextWrapper = styled.p`
   font-weight: bold;
@@ -35,7 +39,7 @@ const Login = function () {
 
   return (
     <MainWrapper>
-      <TextWrapper>딸깍사진관</TextWrapper>
+      <Logo />
       <a href={url}>
         <Image alt="카톡로그인" src={kakaologin}></Image>
       </a>
