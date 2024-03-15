@@ -85,7 +85,7 @@ interface Props {
   children: React.ReactNode
   isClose: boolean
   height: string
-  handleClose: () => Promise<void>
+  handleClose: (() => Promise<void>) | (() => void)
 }
 
 function SlideupModal({ children, isClose, handleClose, height }: Props) {
