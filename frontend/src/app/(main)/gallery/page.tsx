@@ -1,29 +1,11 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import Image from 'next/image'
 import ImageWrapper from '@/components/ImageWrapper'
 import sampleImage from '@@/assets/images/sample.png'
-import styled from 'styled-components'
 import Spinner from '@@/assets/icons/spinner.svg'
 import Link from 'next/link'
-
-const MainGrid = styled.main`
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  grid-gap: 1vw;
-  padding: 1vw;
-`
-
-const SpinnerDiv = styled.div`
-  position: relative;
-  grid-column: 1 / 3;
-  height: 4rem;
-  vertical-align: middle;
-  svg {
-    height: 4rem;
-  }
-`
+import Grid from './_components/Grid'
 
 function GalleryPage() {
   const [target, setTarget] = useState<HTMLElement | null>(null)
@@ -70,33 +52,41 @@ function GalleryPage() {
   }, [target, page])
 
   return (
-    <MainGrid>
-      <Link href={{
-        pathname: '/gallery/detail',
-        query: {
-          arr: [1,2,3]
-        }
-      }}>디테일</Link>
-      <ImageWrapper
-        src={sampleImage}
-        alt="1"
-        $width="100%"
-        $aspectRatio="1 / 1"
-      />
-      <ImageWrapper
-        src={sampleImage}
-        alt="2"
-        $width="100%"
-        $aspectRatio="1 / 1"
-      />
-      {renderPictures()}
+    <main>
+      <Grid>
+        <Link
+          href={{
+            pathname: '/gallery/detail',
+            query: {
+              arr: [1, 2, 3],
+            },
+          }}
+        >
+          디테일
+        </Link>
+        <ImageWrapper
+          src={sampleImage}
+          alt="1"
+          $width="100%"
+          $aspectRatio="1 / 1"
+          priority={true}
+        />
+        <ImageWrapper
+          src={sampleImage}
+          alt="2"
+          $width="100%"
+          $aspectRatio="1 / 1"
+          priority={true}
+        />
+        {renderPictures()}
+      </Grid>
       {isLoading ? (
-        <SpinnerDiv>
-          <Spinner />
-        </SpinnerDiv>
+        <div style={{ verticalAlign: 'middle' }}>
+          <Spinner height="4rem" />
+        </div>
       ) : null}
-      {page ? <div ref={setTarget}></div> : null}
-    </MainGrid>
+      {page ? <div ref={setTarget} /> : null}
+    </main>
   )
 }
 
