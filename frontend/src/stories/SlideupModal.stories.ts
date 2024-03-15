@@ -43,6 +43,7 @@ const meta = {
     height: '300px',
     isClose: false,
     children: '닫기',
+    handleClose: () => {}
   },
 } satisfies Meta<typeof SlideupModal>
 
