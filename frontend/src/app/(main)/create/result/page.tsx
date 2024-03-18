@@ -2,7 +2,7 @@
 import Button from '@/components/Button'
 import ImageWrapper from '@/components/ImageWrapper'
 import { useRouter } from 'next/navigation'
-import styled from 'styled-components'
+import styled, { keyframes } from 'styled-components'
 import { MainRed } from '@@/assets/styles/pallete'
 
 const MainWrapper = styled.main`
@@ -10,7 +10,22 @@ const MainWrapper = styled.main`
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  margin-top: 20px;
+  margin-top: 110px;
+`
+const fadeIn = keyframes`
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+`
+
+const FadeInImage = styled.div`
+  width: auto;
+  height: auto;
+  overflow: hidden;
+  animation: ${fadeIn} 4s forwards;
 `
 
 const Result = function () {
@@ -51,13 +66,15 @@ const Result = function () {
   }
   return (
     <MainWrapper>
-      <ImageWrapper
-        // 임시 사진 - create에서 받아온 사진을 게시할 예정
-        src="https://blog.kakaocdn.net/dn/TJL7n/btr1Wmgwtgu/3RJ7dheqh6T8bjumKp5LzK/img.png"
-        alt="AI완성 사진"
-        $width="300px"
-        origin={true}
-      />
+      <FadeInImage>
+        <ImageWrapper
+          // 임시 사진 - create에서 받아온 사진을 게시할 예정
+          src="https://blog.kakaocdn.net/dn/TJL7n/btr1Wmgwtgu/3RJ7dheqh6T8bjumKp5LzK/img.png"
+          alt="AI완성 사진"
+          $width="300px"
+          origin={true}
+        />
+      </FadeInImage>
 
       <div>
         <Button
