@@ -47,8 +47,6 @@ const FadeOut = keyframes`
 const Background = styled.div<{ $isClose: boolean }>`
   position: fixed;
   background-color: ${Black}80;
-  /* background-color: ${(props) =>
-    props.$isClose ? `${Black}00` : `${Black}80`}; */
   width: 100vw;
   height: 100vh;
   z-index: 1;
@@ -59,7 +57,7 @@ const Background = styled.div<{ $isClose: boolean }>`
   animation-fill-mode: forwards;
 `
 
-const Modal = styled.div<{ $height: string; $isClose: boolean }>`
+const Modal = styled.div<{ $height: string, $isClose: boolean }>`
   position: fixed;
   background-color: ${White};
   width: 100vw;
@@ -94,7 +92,8 @@ function SlideupModal({ children, isClose, handleClose, height }: Props) {
     <>
       <Background
         $isClose={isClose}
-        onClick={() => {
+        onClick={(e) => {
+          e.stopPropagation()
           handleClose()
         }}
       />
