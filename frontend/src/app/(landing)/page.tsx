@@ -2,12 +2,13 @@
 
 import { useState, useEffect } from 'react'
 import DownloadIcon from '@@/assets/icons/download.svg'
+import { useRouter } from 'next/navigation'
 
 function LandingPage() {
+  const router = useRouter()
   const [device, setDevice] = useState<string | null>(null)
   const [deferredPrompt, setDeferredPrompt] = useState<any>(null)
 
-  // function
   function handleBeforeInstallPrompt(event: any) {
     event.preventDefault()
     setDeferredPrompt(event)
@@ -26,11 +27,13 @@ function LandingPage() {
   function renderMessage() {
     if (device === 'web') {
       return <p>모바일 환경에서 접속해 주세요</p>
-    } else if (device === 'android' && deferredPrompt) {
+    } else if (device === 'android') {
       return (
         <p>
           어플리케이션을 이용해 주세요
-          <button onClick={handleInstallClick}>앱 설치</button>
+          {deferredPrompt && (
+            <button onClick={handleInstallClick}>앱 설치</button>
+          )}
         </p>
       )
     } else if (device === 'iphone') {
@@ -43,10 +46,10 @@ function LandingPage() {
     }
   }
 
-  // useEffect
+  useEffect
   useEffect(() => {
     window.addEventListener('beforeinstallprompt', handleBeforeInstallPrompt)
-
+    console.log(window)
     return () => {
       window.removeEventListener(
         'beforeinstallprompt',
@@ -66,13 +69,15 @@ function LandingPage() {
     }
 
     setDevice(tempDevice)
-  }, [device])
+
+    router.push(`/install/${tempDevice}`, {scroll: false})
+  }, [router])
 
   return (
-    <main>
+    <>
       <h1>랜딩페이지</h1>
       {renderMessage()}
-    </main>
+    </>
   )
 }
 

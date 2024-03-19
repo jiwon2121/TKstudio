@@ -36,10 +36,10 @@ function StartPage() {
   }, [device])
 
   return (
-    <main>
+    <>
       <h1>스타트 페이지</h1>
       {renderMessage()}
-    </main>
+    </>
   )
 }
 

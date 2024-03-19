@@ -11,6 +11,8 @@ interface Props {
   src: string | StaticImageData
   alt: string
   priority?: boolean
+  imgType?: 'before' | 'after' | 'default'
+  objectFit?: 'fill' | 'contain' | 'none' | 'cover' | 'scale-down'
   onClick?: () => void
 }
 
@@ -23,7 +25,7 @@ interface WrapperProps {
 const Wrapper = styled.div<WrapperProps>`
   width: ${(props) => props.$width};
   height: ${(props) => props.$height};
-  position: relative !important;
+  position: relative;
   background-color: black;
   aspect-ratio: ${(props) => props.$aspectRatio};
 `
@@ -36,13 +38,14 @@ function ImageWrapper({
   alt,
   src,
   priority = false,
+  objectFit = 'cover',
   onClick = () => {},
 }: Props) {
   const wrapperProps = origin
     ? {
         $width: $width ? $width : '100vw',
         $height: 'auto',
-        $aspectRatio: $aspectRatio ? $aspectRatio : '7 / 9',
+        $aspectRatio: $aspectRatio ? $aspectRatio : '3 / 4',
       }
     : { $width, $height, $aspectRatio }
   return (
@@ -58,7 +61,7 @@ function ImageWrapper({
         fill
         sizes="100%"
         priority={priority}
-        style={{ objectFit: 'cover' }}
+        style={{ objectFit: objectFit }}
       />
     </Wrapper>
   )
