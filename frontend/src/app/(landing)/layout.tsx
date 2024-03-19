@@ -1,12 +1,7 @@
-interface Props extends LayoutProps {
-  modal: React.ReactNode
-}
-
-function IndexLayout({ children, modal }: Props) {
+function IndexLayout({ children }: LayoutProps) {
   return (
     <main>
       {children}
-      {modal}
     </main>
   )
 }
