@@ -16,8 +16,8 @@ interface Props {
   $borderRadius?: string
   $margin?: string
   $padding?: string
-  $cursor?: string
-  $fontSize?: 'auto' | 'default' | 'none' | 'pointer'
+  $cursor?: 'auto' | 'default' | 'none' | 'pointer'
+  $fontSize?: string
   $active?: Active
 }
 
