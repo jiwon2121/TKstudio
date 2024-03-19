@@ -51,22 +51,21 @@ function OptionList({ categorySort, showMine }: any) {
   const [showList, setShowList] = useState<Option[]>()
 
   useEffect(() => {
+    let temp_list
+
     if (categorySort == '전체') {
-      setShowList([...optionList])
+      temp_list = [...optionList]
     } else {
-      setShowList(
-        optionList.filter((option: any) => option.category == categorySort),
+      temp_list = optionList.filter(
+        (option: any) => option.category == categorySort,
       )
     }
-  }, [categorySort])
-
-  useEffect(() => {
     if (showMine) {
-      setShowList((prev) => prev?.filter((option) => option.isMine))
+      setShowList(temp_list.filter((option) => option.isMine))
     } else {
-      setShowList([...optionList])
+      setShowList(temp_list)
     }
-  }, [showMine])
+  }, [categorySort, showMine])
 
   return (
     <OptionListContainer>
