@@ -20,9 +20,15 @@ const OptionContainer = styled.div<OptionContainerStyleProp>`
   }
 `
 
+const ImageContainer = styled.img`
+  width: 100%;
+  overflow: hidden;
+`
+
 function OptionDetail(props: Option) {
   return (
     <OptionContainer $purchased={props.purchased}>
+      <ImageContainer src={props.optionS3Url} alt="optionImg" />
       <p>{props.optionName}</p>
       <p>{props.description}</p>
       <p>{props.cost}</p>
