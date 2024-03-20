@@ -25,7 +25,7 @@ function StorePage() {
   const [categorySort, setCategorySort] = useState<number>(0)
 
   function handleCategoryChange(event: ChangeEvent<HTMLSelectElement>) {
-    setCategorySort(event.target.value)
+    setCategorySort(Number(event.target.value))
   }
 
   function handleMineChange(stat: boolean) {
