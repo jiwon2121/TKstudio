@@ -4,23 +4,23 @@ import styled, { keyframes } from 'styled-components'
 import { White, Black } from '@@/assets/styles/pallete'
 import { useRouter } from 'next/navigation'
 
-const SlideUp = (height: string) => keyframes`
+const SlideUp = keyframes`
   from {
-    bottom: -${height};
+    transform: translate(-50%, 100%);
   }
   
   to {
-    bottom: 0;
+    transform: translate(-50%);
   }
 `
 
-const SlideDown = (height: string) => keyframes`
+const SlideDown = keyframes`
   from {
-    bottom: 0;
+    transform: translate(-50%);
   }
 
   to {
-    bottom: -${height};
+    transform: translate(-50%, 100%);
   }
 `
 
@@ -57,15 +57,19 @@ const Background = styled.div<{ $isClose: boolean }>`
   animation-fill-mode: forwards;
 `
 
-const Modal = styled.div<{ $height: string, $isClose: boolean }>`
+const Modal = styled.div<{ $isClose: boolean }>`
   position: fixed;
   background-color: ${White};
   width: 100vw;
+  max-width: 500px;
   border-radius: 25px 25px 0 0;
+  left: 50%;
+  transform: translate(-50%);
   z-index: 2;
   padding: 0;
   margin: 0;
-  height: ${(props) => props.$height};
+
+  height: auto;
   bottom: 0;
   -ms-user-select: none;
   -moz-user-select: -moz-none;
@@ -73,7 +77,7 @@ const Modal = styled.div<{ $height: string, $isClose: boolean }>`
   -khtml-user-select: none;
   user-select: none;
   animation-name: ${(props) =>
-    props.$isClose ? SlideDown(props.$height) : SlideUp(props.$height)};
+    props.$isClose ? SlideDown : SlideUp};
   animation-timing-function: ease-out;
   animation-duration: 0.3s;
   animation-fill-mode: forwards;
@@ -99,7 +103,6 @@ function SlideupModal({ children, isClose, handleClose, height }: Props) {
       />
       <Modal
         $isClose={isClose}
-        $height={height}
         onClick={(e) => {
           e.stopPropagation
         }}
