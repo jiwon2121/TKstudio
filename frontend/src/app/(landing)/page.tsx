@@ -1,15 +1,17 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import DownloadIcon from '@@/assets/icons/download.svg'
+import ShareIcon from '@@/assets/icons/share.svg'
 import Button from '@/components/Button'
-import InstallWrapper from './_components/InstallWrapper'
-import XWrapper from './_components/XWrapper'
 import SlideupModal from '@/components/SlideupModal'
 import LogoSmall from '@@/assets/icons/logo-small.svg'
 import XIcon from '@@/assets/icons/x.svg'
+import AlertIcon from '@@/assets/icons/triangle-alert.svg'
+import InstallWrapper from './_components/InstallWrapper'
+import XWrapper from './_components/XWrapper'
 import InstallHeader from './_components/InstallHeader'
 import InstallLogo from './_components/InstallLogo'
+import ContentsWrapper from './_components/ContentsWrapper'
 
 function LandingPage() {
   // const router = useRouter()
@@ -41,13 +43,18 @@ function LandingPage() {
 
   const renderMessage = () => {
     if (device === 'web') {
-      return <p>모바일 환경에서 접속해 주세요</p>
+      return (
+        <ContentsWrapper>
+          <AlertIcon width="2rem" height="2rem" />
+          <p>모바일로 접속해 주세요</p>
+        </ContentsWrapper>
+      )
     } else if (device === 'android') {
       return deferredPrompt ? (
         <Button
-          $fontSize='1.5rem'
-          $padding='1rem'
-          $borderRadius='1rem'
+          $fontSize="1.5rem"
+          $padding="0.5rem 1rem"
+          $borderRadius="1rem"
           onClick={() => {
             handleInstallClick()
             handleClose()
@@ -56,14 +63,24 @@ function LandingPage() {
           앱 다운로드
         </Button>
       ) : (
-        <p>앱을 이용해 주세요</p>
+        <ContentsWrapper>
+          <AlertIcon width="2rem" height="2rem" />
+          <p>앱을 이용해 주세요</p>
+        </ContentsWrapper>
       )
     } else if (device === 'iphone') {
       return (
-        <p>
-          <DownloadIcon width="1.5rem" height="1.5rem" />을 클릭하여 홈 화면에
-          추가하기를 통해 설치를 해주세요
-        </p>
+        <ContentsWrapper>
+          <p style={{ width: 'auto' }}>
+            <span style={{ verticalAlign: 'middle' }}>
+              <ShareIcon width="1.5rem" height="1.5rem" color="dodgerblue" />
+            </span>
+            의 <span style={{ color: 'dodgerblue' }}>홈 화면에 추가</span>
+            를 통해
+            <br />
+            다운로드해 주세요
+          </p>
+        </ContentsWrapper>
       )
     }
   }
@@ -103,16 +120,20 @@ function LandingPage() {
         >
           <InstallWrapper>
             <InstallHeader>
-              <XWrapper onClick={() => {
-                handleClose()
-              }}>
+              <XWrapper
+                onClick={() => {
+                  handleClose()
+                }}
+              >
                 <XIcon />
               </XWrapper>
               <InstallLogo>
                 <LogoSmall />
               </InstallLogo>
             </InstallHeader>
-            <h2 style={{width: '90%', marginBottom: '3rem'}}>앱을 사용하여 최적의 환경에서 이용해 보세요</h2>
+            <h2 style={{ width: '90%', marginBottom: '2rem' }}>
+              앱을 사용하여 최적의 환경에서 이용해 보세요
+            </h2>
             {renderMessage()}
           </InstallWrapper>
         </SlideupModal>
