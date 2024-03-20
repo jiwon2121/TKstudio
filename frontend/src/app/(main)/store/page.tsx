@@ -12,6 +12,14 @@ const MainWrapper = styled.main`
   align-items: center;
 `
 
+const FlexWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 450px;
+`
+
 function StorePage() {
   const [showMine, setShowMine] = useState<boolean>(false)
   const [categorySort, setCategorySort] = useState<string>('전체')
@@ -27,12 +35,14 @@ function StorePage() {
   return (
     <MainWrapper>
       <h1>옵션 스토어</h1>
-      <ShowMineTab showMine={showMine} handleMineChange={handleMineChange} />
-      <CategoryList
-        categorySort={categorySort}
-        handleCategoryChange={handleCategoryChange}
-      />
-      <OptionList categorySort={categorySort} showMine={showMine} />
+      <FlexWrapper>
+        <ShowMineTab showMine={showMine} handleMineChange={handleMineChange} />
+        <CategoryList
+          categorySort={categorySort}
+          handleCategoryChange={handleCategoryChange}
+        />
+        <OptionList categorySort={categorySort} showMine={showMine} />
+      </FlexWrapper>
     </MainWrapper>
   )
 }

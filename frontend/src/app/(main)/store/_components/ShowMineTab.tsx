@@ -11,7 +11,7 @@ interface ShowMineTabProp {
 
 const MineTabWrapper = styled.div`
   display: flex;
-  width: 300px;
+  width: 80%;
 `
 
 const MineTab = styled.div<MineTabStyleProp>`

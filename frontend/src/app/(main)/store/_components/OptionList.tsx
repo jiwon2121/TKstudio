@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react'
 const OptionListContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
-  width: 300px;
+  width: 100%;
 `
 interface Option {
   title: string

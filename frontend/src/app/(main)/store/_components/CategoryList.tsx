@@ -27,6 +27,8 @@ interface CategoryListProp {
 
 const CategorySelect = styled.select`
   margin: 10px;
+  align-self: flex-end;
+  padding: 10px;
 `
 
 function CategoryList({

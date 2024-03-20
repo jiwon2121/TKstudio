@@ -5,12 +5,18 @@ interface OptionContainerStyleProp {
 }
 
 const OptionContainer = styled.div<OptionContainerStyleProp>`
-  width: 100px;
   padding: 10px;
   border: solid white 1px;
   box-sizing: border-box;
   background-color: ${(props) => (props.$isMine ? 'grey' : 'green')};
   color: white;
+  width: 33.33%;
+  @media screen and (max-width: 400px) {
+    width: 50%;
+  }
+  @media screen and (max-width: 200px) {
+    width: 100%;
+  }
 `
 
 interface OptionDetailProp {
