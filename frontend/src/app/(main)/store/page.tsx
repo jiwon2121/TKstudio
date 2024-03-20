@@ -1,7 +1,7 @@
 'use client'
 
 import styled from 'styled-components'
-import { ChangeEvent, useState } from 'react'
+import { ChangeEvent, Suspense, useState } from 'react'
 import OptionList from './_components/OptionList'
 import CategoryList from './_components/CategoryList'
 import ShowMineTab from './_components/ShowMineTab'
@@ -22,7 +22,7 @@ const FlexWrapper = styled.div`
 
 function StorePage() {
   const [showMine, setShowMine] = useState<boolean>(false)
-  const [categorySort, setCategorySort] = useState<string>('전체')
+  const [categorySort, setCategorySort] = useState<number>(0)
 
   function handleCategoryChange(event: ChangeEvent<HTMLSelectElement>) {
     setCategorySort(event.target.value)

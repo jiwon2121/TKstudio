@@ -1,14 +1,15 @@
 import styled from 'styled-components'
+import { Option } from './OptionList'
 
 interface OptionContainerStyleProp {
-  $isMine: boolean
+  $purchased: boolean
 }
 
 const OptionContainer = styled.div<OptionContainerStyleProp>`
   padding: 10px;
   border: solid white 1px;
   box-sizing: border-box;
-  background-color: ${(props) => (props.$isMine ? 'grey' : 'green')};
+  background-color: ${(props) => (props.$purchased ? 'grey' : 'green')};
   color: white;
   width: 33.33%;
   @media screen and (max-width: 400px) {
@@ -19,19 +20,12 @@ const OptionContainer = styled.div<OptionContainerStyleProp>`
   }
 `
 
-interface OptionDetailProp {
-  title: string
-  content: string
-  isMine: boolean
-  category: string
-}
-
-function OptionDetail({ title, content, isMine, category }: OptionDetailProp) {
+function OptionDetail(props: Option) {
   return (
-    <OptionContainer $isMine={isMine}>
-      <p>{title}</p>
-      <p>{content}</p>
-      <p>{category}</p>
+    <OptionContainer $purchased={props.purchased}>
+      <p>{props.optionName}</p>
+      <p>{props.description}</p>
+      <p>{props.cost}</p>
     </OptionContainer>
   )
 }
