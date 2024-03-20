@@ -26,8 +26,9 @@ interface OptionListProp {
 }
 
 function OptionList({ categorySort, showMine }: OptionListProp) {
-  const [optionList, setOptionList] = useState<Option[]>([])
+  // const [optionList, setOptionList] = useState<Option[]>([])
   const [showList, setShowList] = useState<Option[]>([])
+  const [isLoading, setIsLoading] = useState<boolean>(true)
 
   async function getOptionList() {
     const tk = localStorage.getItem('accessToken') as string
@@ -40,11 +41,8 @@ function OptionList({ categorySort, showMine }: OptionListProp) {
     }
 
     const optionListJson = await optionListResponse.json()
-    setOptionList(optionListJson.data)
-  }
 
-  useEffect(() => {
-    getOptionList()
+    const optionList: Option[] = optionListJson.data
 
     let temp_list
 
@@ -60,16 +58,23 @@ function OptionList({ categorySort, showMine }: OptionListProp) {
     } else {
       setShowList(temp_list)
     }
+    setIsLoading(false)
+  }
+
+  useEffect(() => {
+    getOptionList()
   }, [categorySort, showMine])
 
   return (
     <OptionListContainer>
-      {showList?.length ? (
+      {isLoading && <h1>옵션 리스트 로딩중입니다.</h1>}
+      {showList?.length > 0 && (
         showList?.map((option: Option) => (
           <OptionDetail key={option.optionId} {...option} />
         ))
-      ) : (
-        <div>없습니다.</div>
+      ) }
+      { !isLoading && showList?.length == 0 && (
+        <h1>해당 조건의 상품이 없습니다.</h1>
       )}
     </OptionListContainer>
   )
