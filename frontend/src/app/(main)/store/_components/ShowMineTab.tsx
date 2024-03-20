@@ -4,6 +4,11 @@ interface MineTabStyleProp {
   $showMode: boolean
 }
 
+interface ShowMineTabProp {
+  showMine: boolean
+  handleMineChange: (target: boolean) => void
+}
+
 const MineTabWrapper = styled.div`
   display: flex;
   width: 300px;
@@ -16,7 +21,7 @@ const MineTab = styled.div<MineTabStyleProp>`
   padding: 10px;
 `
 
-function ShowMineTab({ showMine, handleMineChange }: any) {
+function ShowMineTab({ showMine, handleMineChange }: ShowMineTabProp) {
   return (
     <MineTabWrapper>
       <MineTab $showMode={!showMine} onClick={() => handleMineChange(false)}>

@@ -1,3 +1,4 @@
+import { ChangeEvent } from 'react'
 import styled from 'styled-components'
 
 const categoryList = [
@@ -19,11 +20,19 @@ const categoryList = [
   },
 ]
 
+interface CategoryListProp {
+  categorySort: string
+  handleCategoryChange: (event: ChangeEvent<HTMLSelectElement>) => void
+}
+
 const CategorySelect = styled.select`
   margin: 10px;
 `
 
-function CategoryList({ categorySort, handleCategoryChange }: any) {
+function CategoryList({
+  categorySort,
+  handleCategoryChange,
+}: CategoryListProp) {
   return (
     <CategorySelect
       name=""

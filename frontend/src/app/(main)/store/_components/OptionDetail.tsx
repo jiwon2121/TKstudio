@@ -1,10 +1,10 @@
 import styled from 'styled-components'
 
-interface OptionDetailProp {
+interface OptionContainerStyleProp {
   $isMine: boolean
 }
 
-const OptionContainer = styled.div<OptionDetailProp>`
+const OptionContainer = styled.div<OptionContainerStyleProp>`
   width: 100px;
   padding: 10px;
   border: solid white 1px;
@@ -13,14 +13,14 @@ const OptionContainer = styled.div<OptionDetailProp>`
   color: white;
 `
 
-interface Prop {
+interface OptionDetailProp {
   title: string
   content: string
   isMine: boolean
   category: string
 }
 
-function OptionDetail({ title, content, isMine, category }: Prop) {
+function OptionDetail({ title, content, isMine, category }: OptionDetailProp) {
   return (
     <OptionContainer $isMine={isMine}>
       <p>{title}</p>

@@ -14,6 +14,11 @@ interface Option {
   category: string
 }
 
+interface OptionListProp {
+  categorySort: string
+  showMine: boolean
+}
+
 const optionList = [
   {
     title: 'title 1',
@@ -47,7 +52,7 @@ const optionList = [
   },
 ]
 
-function OptionList({ categorySort, showMine }: any) {
+function OptionList({ categorySort, showMine }: OptionListProp) {
   const [showList, setShowList] = useState<Option[]>()
 
   useEffect(() => {
@@ -57,7 +62,7 @@ function OptionList({ categorySort, showMine }: any) {
       temp_list = [...optionList]
     } else {
       temp_list = optionList.filter(
-        (option: any) => option.category == categorySort,
+        (option: Option) => option.category == categorySort,
       )
     }
     if (showMine) {
@@ -70,7 +75,7 @@ function OptionList({ categorySort, showMine }: any) {
   return (
     <OptionListContainer>
       {showList?.length ? (
-        showList?.map((option: any) => (
+        showList?.map((option: Option) => (
           <OptionDetail key={option.title} {...option} />
         ))
       ) : (

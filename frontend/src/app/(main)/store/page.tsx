@@ -1,7 +1,7 @@
 'use client'
 
 import styled from 'styled-components'
-import { useState } from 'react'
+import { ChangeEvent, useState } from 'react'
 import OptionList from './_components/OptionList'
 import CategoryList from './_components/CategoryList'
 import ShowMineTab from './_components/ShowMineTab'
@@ -16,7 +16,7 @@ function StorePage() {
   const [showMine, setShowMine] = useState<boolean>(false)
   const [categorySort, setCategorySort] = useState<string>('전체')
 
-  function handleCategoryChange(event: any) {
+  function handleCategoryChange(event: ChangeEvent<HTMLSelectElement>) {
     setCategorySort(event.target.value)
   }
 
