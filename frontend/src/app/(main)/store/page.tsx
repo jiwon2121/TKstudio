@@ -18,12 +18,10 @@ function StorePage() {
 
   function handleCategoryChange(event: any) {
     setCategorySort(event.target.value)
-    console.log(event.target.value)
   }
 
   function handleMineChange(stat: boolean) {
     setShowMine(stat)
-    setCategorySort('전체')
   }
 
   return (
