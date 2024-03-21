@@ -1,7 +1,6 @@
 import { ChangeEvent, useEffect, useState } from 'react'
 import styled from 'styled-components'
-
-const API_URL = 'https://j10a101.p.ssafy.io/api/v1'
+import { API_URL } from '../page'
 
 interface Category {
   categoryId: number
@@ -13,7 +12,7 @@ interface CategoryListProp {
   handleCategoryChange: (event: ChangeEvent<HTMLSelectElement>) => void
 }
 
-const CategorySelect = styled.select`
+const CategoryDropdown = styled.select`
   margin: 10px;
   align-self: flex-end;
   padding: 10px;
@@ -39,9 +38,9 @@ function CategoryList({ handleCategoryChange }: CategoryListProp) {
   }, [])
 
   return (
-    <CategorySelect
-      name="categorySelect"
-      id="categorySelect"
+    <CategoryDropdown
+      name="CategoryDropdown"
+      id="CategoryDropdown"
       onChange={handleCategoryChange}
     >
       <option key={0} value={0}>
@@ -54,7 +53,7 @@ function CategoryList({ handleCategoryChange }: CategoryListProp) {
           </option>
         )
       })}
-    </CategorySelect>
+    </CategoryDropdown>
   )
 }
 

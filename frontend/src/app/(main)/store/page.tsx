@@ -1,18 +1,20 @@
 'use client'
 
 import styled from 'styled-components'
-import { ChangeEvent, Suspense, useState } from 'react'
+import { ChangeEvent, useState } from 'react'
 import OptionList from './_components/OptionList'
 import CategoryList from './_components/CategoryList'
 import ShowMineTab from './_components/ShowMineTab'
 
-const MainWrapper = styled.main`
+const API_URL = 'https://j10a101.p.ssafy.io/api/v1'
+
+const MainContainer = styled.main`
   display: flex;
   flex-direction: column;
   align-items: center;
 `
 
-const FlexWrapper = styled.div`
+const ContentContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -33,18 +35,20 @@ function StorePage() {
   }
 
   return (
-    <MainWrapper>
+    <MainContainer>
       <h1>옵션 스토어</h1>
-      <FlexWrapper>
+      <ContentContainer>
         <ShowMineTab showMine={showMine} handleMineChange={handleMineChange} />
         <CategoryList
           categorySort={categorySort}
           handleCategoryChange={handleCategoryChange}
         />
         <OptionList categorySort={categorySort} showMine={showMine} />
-      </FlexWrapper>
-    </MainWrapper>
+      </ContentContainer>
+    </MainContainer>
   )
 }
 
 export default StorePage
+
+export { API_URL }

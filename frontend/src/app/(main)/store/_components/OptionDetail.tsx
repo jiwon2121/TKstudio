@@ -1,11 +1,11 @@
 import styled from 'styled-components'
 import { Option } from './OptionList'
 
-interface OptionContainerStyleProp {
+interface OptionDetailWrapperStyleProp {
   $purchased: boolean
 }
 
-const OptionContainer = styled.div<OptionContainerStyleProp>`
+const OptionDetailWrapper = styled.div<OptionDetailWrapperStyleProp>`
   padding: 10px;
   border: solid white 1px;
   box-sizing: border-box;
@@ -20,19 +20,19 @@ const OptionContainer = styled.div<OptionContainerStyleProp>`
   }
 `
 
-const ImageContainer = styled.img`
+const ImageWrapper = styled.img`
   width: 100%;
   overflow: hidden;
 `
 
 function OptionDetail(props: Option) {
   return (
-    <OptionContainer $purchased={props.purchased}>
-      <ImageContainer src={props.optionS3Url} alt="optionImg" />
+    <OptionDetailWrapper $purchased={props.purchased}>
+      <ImageWrapper src={props.optionS3Url} alt="optionImg" />
       <p>{props.optionName}</p>
       <p>{props.description}</p>
       <p>{props.cost}</p>
-    </OptionContainer>
+    </OptionDetailWrapper>
   )
 }
 

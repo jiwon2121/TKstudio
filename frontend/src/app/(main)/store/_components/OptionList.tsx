@@ -1,8 +1,7 @@
 import styled from 'styled-components'
 import OptionDetail from './OptionDetail'
 import { useEffect, useState } from 'react'
-
-const API_URL = 'https://j10a101.p.ssafy.io/api/v1'
+import { API_URL } from '../page'
 
 const OptionListContainer = styled.div`
   display: flex;
@@ -68,12 +67,11 @@ function OptionList({ categorySort, showMine }: OptionListProp) {
   return (
     <OptionListContainer>
       {isLoading && <h1>옵션 리스트 로딩중입니다.</h1>}
-      {showList?.length > 0 && (
+      {showList?.length > 0 &&
         showList?.map((option: Option) => (
           <OptionDetail key={option.optionId} {...option} />
-        ))
-      ) }
-      { !isLoading && showList?.length == 0 && (
+        ))}
+      {!isLoading && showList?.length == 0 && (
         <h1>해당 조건의 상품이 없습니다.</h1>
       )}
     </OptionListContainer>

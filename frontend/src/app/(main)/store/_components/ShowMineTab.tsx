@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-interface MineTabStyleProp {
+interface MineTabContainerStyleProp {
   $showMode: boolean
 }
 
@@ -14,7 +14,7 @@ const MineTabWrapper = styled.div`
   width: 80%;
 `
 
-const MineTab = styled.div<MineTabStyleProp>`
+const MineTabContainer = styled.div<MineTabContainerStyleProp>`
   border-bottom: solid ${(props) => (props.$showMode ? 'black' : 'white')};
   flex: 1;
   text-align: center;
@@ -24,12 +24,18 @@ const MineTab = styled.div<MineTabStyleProp>`
 function ShowMineTab({ showMine, handleMineChange }: ShowMineTabProp) {
   return (
     <MineTabWrapper>
-      <MineTab $showMode={!showMine} onClick={() => handleMineChange(false)}>
+      <MineTabContainer
+        $showMode={!showMine}
+        onClick={() => handleMineChange(false)}
+      >
         전체
-      </MineTab>
-      <MineTab $showMode={showMine} onClick={() => handleMineChange(true)}>
+      </MineTabContainer>
+      <MineTabContainer
+        $showMode={showMine}
+        onClick={() => handleMineChange(true)}
+      >
         구매한 상품
-      </MineTab>
+      </MineTabContainer>
     </MineTabWrapper>
   )
 }
