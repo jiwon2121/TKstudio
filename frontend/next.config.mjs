@@ -14,8 +14,11 @@ export default withPWA({
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: '*',
+        hostname: '**',
       },
+    ],
+    domains: [
+      'ddalkkak101-bucket.s3.ap-northeast-2.amazonaws.com'
     ],
   },
   webpack(config) {

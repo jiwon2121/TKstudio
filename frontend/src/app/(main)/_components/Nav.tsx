@@ -16,6 +16,7 @@ const NavWrapper = styled.nav`
   background-color: ${White};
   border-top: 1px solid ${Black};
   box-sizing: border-box;
+  z-index: 4;
 `
 
 function Nav() {

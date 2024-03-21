@@ -13,7 +13,7 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en">
+    <html lang="ko">
       <head>
         <link
           rel="apple-touch-icon"
@@ -85,6 +85,7 @@ export default function RootLayout({
           href="/assets/images/favicon-16x16.png"
         />
         <link rel="manifest" href="/manifest.json" />
+        <meta name="referrer" content="no-referrer" />
         <meta name="msapplication-TileColor" content="#FDFFFD" />
         <meta
           name="msapplication-TileImage"
