@@ -5,7 +5,7 @@ import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import ModalContents from '@/components/ModalContents'
 
-function DownloadPage() {
+function DownloadModal() {
   const router = useRouter()
   const [isClose, setIsClose] = useState<boolean>(false)
   const handleClose = async () => {
@@ -27,4 +27,4 @@ function DownloadPage() {
   )
 }
 
-export default DownloadPage
+export default DownloadModal

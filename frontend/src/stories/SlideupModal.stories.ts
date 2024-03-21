@@ -20,15 +20,6 @@ const meta = {
       },
       description: '자식 컴포넌트(Required)',
     },
-    height: {
-      control: {
-        type: 'text',
-      },
-      description: '높이(Required)',
-      table: {
-        type: { summary: 'string' },
-      },
-    },
     isClose: {
       control: {
         type: 'boolean',
@@ -53,7 +44,6 @@ type Story = StoryObj<typeof meta>
 // More on writing stories with args: https://storybook.js.org/docs/writing-stories/args
 export const Default: Story = {
   args: {
-    height: '12rem',
     isClose: false,
     children: '닫기',
   },
