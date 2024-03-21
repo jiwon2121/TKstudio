@@ -6,8 +6,6 @@ import OptionList from './_components/OptionList'
 import CategoryList from './_components/CategoryList'
 import ShowMineTab from './_components/ShowMineTab'
 
-const API_URL = 'https://j10a101.p.ssafy.io/api/v1'
-
 const MainContainer = styled.main`
   display: flex;
   flex-direction: column;
@@ -50,5 +48,3 @@ function StorePage() {
 }
 
 export default StorePage
-
-export { API_URL }

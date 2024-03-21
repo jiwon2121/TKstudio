@@ -1,7 +1,6 @@
 import styled from 'styled-components'
 import OptionDetail from './OptionDetail'
 import { useEffect, useState } from 'react'
-import { API_URL } from '../page'
 
 const OptionListContainer = styled.div`
   display: flex;
@@ -30,13 +29,16 @@ function OptionList({ categorySort, showMine }: OptionListProp) {
   const [isLoading, setIsLoading] = useState<boolean>(true)
 
   async function getOptionList() {
-    const tk = localStorage.getItem('accessToken') as string
-    const optionListResponse = await fetch(API_URL + '/option/list', {
-      headers: { Authorization: tk },
-    })
+    const accessToken = localStorage.getItem('accessToken') as string
+    const optionListResponse = await fetch(
+      process.env.NEXT_PUBLIC_BACK_URL + '/api/v1/option/list',
+      {
+        headers: { Authorization: accessToken },
+      },
+    )
 
     if (!optionListResponse.ok) {
-      throw new Error('fetch fail')
+      throw new Error('옵션 리스트 불러오기 실패')
     }
 
     const optionListJson = await optionListResponse.json()

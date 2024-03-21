@@ -1,6 +1,5 @@
 import { ChangeEvent, useEffect, useState } from 'react'
 import styled from 'styled-components'
-import { API_URL } from '../page'
 
 interface Category {
   categoryId: number
@@ -22,10 +21,12 @@ function CategoryList({ handleCategoryChange }: CategoryListProp) {
   const [categoryList, setCategoryList] = useState<Category[]>()
 
   async function getCategoryList() {
-    const optionCategoryResponse = await fetch(API_URL + '/option/category')
+    const optionCategoryResponse = await fetch(
+      process.env.NEXT_PUBLIC_BACK_URL + '/api/v1/option/category',
+    )
 
     if (!optionCategoryResponse.ok) {
-      throw new Error('Failed to fetch data')
+      throw new Error('카테고리 리스트 불러오기 실패')
     }
 
     const optionCategoryJson = await optionCategoryResponse.json()
