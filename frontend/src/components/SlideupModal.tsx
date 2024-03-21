@@ -2,7 +2,6 @@
 
 import styled, { keyframes } from 'styled-components'
 import { White, Black } from '@@/assets/styles/pallete'
-import { useRouter } from 'next/navigation'
 
 const SlideUp = keyframes`
   from {
@@ -55,13 +54,14 @@ const Background = styled.div<{ $isClose: boolean }>`
   animation-timing-function: ease-out;
   animation-duration: 0.3s;
   animation-fill-mode: forwards;
+  z-index: 100;
 `
 
 const Modal = styled.div<{ $isClose: boolean }>`
   position: fixed;
   background-color: ${White};
   width: 100vw;
-  max-width: 500px;
+  max-width: 512px;
   border-radius: 25px 25px 0 0;
   left: 50%;
   transform: translate(-50%);
@@ -76,22 +76,20 @@ const Modal = styled.div<{ $isClose: boolean }>`
   -webkit-user-select: none;
   -khtml-user-select: none;
   user-select: none;
-  animation-name: ${(props) =>
-    props.$isClose ? SlideDown : SlideUp};
+  animation-name: ${(props) => (props.$isClose ? SlideDown : SlideUp)};
   animation-timing-function: ease-out;
   animation-duration: 0.3s;
   animation-fill-mode: forwards;
+  z-index: 101;
 `
 
 interface Props {
   children: React.ReactNode
   isClose: boolean
-  height: string
   handleClose: (() => Promise<void>) | (() => void)
 }
 
-function SlideupModal({ children, isClose, handleClose, height }: Props) {
-  const router = useRouter()
+function SlideupModal({ children, isClose, handleClose }: Props) {
   return (
     <>
       <Background

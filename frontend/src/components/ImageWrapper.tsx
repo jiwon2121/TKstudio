@@ -11,7 +11,6 @@ interface Props {
   src: string | StaticImageData
   alt: string
   priority?: boolean
-  imgType?: 'before' | 'after' | 'default'
   objectFit?: 'fill' | 'contain' | 'none' | 'cover' | 'scale-down'
   onClick?: () => void
 }

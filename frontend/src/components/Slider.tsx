@@ -63,30 +63,26 @@ interface Props {
   after: string
 }
 
-function Slider() {
+function Slider({ before, after }: Props) {
   const [range, setRange] = useState<number>(50)
 
   return (
     <SliderWrapper>
       <BeforeWrapper $width={`${range}%`}>
         <ImageWrapper
-          src={
-            'https://ddalkkak101-bucket.s3.ap-northeast-2.amazonaws.com/originalImages/03bf0b7c-e4d6-11ee-afa5-0242ac110004.png'
-          }
+          src={before}
           alt="before"
           $width="100vw"
           $aspectRatio="3 / 4"
-          imgType="before"
+          priority={true}
         />
       </BeforeWrapper>
       <ImageWrapper
-        src={
-          'https://ddalkkak101-bucket.s3.ap-northeast-2.amazonaws.com/processedImages/05166b82-e4d6-11ee-afa5-0242ac110004.png'
-        }
+        src={after}
         alt="after"
         $width="100vw"
-        imgType="after"
         origin={true}
+        priority={true}
       />
       <SliderInput
         type="range"
