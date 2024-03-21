@@ -19,7 +19,7 @@ const ContentContainer = styled.div`
   flex-direction: column;
   align-items: center;
   width: 100%;
-  max-width: 450px;
+  max-width: 1440px;
 `
 
 function StorePage() {
