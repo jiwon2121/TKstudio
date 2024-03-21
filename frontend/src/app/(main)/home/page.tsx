@@ -7,13 +7,13 @@ import Main from './_component/_atom/Main'
 import Carousel from './_component/Carousel'
 
 function MainPage() {
-  const accessToken = localStorage.getItem('accessToken')
   const baseUrl = process.env.NEXT_PUBLIC_BACK_URL
   const router = useRouter()
   const imgs = [Sample, Sample, Sample, Sample]
-
+  
   const handleLogout = async () => {
     try {
+      const accessToken = localStorage.getItem('accessToken')
       const res = await fetch(baseUrl + '/api/v1/user/logout', {
         headers: {
           Authorization: accessToken as string,
