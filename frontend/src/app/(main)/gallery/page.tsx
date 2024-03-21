@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from 'react'
 import ImageWrapper from '@/components/ImageWrapper'
-import sampleImage from '@@/assets/images/sample.png'
 import Spinner from '@/components/Spinner'
 import Link from 'next/link'
 import Grid from './_components/Grid'
@@ -54,30 +53,17 @@ function GalleryPage() {
   return (
     <main>
       <Grid>
-        <Link
-          href={{
-            pathname: '/gallery/detail',
-            query: {
-              arr: [1, 2, 3],
-            },
-          }}
-        >
-          디테일
+        <Link href="/gallery/detail/1/option1/option2">
+          <ImageWrapper
+            src={
+              'https://ddalkkak101-bucket.s3.ap-northeast-2.amazonaws.com/processedImages/05166b82-e4d6-11ee-afa5-0242ac110004.png'
+            }
+            alt="1"
+            $width="100%"
+            $aspectRatio="1 / 1"
+            priority={true}
+          />
         </Link>
-        <ImageWrapper
-          src={sampleImage}
-          alt="1"
-          $width="100%"
-          $aspectRatio="1 / 1"
-          priority={true}
-        />
-        <ImageWrapper
-          src={sampleImage}
-          alt="2"
-          $width="100%"
-          $aspectRatio="1 / 1"
-          priority={true}
-        />
         {renderPictures()}
       </Grid>
       {isLoading ? (

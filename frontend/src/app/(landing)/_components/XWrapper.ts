@@ -9,7 +9,7 @@ const XWrapper = styled.button`
   width: 3rem;
   height: 3rem;
   grid-column: 3;
-  padding: 4px
+  padding: 4px;
 `
 
 export default XWrapper

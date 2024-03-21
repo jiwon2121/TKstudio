@@ -113,11 +113,7 @@ function LandingPage() {
   return (
     <>
       {seen && (
-        <SlideupModal
-          isClose={isClose}
-          height="20rem"
-          handleClose={handleClose}
-        >
+        <SlideupModal isClose={isClose} handleClose={handleClose}>
           <InstallWrapper>
             <InstallHeader>
               <XWrapper
