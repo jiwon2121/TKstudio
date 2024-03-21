@@ -82,10 +82,10 @@ function GalleryDetailPage() {
     <main>
       <Slider
         before={
-          'https://ddalkkak101-bucket.s3.ap-northeast-2.amazonaws.com/originalImages/03bf0b7c-e4d6-11ee-afa5-0242ac110004.png'
+          'https://ddalkkak101-bucket.s3.ap-northeast-2.amazonaws.com/originalImages/05943184-e5bc-11ee-8b06-0242ac110004.png'
         }
         after={
-          'https://ddalkkak101-bucket.s3.ap-northeast-2.amazonaws.com/processedImages/05166b82-e4d6-11ee-afa5-0242ac110004.png'
+          'https://ddalkkak101-bucket.s3.ap-northeast-2.amazonaws.com/processedImages/06ee5334-e5bc-11ee-8b06-0242ac110004.png'
         }
       />
       <IconWrapper>
@@ -99,7 +99,7 @@ function GalleryDetailPage() {
         <EmptyButton
           onClick={async () => {
             const file = await urlToFile(
-              'https://ddalkkak101-bucket.s3.ap-northeast-2.amazonaws.com/processedImages/05166b82-e4d6-11ee-afa5-0242ac110004.png',
+              'https://ddalkkak101-bucket.s3.ap-northeast-2.amazonaws.com/processedImages/06ee5334-e5bc-11ee-8b06-0242ac110004.png',
             )
             await handleShare(file)
           }}
