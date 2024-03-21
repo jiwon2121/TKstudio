@@ -1,12 +1,7 @@
-interface Props extends LayoutProps {
-  modal: React.ReactNode
-}
-
-function DetailLayout({ children, modal }: Props) {
+function DetailLayout({ children }: LayoutProps) {
   return (
     <>
       {children}
-      {modal}
     </>
   )
 }

@@ -31,7 +31,6 @@ const meta = {
     },
   },
   args: {
-    height: '300px',
     isClose: false,
     children: '닫기',
     handleClose: () => {}

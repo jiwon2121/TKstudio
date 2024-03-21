@@ -76,7 +76,6 @@ function Slider({ before, after}: Props) {
           alt="before"
           $width="100vw"
           $aspectRatio="3 / 4"
-          imgType="before"
         />
       </BeforeWrapper>
       <ImageWrapper
@@ -85,7 +84,6 @@ function Slider({ before, after}: Props) {
         }
         alt="after"
         $width="100vw"
-        imgType="after"
         origin={true}
       />
       <SliderInput
