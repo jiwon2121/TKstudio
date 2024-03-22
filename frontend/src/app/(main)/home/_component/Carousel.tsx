@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import Image, { StaticImageData } from 'next/image'
 import ChevronLeftIcon from '@@/assets/icons/chevron-left.svg'
 import ChevronRightIcon from '@@/assets/icons/chevron-right.svg'
@@ -9,64 +9,175 @@ import { PrevButton, NextButton } from './_atom/CarouselButton'
 import Pagination from './_atom/Pagination'
 
 interface Props {
-  images: Array<StaticImageData>| Array<string>
+  images: Array<StaticImageData> | Array<string>
 }
 
 function Carousel({ images }: Props) {
-  const endIdx = images.length - 1
-  const [index, setIndex] = useState<number>(0)
+  const endIdx = images.length
+  const changeRef = useRef<any>()
+  const [index, setIndex] = useState<number>(1)
+  const [page, setPage] = useState<number>(1)
+  const [reset, setReset] = useState<boolean>(false)
+  const [startX, setStartX] = useState<number>(0)
+  const [translateX, setTranslateX] = useState<string>('-70vw')
 
   const handlePrev = () => {
-    if (index <= 0) {
-      setIndex(endIdx)
+    setIndex((prev) => prev - 1)
+    setTranslateX(`-${(index - 1) * 70}vw`)
+
+    if (index == 1) {
+      setPage(endIdx)
+      setTimeout(() => {
+        setReset(true)
+        setIndex(endIdx)
+        setTranslateX(`-${endIdx * 70}vw`)
+      }, 350)
     } else {
-      setIndex((prev) => prev - 1)
+      setPage((prev) => prev - 1)
     }
   }
   const handleNext = () => {
-    if (index >= endIdx) {
-      setIndex(0)
+    setIndex((prev) => prev + 1)
+    setTranslateX(`-${(index + 1) * 70}vw`)
+    if (index == endIdx) {
+      setPage(1)
+      setTimeout(() => {
+        setReset(true)
+        setIndex(1)
+        setTranslateX(`-${1 * 70}vw`)
+      }, 350)
     } else {
-      setIndex((prev) => prev + 1)
+      setPage((prev) => prev + 1)
     }
   }
 
   const renderImage = () => {
-    return images.map((img, index) => {
-      return (
+    const result = []
+    result.push(
+      <CarouselSlide key="copy-last">
+        <p>copy-last</p>
+        <Image
+          src={images[images.length - 1]}
+          alt="copy-last"
+          priority={true}
+        />
+      </CarouselSlide>,
+    )
+
+    images.forEach((img, index) => {
+      result.push(
         <CarouselSlide key={'carousel' + index}>
-          <Image src={img} alt={'carousel' + index} />
-        </CarouselSlide>
+          <p>{index}</p>
+          <Image src={img} alt={'carousel' + index} priority={true} />
+        </CarouselSlide>,
       )
     })
+
+    result.push(
+      <CarouselSlide key="copy-first">
+        <p>copy-first</p>
+        <Image src={images[0]} alt="copy-first" priority={true} />
+      </CarouselSlide>,
+    )
+
+    return result
   }
 
   const renderPage = (length: number) => {
     const page = []
     for (let i = 0; i < length; i++) {
-      page.push(<button onClick={() => {
-        setIndex(i)
-        console.log(i)
-      }} />)
+      page.push(
+        <button
+          key={`page-${i}`}
+          onClick={() => {
+            setIndex(i)
+          }}
+        />,
+      )
     }
 
     return page
   }
 
+  const callback = () => {
+      handleNext()
+      setReset(false)
+  }
+
+  const changeStart = () => {
+    if (!changeRef.current){
+      changeRef.current = setInterval(callback, 3000)
+    }
+  }
+
+  const changeStop = () => {
+    if (changeRef.current){
+      clearInterval(changeRef.current)
+      changeRef.current = null
+    }
+  }
+
+  useEffect(() => {
+    changeStart()
+
+    return () => {
+      changeStop()
+    }
+  })
+
   return (
-    <CarouselMain>
-      <CarouselWrapper $translateX={-index * 70}>
+    <CarouselMain
+      onTouchStart={(e) => {
+        changeStop()
+        setStartX(e.touches[0].clientX)
+        setReset(true)
+      }}
+      onTouchMove={(e) => {
+        const currentX: number = e.touches[0].clientX
+        setTranslateX(`calc(${-70 * page}vw - ${startX - currentX}px)`)
+      }}
+      onTouchEnd={(e) => {
+        setReset(false)
+        const currentX = e.changedTouches[0].clientX
+        if (Math.abs(currentX - startX) > 40) {
+          if (currentX > startX) {
+            handlePrev()
+            setReset(false)
+          } else {
+            handleNext()
+            setReset(false)
+          }
+          setStartX(0)
+        } else {
+          setTranslateX(`${-70 * page}vw`)
+        }
+        changeStart()
+      }}
+    >
+      <CarouselWrapper $translateX={translateX} $reset={reset}>
         {renderImage()}
       </CarouselWrapper>
-      <PrevButton onClick={handlePrev}>
+      <PrevButton
+        onClick={() => {
+          changeStop()
+          handlePrev()
+          setReset(false)
+          changeStart()
+        }}
+      >
         <ChevronLeftIcon />
       </PrevButton>
-      <NextButton onClick={handleNext}>
+      <NextButton
+        onClick={() => {
+          changeStop
+          handleNext()
+          setReset(false)
+          changeStart()
+        }}
+      >
         <ChevronRightIcon />
       </NextButton>
-      <Pagination $idx={index+1}>
-        {renderPage(images.length)}
-      </Pagination>
+      <Pagination $idx={page}>{renderPage(images.length)}</Pagination>
     </CarouselMain>
   )
 }

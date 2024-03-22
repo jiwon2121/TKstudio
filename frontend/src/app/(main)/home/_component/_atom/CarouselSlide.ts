@@ -7,6 +7,7 @@ const CarouselSlide = styled.div`
   img {
     display: block;
     width: 100%;
+    height: auto;
     object-fit: contain;
   }
 `
