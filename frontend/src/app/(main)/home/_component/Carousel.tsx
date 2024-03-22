@@ -44,7 +44,10 @@ function Carousel({ images }: Props) {
   const renderPage = (length: number) => {
     const page = []
     for (let i = 0; i < length; i++) {
-      page.push(<button />)
+      page.push(<button onClick={() => {
+        setIndex(i)
+        console.log(i)
+      }} />)
     }
 
     return page
