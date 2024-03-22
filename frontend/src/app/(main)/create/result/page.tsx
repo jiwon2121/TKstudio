@@ -56,7 +56,6 @@ const Result = function () {
         } else {
           console.error('삭제 실패')
           alert('다시 시도해주세요')
-          router.push('/create')
         }
       } catch (error) {
         console.error('삭제 요청 중 오류 발생', error)
