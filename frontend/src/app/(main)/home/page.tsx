@@ -10,24 +10,21 @@ function MainPage() {
   const baseUrl = process.env.NEXT_PUBLIC_BACK_URL
   const router = useRouter()
   const imgs = [Sample, Sample, Sample, Sample]
-  
+
   const handleLogout = async () => {
     try {
-      const accessToken = localStorage.getItem('accessToken')
-      const res = await fetch(baseUrl + '/api/v1/user/logout', {
+      const refreshToken = localStorage.getItem('refreshToken')
+      await fetch(baseUrl + '/api/v1/user/logout', {
         headers: {
-          Authorization: accessToken as string,
+          Authorization: refreshToken as string,
         },
       })
-      if (res.status === 200) {
-        localStorage.removeItem('accessToken')
-        localStorage.removeItem('refreshToken')
-        router.push('/start')
-      } else if (res.status === 400) {
-        throw new Error(`${res.status}`)
-      }
     } catch (err) {
       console.log(err)
+    } finally {
+      localStorage.removeItem('accessToken')
+      localStorage.removeItem('refreshToken')
+      router.push('/start')
     }
   }
   return (
