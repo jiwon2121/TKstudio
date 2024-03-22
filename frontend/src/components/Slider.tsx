@@ -2,7 +2,7 @@
 
 import styled from 'styled-components'
 import ImageWrapper from '@/components/ImageWrapper'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { White, Black } from '@@/assets/styles/pallete'
 
 const SliderWrapper = styled.div`
@@ -13,41 +13,49 @@ const SliderWrapper = styled.div`
   user-select: none;
 `
 
-const SliderInput = styled.input`
-  appearance: none;
+const SliderInput = styled.div`
   background-color: transparent;
   width: 100%;
   height: 100%;
   position: absolute;
-  transform: translate(-50%, -50%);
-  top: 50%;
-  left: 50%;
+  top: 0;
+  left: 0;
   margin: 0;
-  cursor: inherit;
+  border: none;
+  padding: none;
   z-index: 2;
-  &::-webkit-slider-thumb {
-    -webkit-appearance: none;
-    width: 16px;
-  }
+  cursor: inherit;
 `
 
-const BeforeWrapper = styled.div<{ $width: string }>`
+const BeforeWrapper = styled.div.attrs<{ $width: string }>((props) => {
+  return {
+    style: {
+      width: props.$width,
+    },
+  }
+})`
   position: absolute;
   overflow: hidden;
-  width: ${(props) => props.$width};
   height: 100%;
   top: 0;
   left: 0;
   border-right: 3px solid ${White};
+  box-sizing: border-box;
   z-index: 1;
+  max-width: 100vw;
 `
 
-const ThumbWrapper = styled.div<{ $width: string }>`
+const ThumbWrapper = styled.div.attrs<{ $width: string }>((props) => {
+  return {
+    style: {
+      left: props.$width,
+    },
+  }
+})`
   background-color: ${White};
   pointer-events: none;
   position: absolute;
   top: 50%;
-  left: ${(props) => props.$width};
   transform: translate(-45%, -50%);
   border-radius: 50%;
   width: 30px;
@@ -64,11 +72,15 @@ interface Props {
 }
 
 function Slider({ before, after }: Props) {
-  const [range, setRange] = useState<number>(50)
+  const [range, setRange] = useState<string>('50%')
+
+  useEffect(() => {
+    console.log(range)
+  }, [range])
 
   return (
     <SliderWrapper>
-      <BeforeWrapper $width={`${range}%`}>
+      <BeforeWrapper $width={`${range}`}>
         <ImageWrapper
           src={before}
           alt="before"
@@ -85,15 +97,13 @@ function Slider({ before, after }: Props) {
         priority={true}
       />
       <SliderInput
-        type="range"
-        min={0}
-        max={100}
-        name="slider"
-        onChange={(e) => {
-          setRange(Number(e.target.value))
+        onTouchMove={(e) => {
+          if (e.touches[0].pageX >= 0) {
+            setRange(e.touches[0].pageX + 'px')
+          }
         }}
       />
-      <ThumbWrapper $width={`${range}%`}>
+      <ThumbWrapper $width={`min(${range}, 100%)`}>
         <svg
           fill={Black}
           xmlns="http://www.w3.org/2000/svg"
