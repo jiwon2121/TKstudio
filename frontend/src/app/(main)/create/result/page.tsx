@@ -25,12 +25,13 @@ const FadeInImage = styled.div`
   width: auto;
   height: auto;
   overflow: hidden;
-  animation: ${fadeIn} 4s forwards;
+  animation: ${fadeIn} 3s forwards;
 `
 
 const Result = function () {
   // /create 에서 딸깍사진을 받아야함
   const router = useRouter()
+
   const handleDelete = async () => {
     const accessToken = localStorage.getItem('accessToken')
 
@@ -44,24 +45,27 @@ const Result = function () {
       }
 
       try {
-        const response = await fetch('백엔드 URL', requestOptions)
+        const response = await fetch(
+          `${process.env.NEXT_PUBLIC_BACK_URL}/api/v1/image/delete/:imageInfoId`,
+          requestOptions,
+        )
         if (response.ok) {
           console.log('삭제 성공')
           router.push('/create')
           // 필요한 경우 추가적인 처리
         } else {
           console.error('삭제 실패')
-          // 필요한 경우 실패 시 처리
+          alert('다시 시도해주세요')
         }
       } catch (error) {
         console.error('삭제 요청 중 오류 발생', error)
-        // 필요한 경우 오류 처리.
+        alert('다시 시도해 주세요')
+        router.push('/create')
       }
     } else {
       console.error('Access token이 없습니다.')
       alert('로그인이 필요합니다')
       router.push('/login')
-      // 필요한 경우 access token이 없을 때의 처리.
     }
   }
   return (
@@ -78,7 +82,10 @@ const Result = function () {
 
       <div>
         <Button
-          onClick={() => router.push('/create')}
+          onClick={() => {
+            alert('저장되었습니다.')
+            router.push('/gallery')
+          }}
           $width="80px"
           $margin="20px"
         >
