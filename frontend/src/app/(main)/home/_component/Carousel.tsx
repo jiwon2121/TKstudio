@@ -85,12 +85,14 @@ function Carousel({ images }: Props) {
 
   const renderPage = (length: number) => {
     const page = []
-    for (let i = 0; i < length; i++) {
+    for (let i = 1; i <= length; i++) {
       page.push(
         <button
           key={`page-${i}`}
           onClick={() => {
             setIndex(i)
+            setPage(i)
+            setTranslateX(`-${i * 70}vw`)
           }}
         />,
       )
@@ -100,18 +102,18 @@ function Carousel({ images }: Props) {
   }
 
   const callback = () => {
-      handleNext()
-      setReset(false)
+    handleNext()
+    setReset(false)
   }
 
   const changeStart = () => {
-    if (!changeRef.current){
+    if (!changeRef.current) {
       changeRef.current = setInterval(callback, 3000)
     }
   }
 
   const changeStop = () => {
-    if (changeRef.current){
+    if (changeRef.current) {
       clearInterval(changeRef.current)
       changeRef.current = null
     }
