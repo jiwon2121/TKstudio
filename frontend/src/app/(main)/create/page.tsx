@@ -46,7 +46,8 @@ const CreatePageButton = {
 
 function CreatePage() {
   const [image, setImage] = useState<string | null>(null)
-  const imgInputRef = useRef<HTMLInputElement>(null)
+  const [resImg, setResImg] = useState<string | null>(null)
+  const originalImageRef = useRef<HTMLInputElement>(null)
 
   function changeInput(event: ChangeEvent<HTMLInputElement>) {
     const file = event.target.files?.[0]
@@ -61,33 +62,56 @@ function CreatePage() {
 
   function handleImageInputClick(event: any) {
     event?.preventDefault()
-    imgInputRef.current?.click()
+    originalImageRef.current?.click()
   }
 
-  function handleSubmit(event: FormEvent<HTMLFormElement>) {
+  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
     if (!image) {
       alert('사진을 첨부해주세요')
       return
     }
-    alert('첨부 완료')
+
+    const accessToken = localStorage.getItem('accessToken') as string
+
+    const formData = new FormData(event.currentTarget)
+    formData.append('background', '1')
+    formData.append('suit', '1')
+    formData.append('hair', '1')
+    formData.append('sex', 'MALE')
+
+    const res = await fetch(
+      process.env.NEXT_PUBLIC_BACK_URL! + '/api/v1/image/create',
+      {
+        method: 'POST',
+        body: formData,
+        headers: {
+          Authorization: accessToken,
+        },
+      },
+    )
+    const imageBlob = await res.blob()
+    const imageObjectURL = URL.createObjectURL(imageBlob)
+    console.log(imageObjectURL)
+    setResImg(imageObjectURL)
   }
 
   return (
     <main>
+      {resImg && <img src={resImg} alt="resImg" />}
       <ImgRequestForm onSubmit={handleSubmit}>
         <input
-          ref={imgInputRef}
+          ref={originalImageRef}
           type="file"
-          id="imgInput"
-          name="imgInput"
+          id="originalImage"
+          name="originalImage"
           accept="image/*"
           onChange={changeInput}
           hidden
         />
         <ImgContainer onClick={handleImageInputClick}>
           {!image && <UploadSquare>사진을 추가해주세요</UploadSquare>}
-          {image && <OriginalImg src={image} alt="imgInput" />}
+          {image && <OriginalImg src={image} alt="originalImage" />}
         </ImgContainer>
         <Button {...CreatePageButton} onClick={handleImageInputClick}>
           사진 {image ? '변경' : '추가'}
