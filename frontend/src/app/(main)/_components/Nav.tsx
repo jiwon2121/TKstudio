@@ -3,7 +3,7 @@
 import NavLink from './_molecules/NavLink'
 import NavMargin from './_molecules/NavMargin'
 import styled from 'styled-components'
-import { White, Black } from '@/assets/styles/pallete'
+import { White, Black } from '@@/assets/styles/pallete'
 
 const NavWrapper = styled.nav`
   position: fixed;
@@ -16,12 +16,13 @@ const NavWrapper = styled.nav`
   background-color: ${White};
   border-top: 1px solid ${Black};
   box-sizing: border-box;
+  z-index: 4;
 `
 
 function Nav() {
   return (
     <>
-      <NavMargin>&nbsp;</NavMargin>
+      <NavMargin>{' '}</NavMargin>
       <NavWrapper>
         <NavLink to="home" />
         <NavLink to="create" />

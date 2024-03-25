@@ -1,7 +1,7 @@
 function IndexLayout({ children }: LayoutProps) {
   return (
     <main>
-      <p>배경배경</p>
+      <span>배경이미지 제작 예정</span>
       {children}
     </main>
   )

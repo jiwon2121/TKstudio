@@ -1,11 +1,11 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import styled from 'styled-components'
-import { Black } from '@/assets/styles/pallete'
-import HomeIcon from '@/assets/icons/home.svg'
-import CreateIcon from '@/assets/icons/aperture.svg'
-import GalleryIcon from '@/assets/icons/images.svg'
-import StoreIcon from '@/assets/icons/store.svg'
+import { Black } from '@@/assets/styles/pallete'
+import HomeIcon from '@@/assets/icons/home.svg'
+import CreateIcon from '@@/assets/icons/aperture.svg'
+import GalleryIcon from '@@/assets/icons/images.svg'
+import StoreIcon from '@@/assets/icons/store.svg'
 
 interface Props {
   to: 'home' | 'create' | 'gallery' | 'store'
@@ -19,6 +19,13 @@ const IconWrapper = styled.div`
   justify-content: center;
   width: 25vw;
   height: 100%;
+
+  svg {
+    color: ${Black};
+    text-decoration-line: none;
+    width: 2.5rem;
+    height: 2.5rem;
+  }
 `
 
 const Text = styled.span`
@@ -31,13 +38,13 @@ function NavLink({ to }: Props) {
   function Icon() {
     switch (to) {
       case 'home':
-        return HomeIcon
+        return <HomeIcon />
       case 'create':
-        return CreateIcon
+        return <CreateIcon />
       case 'gallery':
-        return GalleryIcon
+        return <GalleryIcon />
       case 'store':
-        return StoreIcon
+        return <StoreIcon />
       default:
         return null
     }
@@ -58,15 +65,10 @@ function NavLink({ to }: Props) {
     }
   }
 
-  const ImageStyle = {
-    width: '2.5rem',
-    height: 'auto',
-  }
-
   return (
     <Link href={`/${to}`} style={{ textDecoration: 'none', height: '100%' }}>
       <IconWrapper>
-        <Image src={Icon()} alt={`/${to}`} style={ImageStyle} />
+        {Icon()}
         <Text>{toName()}</Text>
       </IconWrapper>
     </Link>

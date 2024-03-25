@@ -1,11 +1,7 @@
 import Nav from './_components/Nav'
 import Header from './_components/Header'
 
-interface Props {
-  children: React.ReactNode
-}
-
-function MainLayout({ children }: Props) {
+function MainLayout({ children }: LayoutProps) {
   return (
     <>
       <Header />
