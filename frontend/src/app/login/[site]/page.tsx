@@ -1,6 +1,5 @@
 'use client'
-import { useRouter } from 'next/navigation'
-
+import { useRouter, useParams, notFound } from 'next/navigation'
 import { useCallback, useEffect, useState } from 'react'
 
 interface ResponseType {
@@ -10,14 +9,14 @@ interface ResponseType {
 
 const Redirect = function () {
   const router = useRouter()
-  const [isLoading, setIsLoading] = useState(true)
   const [result, setResult] = useState('')
-
+  const { site } = useParams()
+  console.log(site)
   const loginHandler = useCallback(
     async (code: any) => {
       try {
         const response = await fetch(
-          `${process.env.NEXT_PUBLIC_BACK_URL}/api/v1/user/login/kakao`,
+          `${process.env.NEXT_PUBLIC_BACK_URL}/api/v1/user/login/${site}`,
           {
             method: 'POST',
             headers: {
@@ -55,18 +54,22 @@ const Redirect = function () {
         console.error('Error:', error)
       }
     },
-    [router],
+    [router, site],
   )
 
   useEffect(() => {
-    const params = new URLSearchParams(window.location.search)
-    const code = params.get('code')
-    console.log('Auth Code:', code)
-    setResult(String(code))
-    if (code) {
-      loginHandler(code)
+    if (site === 'kakao' || 'naver') {
+      const params = new URLSearchParams(window.location.search)
+      const code = params.get('code')
+      console.log('Auth Code:', code)
+      setResult(String(code))
+      if (code) {
+        loginHandler(code)
+      }
+    } else {
+      notFound()
     }
-  }, [loginHandler])
+  }, [loginHandler, site])
 
   return <div>{result ? '로그인중입니다' : '다시 시도해주세요'}</div>
 }
