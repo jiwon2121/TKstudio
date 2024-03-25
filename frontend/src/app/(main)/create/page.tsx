@@ -6,6 +6,7 @@ import { ChangeEvent, FormEvent, useRef, useState } from 'react'
 import styled from 'styled-components'
 import Button from '@/components/Button'
 import { MainGreen } from '@@/assets/styles/pallete'
+import { useRouter } from 'next/navigation'
 
 const MainWrapper = styled.main`
   display: flex;
@@ -56,8 +57,9 @@ const CreatePageButton = {
 
 function CreatePage() {
   const [image, setImage] = useState<string | null>(null)
-  const [resImg, setResImg] = useState<string | null>(null)
   const imageInputRef = useRef<HTMLInputElement>(null)
+
+  const router = useRouter()
 
   function changeInput(event: ChangeEvent<HTMLInputElement>) {
     const file = event.target.files?.[0]
@@ -100,16 +102,14 @@ function CreatePage() {
         },
       },
     )
-    const imageBlob = await res.blob()
-    const imageObjectURL = URL.createObjectURL(imageBlob)
-    console.log(imageObjectURL)
-    setResImg(imageObjectURL)
+
+    const createdImageId = res.headers.get('imageInfoId')
+    router.push(`/create/result?imageId=${createdImageId}`)
   }
 
   return (
     <MainWrapper>
       <ContentContainer>
-        {resImg && <img src={resImg} alt="resImg" />}
         <ImgRequestForm onSubmit={handleSubmit}>
           <input
             ref={imageInputRef}
