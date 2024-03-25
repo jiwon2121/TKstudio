@@ -21,8 +21,14 @@ function CategoryList({ handleCategoryChange }: CategoryListProp) {
   const [categoryList, setCategoryList] = useState<Category[]>()
 
   async function getCategoryList() {
+    const accessToken = localStorage.getItem('accessToken') as string
     const optionCategoryResponse = await fetch(
       process.env.NEXT_PUBLIC_BACK_URL + '/api/v1/option/category',
+      {
+        headers: {
+          Authorization: accessToken,
+        },
+      },
     )
 
     if (!optionCategoryResponse.ok) {
