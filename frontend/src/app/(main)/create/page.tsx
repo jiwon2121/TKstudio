@@ -1,11 +1,21 @@
 'use client'
 
-import OptionList from './_components/optionList'
+import CreateOptionList from './_components/CreateOptionList'
 import { ChangeEvent, FormEvent, useRef, useState } from 'react'
 
 import styled from 'styled-components'
 import Button from '@/components/Button'
 import { MainGreen } from '@@/assets/styles/pallete'
+
+const MainWrapper = styled.main`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`
+
+const ContentContainer = styled.div`
+  width: 80%;
+`
 
 const ImgRequestForm = styled.form`
   display: flex;
@@ -13,12 +23,12 @@ const ImgRequestForm = styled.form`
   align-items: center;
 `
 
-const ImgContainer = styled.div`
+const ImageWrapper = styled.div`
   border: solid ${MainGreen};
   border-radius: 10px;
   overflow: hidden;
-  width: 300px;
-  height: 400px;
+  width: 100%;
+  aspect-ratio: 3/4;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -28,7 +38,7 @@ const UploadSquare = styled.div`
   width: 100%;
   text-align: center;
   color: ${MainGreen};
-  font-size: 20px;
+  font-size: xx-large;
   font-weight: bolder;
 `
 
@@ -39,7 +49,7 @@ const OriginalImg = styled.img`
 
 const CreatePageButton = {
   $height: '60px',
-  $width: '300px',
+  $width: '100%',
   $fontWeight: 'bolder',
   $margin: '10px',
 }
@@ -47,7 +57,7 @@ const CreatePageButton = {
 function CreatePage() {
   const [image, setImage] = useState<string | null>(null)
   const [resImg, setResImg] = useState<string | null>(null)
-  const originalImageRef = useRef<HTMLInputElement>(null)
+  const imageInputRef = useRef<HTMLInputElement>(null)
 
   function changeInput(event: ChangeEvent<HTMLInputElement>) {
     const file = event.target.files?.[0]
@@ -62,7 +72,7 @@ function CreatePage() {
 
   function handleImageInputClick(event: any) {
     event?.preventDefault()
-    originalImageRef.current?.click()
+    imageInputRef.current?.click()
   }
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
@@ -97,31 +107,31 @@ function CreatePage() {
   }
 
   return (
-    <main>
-      {resImg && <img src={resImg} alt="resImg" />}
-      <ImgRequestForm onSubmit={handleSubmit}>
-        <input
-          ref={originalImageRef}
-          type="file"
-          id="originalImage"
-          name="originalImage"
-          accept="image/*"
-          onChange={changeInput}
-          hidden
-        />
-        <ImgContainer onClick={handleImageInputClick}>
-          {!image && <UploadSquare>사진을 추가해주세요</UploadSquare>}
-          {image && <OriginalImg src={image} alt="originalImage" />}
-        </ImgContainer>
-        <Button {...CreatePageButton} onClick={handleImageInputClick}>
-          사진 {image ? '변경' : '추가'}
-        </Button>
-        <div>
-          <OptionList />
-        </div>
-        <Button {...CreatePageButton}>딸깍</Button>
-      </ImgRequestForm>
-    </main>
+    <MainWrapper>
+      <ContentContainer>
+        {resImg && <img src={resImg} alt="resImg" />}
+        <ImgRequestForm onSubmit={handleSubmit}>
+          <input
+            ref={imageInputRef}
+            type="file"
+            id="originalImage"
+            name="originalImage"
+            accept="image/*"
+            onChange={changeInput}
+            hidden
+          />
+          <ImageWrapper onClick={handleImageInputClick}>
+            {!image && <UploadSquare>+</UploadSquare>}
+            {image && <OriginalImg src={image} alt="originalImage" />}
+          </ImageWrapper>
+          <Button {...CreatePageButton} onClick={handleImageInputClick}>
+            사진 {image ? '변경' : '추가'}
+          </Button>
+          <CreateOptionList />
+          <Button {...CreatePageButton}>딸깍</Button>
+        </ImgRequestForm>
+      </ContentContainer>
+    </MainWrapper>
   )
 }
 
