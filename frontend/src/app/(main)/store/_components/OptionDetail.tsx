@@ -47,7 +47,11 @@ const OptionDetailTextWrapper = styled.div<PurchasedOptionStyleProp>`
 
 function OptionDetail(props: Option) {
   return (
-    <OptionDetailWrapper>
+    <OptionDetailWrapper
+      onContextMenu={(e) => {
+        event?.preventDefault()
+      }}
+    >
       <ImageWrapper src={props.optionS3Url} alt="optionImg" />
       <OptionDetailTextWrapper $purchased={props.purchased}>
         <div>{props.optionName}</div>

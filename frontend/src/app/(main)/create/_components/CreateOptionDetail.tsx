@@ -21,7 +21,11 @@ const CreateOptionDetailTextWrapper = styled.div`
 
 function CreateOptionDetail(props: Option) {
   return (
-    <CreateOptionDetailContainer>
+    <CreateOptionDetailContainer
+      onContextMenu={(e) => {
+        event?.preventDefault()
+      }}
+    >
       <CreateOptionDetailImageWrapper src={props.optionS3Url} />
       <CreateOptionDetailTextWrapper>
         {props.optionName}
