@@ -1,12 +1,13 @@
 'use client'
 
-import { useSearchParams, useRouter } from 'next/navigation'
+import { useRouter } from 'next/navigation'
 import kakaologin from '@@/assets/images/kakaologin.png'
 import Image from 'next/image'
 import { useEffect } from 'react'
 import styled from 'styled-components'
 import { MainGreen } from '@@/assets/styles/pallete'
 import Logo from '@@/assets/icons/logo-big.svg'
+import Link from 'next/link'
 
 const MainWrapper = styled.main`
   width: 90vw;
@@ -19,10 +20,6 @@ const MainWrapper = styled.main`
   align-items: center;
   box-sizing: border-box;
   margin: 10vh auto;
-`
-const TextWrapper = styled.p`
-  font-weight: bold;
-  font-size: 3rem;
 `
 
 const Login = function () {
@@ -40,9 +37,9 @@ const Login = function () {
   return (
     <MainWrapper>
       <Logo />
-      <a href={url}>
+      <Link href={url}>
         <Image alt="카톡로그인" src={kakaologin}></Image>
-      </a>
+      </Link>
     </MainWrapper>
   )
 }
