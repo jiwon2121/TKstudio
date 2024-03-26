@@ -16,6 +16,7 @@ const MainWrapper = styled.main`
 
 const ContentContainer = styled.div`
   width: 80%;
+  margin-top: 20px;
 `
 
 const ImgRequestForm = styled.form`
@@ -64,6 +65,7 @@ const CreatePageButton = {
 function CreatePage() {
   const [image, setImage] = useState<string | null>(null)
   const imageInputRef = useRef<HTMLInputElement>(null)
+  const [selectedOptionId, setSelectedOptionId] = useState<number | null>(null)
 
   const router = useRouter()
 
@@ -134,7 +136,11 @@ function CreatePage() {
             사진 {image ? '변경' : '추가'}
           </Button>
           <TextWrapper>옵션 리스트</TextWrapper>
-          <CreateOptionList />
+          <CreateOptionList
+            selectedOptionId={selectedOptionId}
+            setSelectedOptionId={setSelectedOptionId}
+          />
+
           <Button {...CreatePageButton}>딸깍</Button>
         </ImgRequestForm>
       </ContentContainer>

@@ -12,7 +12,15 @@ const MyOptionListContainer = styled.div`
   overflow-y: hidden;
 `
 
-const CreateOptionList = function () {
+interface CreateOptionListProps {
+  selectedOptionId: number | null
+  setSelectedOptionId: (optionId: number | null) => void
+}
+
+const CreateOptionList = function ({
+  selectedOptionId,
+  setSelectedOptionId,
+}: CreateOptionListProps) {
   const [myOptionList, setMyOptionList] = useState<Option[]>()
 
   useEffect(() => {
@@ -41,7 +49,12 @@ const CreateOptionList = function () {
   return (
     <MyOptionListContainer>
       {myOptionList?.map((option) => (
-        <CreateOptionDetail key={option.optionId} {...option} />
+        <CreateOptionDetail
+          key={option.optionId}
+          {...option}
+          selectedOptionId={selectedOptionId}
+          setSelectedOptionId={setSelectedOptionId}
+        />
       ))}
     </MyOptionListContainer>
   )
