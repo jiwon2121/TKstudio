@@ -1,7 +1,7 @@
 'use client'
 
 import { useRouter } from 'next/navigation'
-import Sample from '@@/assets/images/sample.png'
+import Carousel1 from '@@/assets/images/carousel1.png'
 import Button from '@/components/Button'
 import Main from './_component/_atom/Main'
 import Carousel from './_component/Carousel'
@@ -9,7 +9,7 @@ import Carousel from './_component/Carousel'
 function MainPage() {
   const baseUrl = process.env.NEXT_PUBLIC_BACK_URL
   const router = useRouter()
-  const imgs = [Sample, Sample, Sample, Sample]
+  const imgs = [Carousel1, Carousel1, Carousel1, Carousel1]
 
   const handleLogout = async () => {
     try {
