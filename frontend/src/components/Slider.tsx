@@ -2,13 +2,14 @@
 
 import styled from 'styled-components'
 import ImageWrapper from '@/components/ImageWrapper'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { White, Black } from '@@/assets/styles/pallete'
 
 const SliderWrapper = styled.div`
   position: relative;
   overflow: hidden;
-  width: fit-content;
+  width: 100vw;
+  aspect-ratio: 3 / 4;
   cursor: e-resize;
   user-select: none;
 `
@@ -74,28 +75,28 @@ interface Props {
 function Slider({ before, after }: Props) {
   const [range, setRange] = useState<string>('50%')
 
-  useEffect(() => {
-    console.log(range)
-  }, [range])
-
   return (
     <SliderWrapper>
       <BeforeWrapper $width={`${range}`}>
+        {before && (
+          <ImageWrapper
+            src={before}
+            alt="before"
+            $width="100vw"
+            $aspectRatio="3 / 4"
+            priority={true}
+          />
+        )}
+      </BeforeWrapper>
+      {after && (
         <ImageWrapper
-          src={before}
-          alt="before"
+          src={after}
+          alt="after"
           $width="100vw"
-          $aspectRatio="3 / 4"
+          origin={true}
           priority={true}
         />
-      </BeforeWrapper>
-      <ImageWrapper
-        src={after}
-        alt="after"
-        $width="100vw"
-        origin={true}
-        priority={true}
-      />
+      )}
       <SliderInput
         onTouchMove={(e) => {
           if (e.touches[0].pageX >= 0) {

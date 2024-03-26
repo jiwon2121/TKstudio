@@ -55,7 +55,6 @@ function Carousel({ images }: Props) {
     const result = []
     result.push(
       <CarouselSlide key="copy-last">
-        <p>copy-last</p>
         <Image
           src={images[images.length - 1]}
           alt="copy-last"
@@ -67,7 +66,6 @@ function Carousel({ images }: Props) {
     images.forEach((img, index) => {
       result.push(
         <CarouselSlide key={'carousel' + index}>
-          <p>{index}</p>
           <Image src={img} alt={'carousel' + index} priority={true} />
         </CarouselSlide>,
       )
@@ -75,7 +73,6 @@ function Carousel({ images }: Props) {
 
     result.push(
       <CarouselSlide key="copy-first">
-        <p>copy-first</p>
         <Image src={images[0]} alt="copy-first" priority={true} />
       </CarouselSlide>,
     )
