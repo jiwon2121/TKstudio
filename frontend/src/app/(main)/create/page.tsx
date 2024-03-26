@@ -29,7 +29,7 @@ const ImageWrapper = styled.div`
   border-radius: 10px;
   overflow: hidden;
   width: 100%;
-  aspect-ratio: 3/4;
+  aspect-ratio: 1;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -45,7 +45,13 @@ const UploadSquare = styled.div`
 
 const OriginalImg = styled.img`
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
+`
+
+const TextWrapper = styled.div`
+  font-size: x-large;
+  align-self: flex-start;
+  margin-bottom: 10px;
 `
 
 const CreatePageButton = {
@@ -127,6 +133,7 @@ function CreatePage() {
           <Button {...CreatePageButton} onClick={handleImageInputClick}>
             사진 {image ? '변경' : '추가'}
           </Button>
+          <TextWrapper>옵션 리스트</TextWrapper>
           <CreateOptionList />
           <Button {...CreatePageButton}>딸깍</Button>
         </ImgRequestForm>
