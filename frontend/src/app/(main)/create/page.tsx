@@ -126,7 +126,6 @@ function CreatePage() {
             name="originalImage"
             accept="image/*"
             onChange={changeInput}
-            hidden
           />
           <ImageWrapper onClick={handleImageInputClick}>
             {!image && <UploadSquare>+</UploadSquare>}
