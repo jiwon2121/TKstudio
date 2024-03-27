@@ -19,6 +19,7 @@ const Pagination = styled.div<{ $idx: number }>`
     margin: 0;
     padding: 0;
     cursor: pointer;
+    transition: 0.35s ease-out;
 
     &:nth-child(${({ $idx }) => $idx}) {
       background-color: ${Black};
