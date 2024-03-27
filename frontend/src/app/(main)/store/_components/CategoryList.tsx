@@ -1,13 +1,9 @@
 import { ChangeEvent, useEffect, useState } from 'react'
 import styled from 'styled-components'
-
-interface Category {
-  categoryId: number
-  categoryName: string
-}
+import { GenderCategory } from '../page'
 
 interface CategoryListProp {
-  categorySort: number
+  categorySort: GenderCategory
   handleCategoryChange: (event: ChangeEvent<HTMLSelectElement>) => void
 }
 
@@ -18,48 +14,21 @@ const CategoryDropdown = styled.select`
 `
 
 function CategoryList({ handleCategoryChange }: CategoryListProp) {
-  const [categoryList, setCategoryList] = useState<Category[]>()
-
-  async function getCategoryList() {
-    const accessToken = localStorage.getItem('accessToken') as string
-    const optionCategoryResponse = await fetch(
-      process.env.NEXT_PUBLIC_BACK_URL + '/api/v1/option/category',
-      {
-        headers: {
-          Authorization: accessToken,
-        },
-      },
-    )
-
-    if (!optionCategoryResponse.ok) {
-      throw new Error('카테고리 리스트 불러오기 실패')
-    }
-
-    const optionCategoryJson = await optionCategoryResponse.json()
-
-    setCategoryList(optionCategoryJson.data)
-  }
-
-  useEffect(() => {
-    getCategoryList()
-  }, [])
-
   return (
     <CategoryDropdown
       name="CategoryDropdown"
       id="CategoryDropdown"
       onChange={handleCategoryChange}
     >
-      <option key={0} value={0}>
+      <option key="ALL" value="ALL">
         전체
       </option>
-      {categoryList?.map((category) => {
-        return (
-          <option key={category.categoryId} value={category.categoryId}>
-            {category.categoryName}
-          </option>
-        )
-      })}
+      <option key="MALE" value="MALE">
+        남성
+      </option>
+      <option key="FEMALE" value="FEMALE">
+        여성
+      </option>
     </CategoryDropdown>
   )
 }

@@ -1,6 +1,7 @@
 import styled from 'styled-components'
 import OptionDetail from './OptionDetail'
 import { useEffect, useState } from 'react'
+import { GenderCategory } from '../page'
 
 const OptionListContainer = styled.div`
   display: flex;
@@ -16,15 +17,15 @@ export interface Option {
   purchased: boolean
   categoryId: number
   createdTime: string
+  gender: 'MALE' | 'FEMALE'
 }
 
 interface OptionListProp {
-  categorySort: number
+  categorySort: GenderCategory
   showMine: boolean
 }
 
 function OptionList({ categorySort, showMine }: OptionListProp) {
-  // const [optionList, setOptionList] = useState<Option[]>([])
   const [showList, setShowList] = useState<Option[]>([])
   const [isLoading, setIsLoading] = useState<boolean>(true)
 
@@ -47,11 +48,11 @@ function OptionList({ categorySort, showMine }: OptionListProp) {
 
     let temp_list
 
-    if (categorySort == 0) {
+    if (categorySort == 'ALL') {
       temp_list = [...optionList]
     } else {
       temp_list = optionList?.filter(
-        (option: Option) => option.categoryId == categorySort,
+        (option: Option) => option.gender == categorySort,
       )
     }
     if (showMine) {

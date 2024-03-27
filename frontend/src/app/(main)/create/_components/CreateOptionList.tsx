@@ -12,7 +12,17 @@ const MyOptionListContainer = styled.div`
   overflow-y: hidden;
 `
 
-const CreateOptionList = function () {
+interface CreateOptionListProps {
+  optionGender: string
+  selectedOptionId: number
+  setSelectedOptionId: (optionId: number) => void
+}
+
+const CreateOptionList = function ({
+  optionGender,
+  selectedOptionId,
+  setSelectedOptionId,
+}: CreateOptionListProps) {
   const [myOptionList, setMyOptionList] = useState<Option[]>()
 
   useEffect(() => {
@@ -33,15 +43,27 @@ const CreateOptionList = function () {
 
       const optionList: Option[] = optionListJson.data
 
-      setMyOptionList(optionList)
+      if (optionGender == 'ALL') {
+        setMyOptionList(optionList)
+      } else {
+        const sortedList: Option[] = optionList.filter(
+          (option) => option.gender == optionGender,
+        )
+        setMyOptionList(sortedList)
+      }
     }
     getOptionList()
-  }, [])
+  }, [optionGender])
 
   return (
     <MyOptionListContainer>
       {myOptionList?.map((option) => (
-        <CreateOptionDetail key={option.optionId} {...option} />
+        <CreateOptionDetail
+          key={option.optionId}
+          {...option}
+          selectedOptionId={selectedOptionId}
+          setSelectedOptionId={setSelectedOptionId}
+        />
       ))}
     </MyOptionListContainer>
   )

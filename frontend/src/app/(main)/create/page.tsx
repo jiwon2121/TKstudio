@@ -7,6 +7,8 @@ import styled from 'styled-components'
 import Button from '@/components/Button'
 import { MainGreen } from '@@/assets/styles/pallete'
 import { useRouter } from 'next/navigation'
+import CreateOptionGenderTab from './_components/CreateOptionGenderTab'
+import { GenderCategory } from '../store/page'
 
 const MainWrapper = styled.main`
   display: flex;
@@ -16,6 +18,7 @@ const MainWrapper = styled.main`
 
 const ContentContainer = styled.div`
   width: 80%;
+  margin-top: 20px;
 `
 
 const ImgRequestForm = styled.form`
@@ -29,7 +32,7 @@ const ImageWrapper = styled.div`
   border-radius: 10px;
   overflow: hidden;
   width: 100%;
-  aspect-ratio: 3/4;
+  aspect-ratio: 1;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -45,7 +48,13 @@ const UploadSquare = styled.div`
 
 const OriginalImg = styled.img`
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
+`
+
+const TextWrapper = styled.div`
+  font-size: x-large;
+  align-self: flex-start;
+  margin-bottom: 5px;
 `
 
 const CreatePageButton = {
@@ -58,6 +67,8 @@ const CreatePageButton = {
 function CreatePage() {
   const [image, setImage] = useState<string | null>(null)
   const imageInputRef = useRef<HTMLInputElement>(null)
+  const [selectedOptionId, setSelectedOptionId] = useState<number>(0)
+  const [optionGender, setOptionGender] = useState<GenderCategory>('ALL')
 
   const router = useRouter()
 
@@ -87,10 +98,7 @@ function CreatePage() {
     const accessToken = localStorage.getItem('accessToken') as string
 
     const formData = new FormData(event.currentTarget)
-    formData.append('background', '1')
-    formData.append('suit', '1')
-    formData.append('hair', '1')
-    formData.append('sex', 'MALE')
+    formData.append('optionId', String(selectedOptionId))
 
     const res = await fetch(
       process.env.NEXT_PUBLIC_BACK_URL! + '/api/v1/image/create',
@@ -127,7 +135,17 @@ function CreatePage() {
           <Button {...CreatePageButton} onClick={handleImageInputClick}>
             사진 {image ? '변경' : '추가'}
           </Button>
-          <CreateOptionList />
+          <TextWrapper>옵션 리스트</TextWrapper>
+          <CreateOptionGenderTab
+            optionGender={optionGender}
+            setOptionGender={setOptionGender}
+          />
+          <CreateOptionList
+            optionGender={optionGender}
+            selectedOptionId={selectedOptionId}
+            setSelectedOptionId={setSelectedOptionId}
+          />
+
           <Button {...CreatePageButton}>딸깍</Button>
         </ImgRequestForm>
       </ContentContainer>
