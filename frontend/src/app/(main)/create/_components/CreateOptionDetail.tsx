@@ -1,20 +1,20 @@
 import styled from 'styled-components'
-import { Black } from '@@/assets/styles/pallete'
 import { Option } from '../../store/_components/OptionList'
-import { White } from '@@/assets/styles/pallete'
+import { Black, White, MainRed } from '@@/assets/styles/pallete'
 
 const CreateOptionDetailContainer = styled.div<OptionDetailStyleProp>`
   white-space: nowrap;
-  border: solid ${Black} 1px;
+  border: solid lightgrey 1px;
   margin: 2px;
   display: flex;
   flex-direction: column;
-  background-color: ${(props) => (props.$selected ? 'lightgrey' : { White })};
+  background-color: ${(props) => (props.$selected ? MainRed : White)};
+  color: ${(props) => (props.$selected ? White : Black)};
 `
 
 const CreateOptionDetailImageWrapper = styled.img`
-  width: 150px;
-  aspect-ratio: 1;
+  width: 120px;
+  aspect-ratio: 3/4;
 `
 
 const CreateOptionDetailTextWrapper = styled.div`
@@ -26,8 +26,8 @@ interface OptionDetailStyleProp {
 }
 
 interface CreateOptionDetailProps extends Option {
-  selectedOptionId: number | null
-  setSelectedOptionId: (optionId: number | null) => void
+  selectedOptionId: number
+  setSelectedOptionId: (optionId: number) => void
 }
 
 function CreateOptionDetail({
@@ -39,7 +39,7 @@ function CreateOptionDetail({
 }: CreateOptionDetailProps) {
   function handleSelectOption(selectedId: number) {
     if (selectedId == selectedOptionId) {
-      setSelectedOptionId(null)
+      setSelectedOptionId(0)
     } else {
       setSelectedOptionId(selectedId)
     }

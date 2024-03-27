@@ -20,12 +20,14 @@ const ContentContainer = styled.div`
   max-width: 1440px;
 `
 
+export type GenderCategory = 'ALL' | 'MALE' | 'FEMALE'
+
 function StorePage() {
   const [showMine, setShowMine] = useState<boolean>(false)
-  const [categorySort, setCategorySort] = useState<number>(0)
+  const [categorySort, setCategorySort] = useState<GenderCategory>('ALL')
 
   function handleCategoryChange(event: ChangeEvent<HTMLSelectElement>) {
-    setCategorySort(Number(event.target.value))
+    setCategorySort(event.target.value as GenderCategory)
   }
 
   function handleMineChange(stat: boolean) {

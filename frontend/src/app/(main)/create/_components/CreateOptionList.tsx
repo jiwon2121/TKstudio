@@ -13,11 +13,13 @@ const MyOptionListContainer = styled.div`
 `
 
 interface CreateOptionListProps {
-  selectedOptionId: number | null
-  setSelectedOptionId: (optionId: number | null) => void
+  optionGender: string
+  selectedOptionId: number
+  setSelectedOptionId: (optionId: number) => void
 }
 
 const CreateOptionList = function ({
+  optionGender,
   selectedOptionId,
   setSelectedOptionId,
 }: CreateOptionListProps) {
@@ -41,10 +43,17 @@ const CreateOptionList = function ({
 
       const optionList: Option[] = optionListJson.data
 
-      setMyOptionList(optionList)
+      if (optionGender == 'ALL') {
+        setMyOptionList(optionList)
+      } else {
+        const sortedList: Option[] = optionList.filter(
+          (option) => option.gender == optionGender,
+        )
+        setMyOptionList(sortedList)
+      }
     }
     getOptionList()
-  }, [])
+  }, [optionGender])
 
   return (
     <MyOptionListContainer>

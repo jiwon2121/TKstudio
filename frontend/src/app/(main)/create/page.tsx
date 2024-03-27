@@ -7,6 +7,8 @@ import styled from 'styled-components'
 import Button from '@/components/Button'
 import { MainGreen } from '@@/assets/styles/pallete'
 import { useRouter } from 'next/navigation'
+import CreateOptionGenderTab from './_components/CreateOptionGenderTab'
+import { GenderCategory } from '../store/page'
 
 const MainWrapper = styled.main`
   display: flex;
@@ -52,7 +54,7 @@ const OriginalImg = styled.img`
 const TextWrapper = styled.div`
   font-size: x-large;
   align-self: flex-start;
-  margin-bottom: 10px;
+  margin-bottom: 5px;
 `
 
 const CreatePageButton = {
@@ -65,7 +67,8 @@ const CreatePageButton = {
 function CreatePage() {
   const [image, setImage] = useState<string | null>(null)
   const imageInputRef = useRef<HTMLInputElement>(null)
-  const [selectedOptionId, setSelectedOptionId] = useState<number | null>(null)
+  const [selectedOptionId, setSelectedOptionId] = useState<number>(0)
+  const [optionGender, setOptionGender] = useState<GenderCategory>('ALL')
 
   const router = useRouter()
 
@@ -95,10 +98,7 @@ function CreatePage() {
     const accessToken = localStorage.getItem('accessToken') as string
 
     const formData = new FormData(event.currentTarget)
-    formData.append('background', '1')
-    formData.append('suit', '1')
-    formData.append('hair', '1')
-    formData.append('sex', 'MALE')
+    formData.append('optionId', String(selectedOptionId))
 
     const res = await fetch(
       process.env.NEXT_PUBLIC_BACK_URL! + '/api/v1/image/create',
@@ -136,7 +136,12 @@ function CreatePage() {
             사진 {image ? '변경' : '추가'}
           </Button>
           <TextWrapper>옵션 리스트</TextWrapper>
+          <CreateOptionGenderTab
+            optionGender={optionGender}
+            setOptionGender={setOptionGender}
+          />
           <CreateOptionList
+            optionGender={optionGender}
             selectedOptionId={selectedOptionId}
             setSelectedOptionId={setSelectedOptionId}
           />

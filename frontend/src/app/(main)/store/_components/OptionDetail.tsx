@@ -28,7 +28,7 @@ const OptionDetailWrapper = styled.div`
 
 const ImageWrapper = styled.img`
   width: 100%;
-  aspect-ratio: 1;
+  aspect-ratio: 3/4;
   overflow: hidden;
   box-sizing: border-box;
   border: solid lightgrey;
