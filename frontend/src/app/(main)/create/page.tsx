@@ -10,6 +10,7 @@ import { MainGreen } from '@@/assets/styles/pallete'
 import { useRouter } from 'next/navigation'
 import CreateOptionGenderTab from './_components/CreateOptionGenderTab'
 import { GenderCategory } from '../store/page'
+import { fetchDataWithAuthorization } from '@/utils/api'
 
 const MainWrapper = styled.main`
   display: flex;
@@ -142,7 +143,13 @@ function CreatePage() {
       return
     }
 
+    if (!selectedOptionId) {
+      alert('옵션을 선택해주세요')
+      return
+    }
+
     const accessToken = localStorage.getItem('accessToken') as string
+    const refreshToken = localStorage.getItem('refreshToken') as string
 
     const formData = new FormData()
     formData.append('originalImage', imageBlob!)
@@ -150,22 +157,23 @@ function CreatePage() {
     formData.append('height', String(requestImgHeight))
     formData.append('optionId', String(selectedOptionId))
 
-    const res = await fetch(
-      process.env.NEXT_PUBLIC_BACK_URL! + '/api/v1/image/create',
-      {
-        method: 'POST',
-        body: formData,
-        headers: {
-          Authorization: accessToken,
-        },
-      },
+    const url = process.env.NEXT_PUBLIC_BACK_URL! + '/api/v1/image/create'
+    const createOption = {
+      method: 'POST',
+      body: formData,
+    }
+    const res = await fetchDataWithAuthorization(
+      url,
+      accessToken,
+      refreshToken,
+      createOption,
     )
 
-    if (!res.ok) {
+    if (!res!.ok) {
       alert('생성 실패!')
       throw new Error('이미지 생성 실패!')
     }
-    const createdImageId = res.headers.get('imageInfoId')
+    const createdImageId = res?.headers.get('imageInfoId')
     reset()
     router.push(`/create/result?imageId=${createdImageId}`)
   }
@@ -191,7 +199,7 @@ function CreatePage() {
           <Button {...CreatePageButton} onClick={handleImageInputClick}>
             사진 {image ? '변경' : '추가'}
           </Button>
-          <TextWrapper>옵션 리스트</TextWrapper>
+          <TextWrapper>내 옵션 리스트</TextWrapper>
           <CreateOptionGenderTab
             optionGender={optionGender}
             setOptionGender={setOptionGender}
