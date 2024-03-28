@@ -61,9 +61,12 @@ function GalleryProvider({ children }: Props) {
       for (let key in response) {
         newInfo.push(response[key])
       }
-      setPicInfo(newInfo)
+
+      const res = newInfo.sort((a, b) => (b.imageInfoId - a.imageInfoId))
+      setPicInfo(res)
       setIsGetInfo(true)
-      return newInfo
+
+      return res
     }
     return null
   }, [baseUrl, isGetInfo])
