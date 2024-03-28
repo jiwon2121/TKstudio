@@ -20,6 +20,7 @@ const CreateOptionDetailImageWrapper = styled.img`
 const CreateOptionDetailTextWrapper = styled.div`
   display: flex;
   padding: 4px;
+  font-size: small;
 `
 interface OptionDetailStyleProp {
   $selected: boolean

@@ -141,6 +141,11 @@ function CreatePage() {
       return
     }
 
+    if (!selectedOptionId) {
+      alert('옵션을 선택해주세요')
+      return
+    }
+
     const accessToken = localStorage.getItem('accessToken') as string
     const refreshToken = localStorage.getItem('refreshToken') as string
 
@@ -191,7 +196,7 @@ function CreatePage() {
           <Button {...CreatePageButton} onClick={handleImageInputClick}>
             사진 {image ? '변경' : '추가'}
           </Button>
-          <TextWrapper>옵션 리스트</TextWrapper>
+          <TextWrapper>내 옵션 리스트</TextWrapper>
           <CreateOptionGenderTab
             optionGender={optionGender}
             setOptionGender={setOptionGender}

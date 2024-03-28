@@ -42,10 +42,12 @@ const CreateOptionList = function ({
 
       const optionList: Option[] = optionListJson.data
 
+      const myList: Option[] = optionList.filter((option) => option.purchased)
+
       if (optionGender == 'ALL') {
-        setMyOptionList(optionList)
+        setMyOptionList(myList)
       } else {
-        const sortedList: Option[] = optionList.filter(
+        const sortedList: Option[] = myList.filter(
           (option) => option.gender == optionGender,
         )
         setMyOptionList(sortedList)
