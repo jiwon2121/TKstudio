@@ -5,18 +5,20 @@ import React, { createContext, useState, useCallback, useEffect } from 'react'
 export interface PicInfo {
   imageInfoId: number
   createdTime: string
-  selectOptionDTOList: Array<number>
+  optionName: string
 }
 
 interface ContextType {
   page: number | null
   picInfo: Array<PicInfo>
   pictures: Array<Blob>
+  isLoading: boolean
+  setIsLoading: React.Dispatch<React.SetStateAction<boolean>>
   setPage: React.Dispatch<React.SetStateAction<number | null>>
   setPictures: React.Dispatch<React.SetStateAction<Array<Blob>>>
   getBlob: (id: number) => Promise<Blob>
   reset: () => void
-  getPicInfo: () => Promise<void>
+  getPicInfo: () => Promise<Array<PicInfo> | null>
   getPictures: () => Promise<void>
 }
 
@@ -32,12 +34,14 @@ function GalleryProvider({ children }: Props) {
   const [picInfo, setPicInfo] = useState<Array<PicInfo>>([])
   const [pictures, setPictures] = useState<Array<Blob>>([])
   const [isGetInfo, setIsGetInfo] = useState<boolean>(false)
+  const [isLoading, setIsLoading] = useState<boolean>(true)
 
   const reset = () => {
     setPage(1)
     setPicInfo([])
     setPictures([])
-    setIsGetInfo(true)
+    setIsGetInfo(false)
+    setIsLoading(true)
   }
 
   useEffect(() => {
@@ -59,7 +63,9 @@ function GalleryProvider({ children }: Props) {
       }
       setPicInfo(newInfo)
       setIsGetInfo(true)
+      return newInfo
     }
+    return null
   }, [baseUrl, isGetInfo])
 
   const getBlob = useCallback(
@@ -91,16 +97,14 @@ function GalleryProvider({ children }: Props) {
     setPictures((prev) => prev.concat(newPics))
   }, [page, getBlob, picInfo])
 
-  useEffect(() => {
-    getPicInfo()
-  }, [getPicInfo, picInfo])
-
   return (
     <GalleryContext.Provider
       value={{
         page,
         picInfo,
         pictures,
+        isLoading,
+        setIsLoading,
         setPage,
         setPictures,
         getBlob,

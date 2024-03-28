@@ -4,7 +4,8 @@ import ImageWrapper from '@/components/ImageWrapper'
 import { useRouter } from 'next/navigation'
 import styled, { keyframes } from 'styled-components'
 import { MainRed } from '@@/assets/styles/pallete'
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useContext } from 'react'
+import { GalleryContext } from '../../_components/ContextProvider'
 
 const MainWrapper = styled.main`
   display: flex;
@@ -33,6 +34,7 @@ const Result = function () {
   // /create 에서 딸깍사진을 받아야함
   const router = useRouter()
   const [imageData, setImageData] = useState<string>('')
+  const { reset } = useContext(GalleryContext)
 
   const handleDelete = async () => {
     const accessToken = localStorage.getItem('accessToken') as string
@@ -114,7 +116,7 @@ const Result = function () {
     }
 
     getImage()
-  }, [router])
+  }, [router, reset])
 
   return (
     <MainWrapper>
