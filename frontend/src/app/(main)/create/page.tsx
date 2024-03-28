@@ -1,7 +1,8 @@
 'use client'
 
 import CreateOptionList from './_components/CreateOptionList'
-import { ChangeEvent, FormEvent, useRef, useState } from 'react'
+import { ChangeEvent, FormEvent, useRef, useState, useContext } from 'react'
+import { GalleryContext } from '../_components/ContextProvider'
 
 import styled from 'styled-components'
 import Button from '@/components/Button'
@@ -65,6 +66,7 @@ const CreatePageButton = {
 }
 
 function CreatePage() {
+  const { reset } = useContext(GalleryContext)
   const [image, setImage] = useState<string | null>(null)
   const imageInputRef = useRef<HTMLInputElement>(null)
   const [requestImgWidth, setRequestImgWidth] = useState<number | null>(null)
@@ -164,6 +166,7 @@ function CreatePage() {
       throw new Error('이미지 생성 실패!')
     }
     const createdImageId = res.headers.get('imageInfoId')
+    reset()
     router.push(`/create/result?imageId=${createdImageId}`)
   }
 

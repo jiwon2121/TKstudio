@@ -11,7 +11,6 @@ import { LightGray } from '@@/assets/styles/pallete'
 
 function GalleryPage() {
   const [target, setTarget] = useState<HTMLElement | null>(null)
-  const [isLoading, setIsLoading] = useState<boolean>(false)
   const [urls, setUrls] = useState<Array<string>>([])
   const {
     page,
@@ -21,19 +20,18 @@ function GalleryPage() {
     setPictures,
     getBlob,
     getPicInfo,
-    getPictures,
+    isLoading,
+    setIsLoading,
   } = useContext(GalleryContext)
 
   const renderPictures = () => {
     if (page === null && pictures.length === 0 && isLoading === false) {
       return <NoImage />
     }
-
     return pictures.map((pic, index) => {
-      const optString =
-        picInfo[index]?.selectOptionDTOList.length === 0
-          ? ''
-          : `/${picInfo[index]?.selectOptionDTOList.join('/')}`
+      const optString = picInfo[index].optionName
+        ? `/${picInfo[index].optionName}`
+        : ''
       return (
         <Link
           key={index}
@@ -59,48 +57,54 @@ function GalleryPage() {
   }
 
   useEffect(() => {
-    const onIntersect: IntersectionObserverCallback = async (
-      [entry],
-      observer,
-    ) => {
-      if (entry.isIntersecting) {
-        observer.disconnect()
-        setIsLoading(true)
-        const start = ((page as number) - 1) * 10
-        let end = (page as number) * 10
-        if (picInfo.length <= end) {
-          end = picInfo.length
-          const promises = picInfo.slice(start, end).map((info) => {
-            return getBlob(info.imageInfoId)
-          })
+    const get = async () => {
+      const newInfo = await getPicInfo()
+      const onIntersect: IntersectionObserverCallback = async (
+        [entry],
+        observer,
+      ) => {
+        if (entry.isIntersecting) {
+          observer.disconnect()
+          setIsLoading(true)
+
+          const start = pictures.length
+          let end = start + 10
+          let promises: Array<Promise<Blob>>
+
+          if (newInfo) {
+            if (newInfo.length <= end) {
+              end = newInfo.length
+              setPage(null)
+            } else {
+              setPage((prev) => (prev as number) + 1)
+            }
+            promises = newInfo.slice(start, end).map((info) => {
+              return getBlob(info.imageInfoId)
+            })
+          } else {
+            if (picInfo.length <= end) {
+              end = picInfo.length
+              setPage(null)
+            } else {
+              setPage((prev) => (prev as number) + 1)
+            }
+            promises = picInfo.slice(start, end).map((info) => {
+              return getBlob(info.imageInfoId)
+            })
+          }
           const newPics = await Promise.all(promises)
           setPictures((prev) => prev.concat(newPics))
-          setPage(null)
-        } else {
-          const promises = picInfo.slice(start, end).map((info) => {
-            return getBlob(info.imageInfoId)
-          })
-          const newPics = await Promise.all(promises)
-          setPictures((prev) => prev.concat(newPics))
-          setPage((prev) => (prev as number) + 1)
+          setIsLoading(false)
         }
-        setIsLoading(false)
+      }
+      if (target) {
+        const observer = new IntersectionObserver(onIntersect, { threshold: 1 })
+        observer.observe(target)
       }
     }
-    if (target) {
-      const observer = new IntersectionObserver(onIntersect, { threshold: 1 })
-      observer.observe(target)
-    }
-  }, [
-    target,
-    getPicInfo,
-    getPictures,
-    page,
-    getBlob,
-    picInfo,
-    setPage,
-    setPictures,
-  ])
+
+    get()
+  }, [target, pictures.length])
 
   useEffect(() => {
     setUrls((prev) => {
