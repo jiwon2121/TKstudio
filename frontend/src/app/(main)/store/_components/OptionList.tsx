@@ -2,6 +2,8 @@ import styled from 'styled-components'
 import OptionDetail from './OptionDetail'
 import { useEffect, useState } from 'react'
 import { GenderCategory } from '../page'
+import { useRouter } from 'next/navigation'
+import { fetchDataWithAuthorization } from '@/utils/api'
 
 const OptionListContainer = styled.div`
   display: flex;
@@ -31,18 +33,20 @@ function OptionList({ categorySort, showMine }: OptionListProp) {
 
   async function getOptionList() {
     const accessToken = localStorage.getItem('accessToken') as string
-    const optionListResponse = await fetch(
-      process.env.NEXT_PUBLIC_BACK_URL + '/api/v1/option/list',
-      {
-        headers: { Authorization: accessToken },
-      },
+    const refreshToken = localStorage.getItem('refreshToken') as string
+
+    const url = process.env.NEXT_PUBLIC_BACK_URL + '/api/v1/option/list'
+
+    const requestOptions = {}
+
+    const optionListResponse = await fetchDataWithAuthorization(
+      url,
+      accessToken,
+      refreshToken,
+      requestOptions,
     )
 
-    if (!optionListResponse.ok) {
-      throw new Error('옵션 리스트 불러오기 실패')
-    }
-
-    const optionListJson = await optionListResponse.json()
+    const optionListJson = await optionListResponse?.json()
 
     const optionList: Option[] = optionListJson.data
 
