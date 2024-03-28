@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 import Image, { StaticImageData } from 'next/image'
 import ChevronLeftIcon from '@@/assets/icons/chevron-left.svg'
 import ChevronRightIcon from '@@/assets/icons/chevron-right.svg'
@@ -36,7 +36,7 @@ function Carousel({ images }: Props) {
       setPage((prev) => prev - 1)
     }
   }
-  const handleNext = () => {
+  const handleNext = useCallback(() => {
     setIndex((prev) => prev + 1)
     setTranslateX(`-${(index + 1) * 70}vw`)
     if (index == endIdx) {
@@ -49,7 +49,7 @@ function Carousel({ images }: Props) {
     } else {
       setPage((prev) => prev + 1)
     }
-  }
+  }, [index, endIdx])
 
   const renderImage = () => {
     const result = []
@@ -98,16 +98,16 @@ function Carousel({ images }: Props) {
     return page
   }
 
-  const callback = () => {
+  const callback = useCallback(() => {
     handleNext()
     setReset(false)
-  }
+  }, [handleNext])
 
-  const changeStart = () => {
+  const changeStart = useCallback(() => {
     if (!changeRef.current) {
       changeRef.current = setInterval(callback, 3000)
     }
-  }
+  }, [callback])
 
   const changeStop = () => {
     if (changeRef.current) {
@@ -119,10 +119,8 @@ function Carousel({ images }: Props) {
   useEffect(() => {
     changeStart()
 
-    return () => {
-      changeStop()
-    }
-  })
+    return changeStop
+  }, [changeStart])
 
   return (
     <CarouselMain

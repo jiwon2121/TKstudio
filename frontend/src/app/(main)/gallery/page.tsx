@@ -1,114 +1,117 @@
 'use client'
 
-import { useEffect, useState, useCallback } from 'react'
+import { useEffect, useState, useContext } from 'react'
+import { GalleryContext } from '@/app/(main)/_components/ContextProvider'
 import ImageWrapper from '@/components/ImageWrapper'
 import Spinner from '@/components/Spinner'
 import Link from 'next/link'
 import Grid from './_components/Grid'
 import NoImage from './_components/NoImage'
-
-interface PicInfo {
-  imageInfoId: number
-  createdTime: string
-  selectOptionDTOList: Array<number>
-}
+import { LightGray } from '@@/assets/styles/pallete'
 
 function GalleryPage() {
-  const baseUrl = process.env.NEXT_PUBLIC_BACK_URL
   const [target, setTarget] = useState<HTMLElement | null>(null)
-  const [page, setPage] = useState<number | null>(1)
-  const [isLoading, setIsLoading] = useState<boolean>(true)
-  const [picInfo, setPicInfo] = useState<Array<PicInfo>>([])
-  const [pictures, setPictures] = useState<Array<string>>([])
+  const [isLoading, setIsLoading] = useState<boolean>(false)
+  const [urls, setUrls] = useState<Array<string>>([])
+  const {
+    page,
+    picInfo,
+    pictures,
+    setPage,
+    setPictures,
+    getBlob,
+    getPicInfo,
+    getPictures,
+  } = useContext(GalleryContext)
 
   const renderPictures = () => {
-    if (page === null && pictures.length === 0) {
+    if (page === null && pictures.length === 0 && isLoading === false) {
       return <NoImage />
     }
-    return pictures.map((url, index) => {
-      const init: string = ''
-      const optString = picInfo[index].selectOptionDTOList.reduce(
-        (accumulator, currentValue) => {
-          return accumulator + `/${currentValue}`
-        },
-        init,
-      )
+
+    return pictures.map((pic, index) => {
+      const optString =
+        picInfo[index]?.selectOptionDTOList.length === 0
+          ? ''
+          : `/${picInfo[index]?.selectOptionDTOList.join('/')}`
       return (
         <Link
           key={index}
           href={`/gallery/detail/${picInfo[index].imageInfoId}${optString}`}
-          locale="ko-kr"
+          style={{
+            width: '100%',
+            aspectRatio: '1/1',
+          }}
         >
-          <ImageWrapper
-            src={url.toString()}
-            alt="1"
-            $width="100%"
-            $aspectRatio="1 / 1"
-          />
+          {urls[index] ? (
+            <ImageWrapper
+              src={urls[index]}
+              alt="1"
+              $width="100%"
+              $aspectRatio="1 / 1"
+            />
+          ) : (
+            <div style={{ width: '100%', height: '100%', color: LightGray }} />
+          )}
         </Link>
       )
     })
   }
 
-  const getBlob = useCallback(
-    (id: number, accTk: string) => {
-      return fetch(`${baseUrl}/api/v1/image/getImage/thumbnailImage/${id}`, {
-        method: 'GET',
-        headers: { Authorization: accTk },
-      })
-        .then((res) => res.blob())
-        .then((blob) => URL.createObjectURL(blob))
-    },
-    [baseUrl],
-  )
-
   useEffect(() => {
-    const accessToken = localStorage.getItem('accessToken') as string
-
-    async function getPictures() {
-      setIsLoading(true)
-      const picInfo = await fetch(`${baseUrl}/api/v1/image/getImageInfos`, {
-        method: 'GET',
-        headers: {
-          Authorization: localStorage.getItem('accessToken') as string,
-        },
-      }).then((res) => res.json())
-
-      if (Object.keys(picInfo).length === 0) {
-        setPage(null)
-      } else {
-        const newInfo: Array<PicInfo> = []
-        const promises: Array<Promise<string>> = []
-
-        for (let i in picInfo) {
-          newInfo.push(picInfo[i])
-          promises.push(getBlob(picInfo[i].imageInfoId, accessToken))
-        }
-
-        const newPics = await Promise.all(promises)
-
-        setPicInfo((prev) => prev.concat(newInfo))
-        setPictures((prev) => prev.concat(newPics))
-        setPage((prev) => (prev as number) + 1)
-      }
-
-      setIsLoading(false)
-    }
-
-    const onIntersect: IntersectionObserverCallback = async function (
+    const onIntersect: IntersectionObserverCallback = async (
       [entry],
       observer,
-    ) {
+    ) => {
       if (entry.isIntersecting) {
         observer.disconnect()
-        getPictures()
+        setIsLoading(true)
+        const start = ((page as number) - 1) * 10
+        let end = (page as number) * 10
+        if (picInfo.length <= end) {
+          end = picInfo.length
+          const promises = picInfo.slice(start, end).map((info) => {
+            return getBlob(info.imageInfoId)
+          })
+          const newPics = await Promise.all(promises)
+          setPictures((prev) => prev.concat(newPics))
+          setPage(null)
+        } else {
+          const promises = picInfo.slice(start, end).map((info) => {
+            return getBlob(info.imageInfoId)
+          })
+          const newPics = await Promise.all(promises)
+          setPictures((prev) => prev.concat(newPics))
+          setPage((prev) => (prev as number) + 1)
+        }
+        setIsLoading(false)
       }
     }
     if (target) {
       const observer = new IntersectionObserver(onIntersect, { threshold: 1 })
       observer.observe(target)
     }
-  }, [target, baseUrl, getBlob, page])
+  }, [
+    target,
+    getPicInfo,
+    getPictures,
+    page,
+    getBlob,
+    picInfo,
+    setPage,
+    setPictures,
+  ])
+
+  useEffect(() => {
+    setUrls((prev) => {
+      const newUrls = pictures
+        .slice(prev.length, pictures.length)
+        .map((pic) => {
+          return URL.createObjectURL(pic)
+        })
+      return prev.concat(newUrls)
+    })
+  }, [pictures])
 
   return (
     <main>
