@@ -65,11 +65,14 @@ const Redirect = function () {
       setResult(String(code))
       if (code) {
         loginHandler(code)
+      } else {
+        alert('동의를 하지않아 로그인이 되지 않았습니다.')
+        router.push('/login')
       }
     } else {
       notFound()
     }
-  }, [loginHandler, site])
+  }, [loginHandler, site, router])
 
   return <div>{result ? '로그인중입니다' : '다시 시도해주세요'}</div>
 }
