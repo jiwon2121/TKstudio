@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { Black } from '@@/assets/styles/pallete'
+import { Gray } from '@@/assets/styles/pallete'
 
 const CarouselMain = styled.div`
   width: 70vw;
@@ -7,7 +7,7 @@ const CarouselMain = styled.div`
   overflow: hidden;
   user-select: none;
   margin: 5vw 0;
-  border: 1px solid ${Black};
+  border: 1px solid ${Gray};
   box-sizing: border-box;
 `
 

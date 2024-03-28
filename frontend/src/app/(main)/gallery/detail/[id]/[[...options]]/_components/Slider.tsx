@@ -12,6 +12,7 @@ const SliderWrapper = styled.div`
   aspect-ratio: 3 / 4;
   cursor: e-resize;
   user-select: none;
+  max-width: 768px;
 `
 
 const SliderInput = styled.div`
@@ -23,7 +24,6 @@ const SliderInput = styled.div`
   left: 0;
   margin: 0;
   border: none;
-  padding: none;
   z-index: 2;
   cursor: inherit;
 `
