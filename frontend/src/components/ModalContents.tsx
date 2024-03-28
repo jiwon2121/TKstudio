@@ -1,7 +1,7 @@
 'use client'
 
 import styled from 'styled-components'
-import { Gray, MainGreen, MainRed, Black } from '@@/assets/styles/pallete'
+import { LightGray, MainGreen, MainRed, Black } from '@@/assets/styles/pallete'
 
 const Lists = styled.ul`
   -ms-user-select: none;
@@ -9,7 +9,7 @@ const Lists = styled.ul`
   -webkit-user-select: none;
   -khtml-user-select: none;
   user-select: none;
-  width: 100vw;
+  width: 100%;
   padding: 0;
   margin: 0;
   text-align: center;
@@ -18,10 +18,11 @@ const Lists = styled.ul`
     cursor: pointer;
     list-style: none;
     color: ${MainGreen};
-    border-top: 1px solid ${Gray};
-    border-bottom: 1px solid ${Gray};
+    border-top: 1px solid ${LightGray};
+    border-bottom: 1px solid ${LightGray};
     box-sizing: border-box;
     font-size: 1.5rem;
+    font-weight: light;
     height: 3rem;
     padding: 0.5rem 0;
 

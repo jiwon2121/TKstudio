@@ -44,7 +44,7 @@ const FadeOut = keyframes`
 `
 
 const Background = styled.div<{ $isClose: boolean }>`
-  position: absolute;
+  position: fixed;
   background-color: ${Black}80;
   width: 100vw;
   height: 100vh;
@@ -58,7 +58,7 @@ const Background = styled.div<{ $isClose: boolean }>`
 `
 
 const Modal = styled.div<{ $isClose: boolean }>`
-  position: absolute;
+  position: fixed;
   background-color: ${White};
   width: 100vw;
   max-width: 512px;
