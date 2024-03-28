@@ -1,6 +1,7 @@
 'use client'
 
 import React, { createContext, useState, useCallback, useEffect } from 'react'
+import { fetchDataWithAuthorization as fetchAuth } from '@/utils/api'
 
 export interface PicInfo {
   imageInfoId: number
@@ -51,18 +52,20 @@ function GalleryProvider({ children }: Props) {
   const getPicInfo = useCallback(async () => {
     if (!isGetInfo) {
       const newInfo: Array<PicInfo> = []
-      const response = await fetch(`${baseUrl}/api/v1/image/getImageInfos`, {
-        method: 'GET',
-        headers: {
-          Authorization: localStorage.getItem('accessToken') as string,
+      const response = await fetchAuth(
+        `${baseUrl}/api/v1/image/getImageInfos`,
+        localStorage.getItem('accessToken') as string,
+        localStorage.getItem('refreshToken') as string,
+        {
+          method: 'GET',
         },
-      }).then((res) => res.json())
+      ).then((res) => (res as Response).json())
 
       for (let key in response) {
         newInfo.push(response[key])
       }
 
-      const res = newInfo.sort((a, b) => (b.imageInfoId - a.imageInfoId))
+      const res = newInfo.sort((a, b) => b.imageInfoId - a.imageInfoId)
       setPicInfo(res)
       setIsGetInfo(true)
 
@@ -73,12 +76,17 @@ function GalleryProvider({ children }: Props) {
 
   const getBlob = useCallback(
     (id: number) => {
-      return fetch(`${baseUrl}/api/v1/image/getImage/thumbnailImage/${id}`, {
-        method: 'GET',
-        headers: {
-          Authorization: localStorage.getItem('accessToken') as string,
+      return fetchAuth(
+        `${baseUrl}/api/v1/image/getImage/thumbnailImage/${id}`,
+        localStorage.getItem('accessToken') as string,
+        localStorage.getItem('refreshToken') as string,
+        {
+          method: 'GET',
+          headers: {
+            Authorization: localStorage.getItem('accessToken') as string,
+          },
         },
-      }).then((res) => res.blob())
+      ).then((res) => (res as Response).blob())
     },
     [baseUrl],
   )

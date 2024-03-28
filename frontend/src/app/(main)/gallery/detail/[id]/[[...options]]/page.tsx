@@ -13,6 +13,7 @@ import EmptyButton from './_components/EmptyButton'
 import IconWrapper from './_components/IconWrapper'
 import OptionsWrapper from './_components/OptionsWrapper'
 import Main from './_components/Main'
+import { fetchDataWithAuthorization as fetchAuth } from '@/utils/api'
 
 function GalleryDetailPage() {
   const router = useRouter()
@@ -23,7 +24,8 @@ function GalleryDetailPage() {
   const processedUrl = `${baseUrl}/api/v1/image/getImage/processedImage/${id}`
 
   const [images, setImages] = useState<Array<string>>([])
-  const [seen, setSeen] = useState<boolean>(false)
+  const [downloadSeen, setDownloadSeen] = useState<boolean>(false)
+  const [deleteSeen, setDeleteSeen] = useState<boolean>(false)
   const [isClose, setIsClose] = useState<boolean>(true)
 
   const canvas = useRef<HTMLCanvasElement>(null)
@@ -46,26 +48,34 @@ function GalleryDetailPage() {
   const handleClose = async () => {
     setIsClose(true)
     await new Promise((resolve) => setTimeout(resolve, 300))
-    setSeen(false)
+    setDownloadSeen(false)
+    setDeleteSeen(false)
   }
 
-  const handleOpen = () => {
-    setSeen(true)
+  const handleDownloadOpen = () => {
+    setDownloadSeen(true)
+    setIsClose(false)
+  }
+
+  const handleDeleteOpen = () => {
+    setDeleteSeen(true)
     setIsClose(false)
   }
 
   const handleDelete = async () => {
     try {
-      const res = await fetch(`${baseUrl}/api/v1/image/delete/${id}`, {
-        method: 'GET',
-        headers: {
-          Authorization: localStorage.getItem('accessToken') as string,
+      const res = await fetchAuth(
+        `${baseUrl}/api/v1/image/delete/${id}`,
+        localStorage.getItem('accessToken') as string,
+        localStorage.getItem('refreshToken') as string,
+        {
+          method: 'GET',
         },
-      })
-      if (res.status === 200) {
+      )
+      if (res?.status === 200) {
         reset()
-        router.push('/gallery')
-      } else if (res.status === 401 || res.status === 403) {
+        router.replace('/gallery')
+      } else if (res?.status === 401 || res?.status === 403) {
         throw new Error(`${res.status}`)
       }
     } catch (err) {
@@ -111,25 +121,29 @@ function GalleryDetailPage() {
   useEffect(() => {
     const getImages = async () => {
       try {
-        const original = fetch(originalUrl, {
-          method: 'GET',
-          headers: {
-            Authorization: localStorage.getItem('accessToken') as string,
+        const original = fetchAuth(
+          originalUrl,
+          localStorage.getItem('accessToken') as string,
+          localStorage.getItem('refreshToken') as string,
+          {
+            method: 'GET',
           },
-        })
-          .then((res) => res.blob())
+        )
+          .then((res) => (res as Response).blob())
           .then((blob) => {
             blobs.current[0] = blob
             return URL.createObjectURL(blob)
           })
 
-        const processed = fetch(processedUrl, {
-          method: 'GET',
-          headers: {
-            Authorization: localStorage.getItem('accessToken') as string,
+        const processed = fetchAuth(
+          processedUrl,
+          localStorage.getItem('accessToken') as string,
+          localStorage.getItem('refreshToken') as string,
+          {
+            method: 'GET',
           },
-        })
-          .then((res) => res.blob())
+        )
+          .then((res) => (res as Response).blob())
           .then((blob) => {
             blobs.current[1] = blob
             return URL.createObjectURL(blob)
@@ -178,7 +192,7 @@ function GalleryDetailPage() {
       <IconWrapper>
         <EmptyButton
           onClick={() => {
-            handleOpen()
+            handleDownloadOpen()
           }}
         >
           <DownloadIcon width="1.5rem" height="1.5rem" />
@@ -197,18 +211,28 @@ function GalleryDetailPage() {
         </EmptyButton>
         <EmptyButton
           onClick={() => {
-            handleDelete()
+            handleDeleteOpen()
           }}
         >
           <DeleteIcon width="1.5rem" height="1.5rem" />
         </EmptyButton>
       </IconWrapper>
-      {seen && (
+      {downloadSeen && (
         <SlideupModal isClose={isClose} handleClose={handleClose}>
           <ModalContents
-            title="테스트"
+            title="사진 크기를 정해주세요"
             contents={contents}
             handleCancel={handleClose}
+          />
+        </SlideupModal>
+      )}
+      {deleteSeen && (
+        <SlideupModal isClose={isClose} handleClose={handleClose}>
+          <ModalContents
+            title="삭제하시겠습니까?"
+            contents={[{ content: '네', handleClick: handleDelete }]}
+            handleCancel={handleClose}
+            cancel='아니요'
           />
         </SlideupModal>
       )}

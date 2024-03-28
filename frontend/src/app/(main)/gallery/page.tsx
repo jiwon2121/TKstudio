@@ -107,6 +107,14 @@ function GalleryPage() {
   }, [target, pictures.length])
 
   useEffect(() => {
+    return () => {
+      urls.forEach((url) => {
+        URL.revokeObjectURL(url)
+      })
+    }
+  }, [urls])
+
+  useEffect(() => {
     setUrls((prev) => {
       const newUrls = pictures
         .slice(prev.length, pictures.length)
