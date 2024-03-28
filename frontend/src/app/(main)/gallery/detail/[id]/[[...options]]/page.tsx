@@ -230,9 +230,9 @@ function GalleryDetailPage() {
         <SlideupModal isClose={isClose} handleClose={handleClose}>
           <ModalContents
             title="삭제하시겠습니까?"
-            contents={[{ content: '네', handleClick: handleDelete }]}
+            contents={[{ content: '삭제', handleClick: handleDelete }]}
             handleCancel={handleClose}
-            cancel='아니요'
+            cancel='취소'
           />
         </SlideupModal>
       )}
