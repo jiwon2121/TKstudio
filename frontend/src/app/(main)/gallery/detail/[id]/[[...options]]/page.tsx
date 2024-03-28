@@ -1,36 +1,42 @@
 'use client'
 
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect, useRef, useContext } from 'react'
 import { useParams, useRouter } from 'next/navigation'
+import { GalleryContext } from '@/app/(main)/_components/ContextProvider'
 import DownloadIcon from '@@/assets/icons/download.svg'
 import LinkIcon from '@@/assets/icons/link.svg'
 import DeleteIcon from '@@/assets/icons/trash.svg'
-import EmptyButton from './_components/EmptyButton'
-import IconWrapper from './_components/IconWrapper'
-import Slider from '@/components/Slider'
 import SlideupModal from '@/components/SlideupModal'
 import ModalContents from '@/components/ModalContents'
+import Slider from './_components/Slider'
+import EmptyButton from './_components/EmptyButton'
+import IconWrapper from './_components/IconWrapper'
 import OptionsWrapper from './_components/OptionsWrapper'
+import Main from './_components/Main'
 
 function GalleryDetailPage() {
-  const baseUrl = process.env.NEXT_PUBLIC_BACK_URL
   const router = useRouter()
   const { id, options } = useParams()
+
+  const baseUrl = process.env.NEXT_PUBLIC_BACK_URL
   const originalUrl = `${baseUrl}/api/v1/image/getImage/originalImage/${id}`
   const processedUrl = `${baseUrl}/api/v1/image/getImage/processedImage/${id}`
+
   const [images, setImages] = useState<Array<string>>([])
   const [seen, setSeen] = useState<boolean>(false)
   const [isClose, setIsClose] = useState<boolean>(true)
+
   const canvas = useRef<HTMLCanvasElement>(null)
-  const accTk = useRef<string | null>(null)
   const blobs = useRef<Array<Blob | null>>([null, null])
+
+  const { reset } = useContext(GalleryContext)
 
   const renderOptions = () => {
     if (typeof options === 'string') {
-      return <b>#{decodeURI(options)}</b>
+      return <span>#{decodeURI(options)}</span>
     } else if (Array.isArray(options)) {
       return options.map((option, index) => {
-        return <b key={index}>#{decodeURI(option)}</b>
+        return <span key={index}>#{decodeURI(option)}</span>
       })
     }
 
@@ -51,12 +57,13 @@ function GalleryDetailPage() {
   const handleDelete = async () => {
     try {
       const res = await fetch(`${baseUrl}/api/v1/image/delete/${id}`, {
-        method: 'DELETE',
+        method: 'GET',
         headers: {
-          Authorization: accTk.current as string,
+          Authorization: localStorage.getItem('accessToken') as string,
         },
       })
       if (res.status === 200) {
+        reset()
         router.push('/gallery')
       } else if (res.status === 401 || res.status === 403) {
         throw new Error(`${res.status}`)
@@ -94,15 +101,20 @@ function GalleryDetailPage() {
   }
 
   useEffect(() => {
-    const accessToken = localStorage.getItem('accessToken') as string
-    accTk.current = accessToken
+    return () => {
+      images.forEach((image) => {
+        URL.revokeObjectURL(image)
+      })
+    }
+  }, [images])
 
+  useEffect(() => {
     const getImages = async () => {
       try {
         const original = fetch(originalUrl, {
           method: 'GET',
           headers: {
-            Authorization: accessToken,
+            Authorization: localStorage.getItem('accessToken') as string,
           },
         })
           .then((res) => res.blob())
@@ -114,7 +126,7 @@ function GalleryDetailPage() {
         const processed = fetch(processedUrl, {
           method: 'GET',
           headers: {
-            Authorization: accessToken,
+            Authorization: localStorage.getItem('accessToken') as string,
           },
         })
           .then((res) => res.blob())
@@ -161,7 +173,7 @@ function GalleryDetailPage() {
   ]
 
   return (
-    <main>
+    <Main>
       <Slider before={images[0]} after={images[1]} />
       <IconWrapper>
         <EmptyButton
@@ -202,7 +214,7 @@ function GalleryDetailPage() {
       )}
       <OptionsWrapper>{renderOptions()}</OptionsWrapper>
       <canvas ref={canvas} style={{ display: 'none' }} />
-    </main>
+    </Main>
   )
 }
 
