@@ -87,7 +87,11 @@ function CreatePage() {
   async function handleFileInputChange(event: ChangeEvent<HTMLInputElement>) {
     const file = event.target.files?.[0]
     if (file) {
-      const resizedBlob = (await resizeImageToBlob(file, maxWidth, maxHeight)) as Blob
+      const resizedBlob = (await resizeImageToBlob(
+        file,
+        maxWidth,
+        maxHeight,
+      )) as Blob
       setImageBlob(resizedBlob)
       const resizedImageUrl = URL.createObjectURL(resizedBlob)
       setImage(resizedImageUrl)
@@ -144,13 +148,16 @@ function CreatePage() {
     formData.append('height', String(requestImgHeight))
     formData.append('optionId', String(selectedOptionId))
 
-    const res = await fetch(process.env.NEXT_PUBLIC_BACK_URL! + '/api/v1/image/create', {
-      method: 'POST',
-      body: formData,
-      headers: {
-        Authorization: accessToken,
+    const res = await fetch(
+      process.env.NEXT_PUBLIC_BACK_URL! + '/api/v1/image/create',
+      {
+        method: 'POST',
+        body: formData,
+        headers: {
+          Authorization: accessToken,
+        },
       },
-    })
+    )
 
     if (!res.ok) {
       alert('생성 실패!')
@@ -164,7 +171,15 @@ function CreatePage() {
     <MainWrapper>
       <ContentContainer>
         <canvas ref={canvasRef} hidden />
-        <input ref={imageInputRef} type="file" id="originalImage" name="originalImage" accept="image/*" onChange={handleFileInputChange} hidden />
+        <input
+          ref={imageInputRef}
+          type="file"
+          id="originalImage"
+          name="originalImage"
+          accept="image/*"
+          onChange={handleFileInputChange}
+          hidden
+        />
         <ImgRequestForm onSubmit={handleSubmit}>
           <ImageWrapper onClick={handleImageInputClick}>
             {!image && <UploadSquare>+</UploadSquare>}
@@ -174,8 +189,15 @@ function CreatePage() {
             사진 {image ? '변경' : '추가'}
           </Button>
           <TextWrapper>옵션 리스트</TextWrapper>
-          <CreateOptionGenderTab optionGender={optionGender} setOptionGender={setOptionGender} />
-          <CreateOptionList optionGender={optionGender} selectedOptionId={selectedOptionId} setSelectedOptionId={setSelectedOptionId} />
+          <CreateOptionGenderTab
+            optionGender={optionGender}
+            setOptionGender={setOptionGender}
+          />
+          <CreateOptionList
+            optionGender={optionGender}
+            selectedOptionId={selectedOptionId}
+            setSelectedOptionId={setSelectedOptionId}
+          />
 
           <Button {...CreatePageButton}>딸깍</Button>
         </ImgRequestForm>
