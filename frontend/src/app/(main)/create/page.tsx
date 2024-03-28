@@ -67,29 +67,74 @@ const CreatePageButton = {
 function CreatePage() {
   const [image, setImage] = useState<string | null>(null)
   const imageInputRef = useRef<HTMLInputElement>(null)
+  const [requestImgWidth, setRequestImgWidth] = useState<number | null>(null)
+  const [requestImgHeight, setRequestImgHeight] = useState<number | null>(null)
+  const canvasRef = useRef<HTMLCanvasElement>(null)
+  const [imageBlob, setImageBlob] = useState<Blob | null>(null)
   const [selectedOptionId, setSelectedOptionId] = useState<number>(0)
   const [optionGender, setOptionGender] = useState<GenderCategory>('ALL')
 
-  const router = useRouter()
+  const maxWidth = 1024 // 최대 너비
+  const maxHeight = 1024 // 최대 높이
 
-  function changeInput(event: ChangeEvent<HTMLInputElement>) {
-    const file = event.target.files?.[0]
-    if (file) {
-      const reader = new FileReader()
-      reader.onloadend = () => {
-        setImage(reader.result as string)
-      }
-      reader.readAsDataURL(file)
-    }
-  }
+  const router = useRouter()
 
   function handleImageInputClick(event: any) {
     event?.preventDefault()
     imageInputRef.current?.click()
   }
 
+  async function handleFileInputChange(event: ChangeEvent<HTMLInputElement>) {
+    const file = event.target.files?.[0]
+    if (file) {
+      const resizedBlob = (await resizeImageToBlob(
+        file,
+        maxWidth,
+        maxHeight,
+      )) as Blob
+      setImageBlob(resizedBlob)
+      const resizedImageUrl = URL.createObjectURL(resizedBlob)
+      setImage(resizedImageUrl)
+    }
+  }
+
+  function resizeImageToBlob(file: File, maxWidth: number, maxHeight: number) {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader()
+      reader.onload = (event) => {
+        const uploadedImg = new Image()
+        uploadedImg.onload = () => {
+          let width = uploadedImg.width
+          let height = uploadedImg.height
+
+          if (width > maxWidth || height > maxHeight) {
+            const ratio = Math.min(maxWidth / width, maxHeight / height)
+            width *= ratio
+            height *= ratio
+          }
+
+          setRequestImgWidth(width)
+          setRequestImgHeight(height)
+          const canvas = canvasRef.current
+          canvas!.width = width
+          canvas!.height = height
+          const ctx = canvas!.getContext('2d')
+          ctx!.drawImage(uploadedImg, 0, 0, width, height)
+
+          canvas!.toBlob((blob) => {
+            resolve(blob)
+          }, 'image/jpeg')
+        }
+        uploadedImg.src = event.target?.result as string
+      }
+      reader.onerror = reject
+      reader.readAsDataURL(file)
+    })
+  }
+
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
+
     if (!image) {
       alert('사진을 첨부해주세요')
       return
@@ -97,7 +142,10 @@ function CreatePage() {
 
     const accessToken = localStorage.getItem('accessToken') as string
 
-    const formData = new FormData(event.currentTarget)
+    const formData = new FormData()
+    formData.append('originalImage', imageBlob!)
+    formData.append('width', String(requestImgWidth))
+    formData.append('height', String(requestImgHeight))
     formData.append('optionId', String(selectedOptionId))
 
     const res = await fetch(
@@ -111,6 +159,10 @@ function CreatePage() {
       },
     )
 
+    if (!res.ok) {
+      alert('생성 실패!')
+      throw new Error('이미지 생성 실패!')
+    }
     const createdImageId = res.headers.get('imageInfoId')
     router.push(`/create/result?imageId=${createdImageId}`)
   }
@@ -118,15 +170,17 @@ function CreatePage() {
   return (
     <MainWrapper>
       <ContentContainer>
+        <canvas ref={canvasRef} hidden />
+        <input
+          ref={imageInputRef}
+          type="file"
+          id="originalImage"
+          name="originalImage"
+          accept="image/*"
+          onChange={handleFileInputChange}
+          hidden
+        />
         <ImgRequestForm onSubmit={handleSubmit}>
-          <input
-            ref={imageInputRef}
-            type="file"
-            id="originalImage"
-            name="originalImage"
-            accept="image/*"
-            onChange={changeInput}
-          />
           <ImageWrapper onClick={handleImageInputClick}>
             {!image && <UploadSquare>+</UploadSquare>}
             {image && <OriginalImg src={image} alt="originalImage" />}
