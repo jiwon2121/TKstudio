@@ -173,7 +173,7 @@ function CreatePage() {
       alert('생성 실패!')
       throw new Error('이미지 생성 실패!')
     }
-    const createdImageId = res.headers.get('imageInfoId')
+    const createdImageId = res?.headers.get('imageInfoId')
     reset()
     router.push(`/create/result?imageId=${createdImageId}`)
   }
