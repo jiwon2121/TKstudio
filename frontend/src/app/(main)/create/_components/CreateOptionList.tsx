@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import { Option } from '../../store/_components/OptionList'
 import CreateOptionDetail from './CreateOptionDetail'
+import { fetchDataWithAuthorization } from '@/utils/api'
 
 const MyOptionListContainer = styled.div`
   width: 100%;
@@ -28,18 +29,16 @@ const CreateOptionList = function ({
   useEffect(() => {
     async function getOptionList() {
       const accessToken = localStorage.getItem('accessToken') as string
-      const optionListResponse = await fetch(
-        process.env.NEXT_PUBLIC_BACK_URL + '/api/v1/option/list',
-        {
-          headers: { Authorization: accessToken },
-        },
+      const refreshToken = localStorage.getItem('refreshToken') as string
+      const url = process.env.NEXT_PUBLIC_BACK_URL + '/api/v1/option/list'
+
+      const optionListResponse = await fetchDataWithAuthorization(
+        url,
+        accessToken,
+        refreshToken,
       )
 
-      if (!optionListResponse.ok) {
-        throw new Error('옵션 리스트 불러오기 실패')
-      }
-
-      const optionListJson = await optionListResponse.json()
+      const optionListJson = await optionListResponse?.json()
 
       const optionList: Option[] = optionListJson.data
 
