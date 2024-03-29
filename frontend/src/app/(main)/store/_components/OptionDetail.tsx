@@ -1,8 +1,11 @@
 import styled from 'styled-components'
+import { useState } from 'react'
 import { Option } from './OptionList'
-import { White, MainGreen, MainRed } from '@@/assets/styles/pallete'
+import { White, MainRed } from '@@/assets/styles/pallete'
 import { useRouter } from 'next/navigation'
 import { fetchDataWithAuthorization } from '@/utils/api'
+import SlideupModal from '@/components/SlideupModal'
+import ModalContents from '@/components/ModalContents'
 
 interface PurchasedOptionStyleProp {
   $purchased: boolean
@@ -44,6 +47,9 @@ const OptionDetailTextWrapper = styled.div<PurchasedOptionStyleProp>`
 
 function OptionDetail(props: Option) {
   const router = useRouter()
+  const [modalSeen, setModalSeen] = useState<boolean>(false)
+  const [isClose, setIsClose] = useState<boolean>(true)
+  
   async function getPayUrl(optionId: number) {
     const accessToken = localStorage.getItem('accessToken') as string
     const refreshToken = localStorage.getItem('refreshToken') as string
@@ -86,32 +92,59 @@ function OptionDetail(props: Option) {
     }
   }
 
-  async function handlePurcahse(optionId: number) {
+  async function handlePurchase(optionId: number) {
     if (props.purchased) {
       alert('이미 구매한 옵션입니다.')
-      return null
-    }
-    if (!window.confirm('구매하시겠습니까?')) {
       return null
     }
     const payUrl = await getPayUrl(optionId)
     router.push(payUrl)
   }
 
+  const handleClose = async () => {
+    setIsClose(true)
+    await new Promise((resolve) => setTimeout(resolve, 300))
+    setModalSeen(false)
+  }
+
+  const handleModalOpen = () => {
+    setModalSeen(true)
+    setIsClose(false)
+  }
+
   return (
-    <OptionDetailWrapper
-      onContextMenu={(event) => {
-        event.preventDefault()
-      }}
-      onClick={() => handlePurcahse(props.optionId)}
-    >
-      <ImageWrapper src={props.optionS3Url} alt="optionImg" />
-      <OptionDetailTextWrapper $purchased={props.purchased}>
-        <div>{props.optionName}</div>
-        <div>{props.description}</div>
-        <div>{props.cost}원</div>
-      </OptionDetailTextWrapper>
-    </OptionDetailWrapper>
+    <>
+      <OptionDetailWrapper
+        onContextMenu={(event) => {
+          event.preventDefault()
+        }}
+        onClick={() => handleModalOpen()}
+      >
+        <ImageWrapper src={props.optionS3Url} alt="optionImg" />
+        <OptionDetailTextWrapper $purchased={props.purchased}>
+          <div>{props.optionName}</div>
+          <div>{props.description}</div>
+          <div>{props.cost}원</div>
+        </OptionDetailTextWrapper>
+      </OptionDetailWrapper>
+      {modalSeen && (
+        <SlideupModal isClose={isClose} handleClose={handleClose}>
+          <ModalContents
+            title="구매하시겠습니까?"
+            contents={[
+              {
+                content: '구매',
+                handleClick: () => {
+                  handlePurchase(props.optionId)
+                },
+              },
+            ]}
+            handleCancel={handleClose}
+            cancel="취소"
+          />
+        </SlideupModal>
+      )}
+    </>
   )
 }
 

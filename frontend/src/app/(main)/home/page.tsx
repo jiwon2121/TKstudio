@@ -15,7 +15,15 @@ import Carousel from './_component/Carousel'
 function MainPage() {
   const baseUrl = process.env.NEXT_PUBLIC_BACK_URL
   const router = useRouter()
-  const imgs = [Carousel1, Carousel2, Carousel3, Carousel4, Carousel5, Carousel6, Carousel7]
+  const imgs = [
+    Carousel1,
+    Carousel2,
+    Carousel3,
+    Carousel4,
+    Carousel5,
+    Carousel6,
+    Carousel7,
+  ]
 
   const handleLogout = async () => {
     try {
@@ -33,6 +41,7 @@ function MainPage() {
       router.push('/start')
     }
   }
+
   return (
     <Main>
       <Carousel images={imgs} />
@@ -41,6 +50,7 @@ function MainPage() {
         onClick={() => {
           handleLogout()
         }}
+        $padding="16px 0"
       >
         로그아웃
       </Button>
