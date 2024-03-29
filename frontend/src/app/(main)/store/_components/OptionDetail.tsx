@@ -18,7 +18,7 @@ const OptionDetailWrapper = styled.div`
   border: solid white 1px;
   box-sizing: border-box;
 
-  width: 33.3333%;
+  width: 33.333333%;
 
   &:active {
     border: solid ${MainRed} 5px;
@@ -45,11 +45,20 @@ const OptionDetailTextWrapper = styled.div<PurchasedOptionStyleProp>`
   background-color: ${(props) => (props.$purchased ? 'lightgrey' : { White })};
 `
 
+const OptionNameWrapper = styled.div`
+  align-self: center;
+  margin-bottom: 5px;
+`
+
+const OptionCostWrapper = styled.div`
+  align-self: center;
+`
+
 function OptionDetail(props: Option) {
   const router = useRouter()
   const [modalSeen, setModalSeen] = useState<boolean>(false)
   const [isClose, setIsClose] = useState<boolean>(true)
-  
+
   async function getPayUrl(optionId: number) {
     const accessToken = localStorage.getItem('accessToken') as string
     const refreshToken = localStorage.getItem('refreshToken') as string
@@ -122,9 +131,10 @@ function OptionDetail(props: Option) {
       >
         <ImageWrapper src={props.optionS3Url} alt="optionImg" />
         <OptionDetailTextWrapper $purchased={props.purchased}>
-          <div>{props.optionName}</div>
-          <div>{props.description}</div>
-          <div>{props.cost}원</div>
+          <OptionNameWrapper>{props.optionName}</OptionNameWrapper>
+          <OptionCostWrapper>
+            {props.cost.toLocaleString('ko-KR')} 원
+          </OptionCostWrapper>
         </OptionDetailTextWrapper>
       </OptionDetailWrapper>
       {modalSeen && (
