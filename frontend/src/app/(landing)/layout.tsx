@@ -1,7 +1,9 @@
+import Animation from './_components/LandingLogo'
+
 function IndexLayout({ children }: LayoutProps) {
   return (
     <main>
-      <span>배경이미지 제작 예정</span>
+      <Animation />
       {children}
     </main>
   )

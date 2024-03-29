@@ -11,6 +11,7 @@ import { useRouter } from 'next/navigation'
 import CreateOptionGenderTab from './_components/CreateOptionGenderTab'
 import { GenderCategory } from '../store/page'
 import { fetchDataWithAuthorization } from '@/utils/api'
+import Ddalkkak from './_components/Lottiddlkkak'
 
 const MainWrapper = styled.main`
   display: flex;
@@ -52,6 +53,24 @@ const OriginalImg = styled.img`
   height: 100%;
   object-fit: contain;
 `
+const ModalWrapper = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.75);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+`
+
+const ModalContent = styled.div`
+  padding: 20px;
+  border-radius: 10px;
+  margin-bottom: 100px;
+`
 
 const CreatePageButton = {
   $height: '60px',
@@ -70,6 +89,7 @@ function CreatePage() {
   const [imageBlob, setImageBlob] = useState<Blob | null>(null)
   const [selectedOptionId, setSelectedOptionId] = useState<number>(0)
   const [optionGender, setOptionGender] = useState<GenderCategory>('ALL')
+  const [isLoading, setIsLoading] = useState(false) // isLoading 상태 추가
 
   const maxWidth = 1024 // 최대 너비
   const maxHeight = 1024 // 최대 높이
@@ -131,6 +151,7 @@ function CreatePage() {
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
+    setIsLoading(true) // 로딩 상태를 true로 변경
 
     if (!image) {
       alert('사진을 첨부해주세요')
@@ -165,6 +186,7 @@ function CreatePage() {
 
     if (!res!.ok) {
       alert('생성 실패!')
+      setIsLoading(false) // 로딩 상태를 false로 변경
       throw new Error('이미지 생성 실패!')
     }
     const createdImageId = res?.headers.get('imageInfoId')
@@ -203,7 +225,21 @@ function CreatePage() {
             setSelectedOptionId={setSelectedOptionId}
           />
 
-          <Button {...CreatePageButton}>딸깍</Button>
+          {/* 로딩 상태에 따라 모달을 렌더링 */}
+          {isLoading && (
+            <ModalWrapper>
+              <ModalContent>
+                <Ddalkkak />
+              </ModalContent>
+            </ModalWrapper>
+          )}
+
+          {/* 로딩 상태가 아닐 때는 일반적으로 버튼을 렌더링 */}
+          {!isLoading && (
+            <Button {...CreatePageButton} type="submit">
+              딸깍
+            </Button>
+          )}
         </ImgRequestForm>
       </ContentContainer>
     </MainWrapper>
