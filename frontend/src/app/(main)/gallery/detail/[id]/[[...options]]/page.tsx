@@ -26,6 +26,7 @@ function GalleryDetailPage() {
   const [images, setImages] = useState<Array<string>>([])
   const [downloadSeen, setDownloadSeen] = useState<boolean>(false)
   const [deleteSeen, setDeleteSeen] = useState<boolean>(false)
+  const [modalSeen, setModalSeen] = useState<null | 'download' | 'delete'>(null)
   const [isClose, setIsClose] = useState<boolean>(true)
 
   const canvas = useRef<HTMLCanvasElement>(null)
@@ -48,17 +49,20 @@ function GalleryDetailPage() {
   const handleClose = async () => {
     setIsClose(true)
     await new Promise((resolve) => setTimeout(resolve, 300))
-    setDownloadSeen(false)
-    setDeleteSeen(false)
+    // setDownloadSeen(false)
+    // setDeleteSeen(false)
+    setModalSeen(null)
   }
 
   const handleDownloadOpen = () => {
-    setDownloadSeen(true)
+    // setDownloadSeen(true)
+    setModalSeen('download')
     setIsClose(false)
   }
 
   const handleDeleteOpen = () => {
-    setDeleteSeen(true)
+    // setDeleteSeen(true)
+    setModalSeen('delete')
     setIsClose(false)
   }
 
@@ -162,27 +166,27 @@ function GalleryDetailPage() {
   const contents = [
     {
       content: '96 X 128',
-      handleDownload: handleDownload,
-      width: 96,
-      height: 128,
+      handleClick: () => {
+        handleDownload(96, 128)
+      }
     },
     {
       content: '192 X 256',
-      handleDownload: handleDownload,
-      width: 192,
-      height: 256,
+      handleClick: () => {
+        handleDownload(192, 256)
+      }
     },
     {
       content: '384 X 512',
-      handleDownload: handleDownload,
-      width: 384,
-      height: 512,
+      handleClick: () => {
+        handleDownload(384, 512)
+      }
     },
     {
       content: '768 X 1024',
-      handleDownload: handleDownload,
-      width: 768,
-      height: 1024,
+      handleClick: () => {
+        handleDownload(768, 1024)
+      }
     },
   ]
 
@@ -217,7 +221,7 @@ function GalleryDetailPage() {
           <DeleteIcon width="1.5rem" height="1.5rem" />
         </EmptyButton>
       </IconWrapper>
-      {downloadSeen && (
+      {modalSeen === 'download' && (
         <SlideupModal isClose={isClose} handleClose={handleClose}>
           <ModalContents
             title="사진 크기를 정해주세요"
@@ -226,7 +230,7 @@ function GalleryDetailPage() {
           />
         </SlideupModal>
       )}
-      {deleteSeen && (
+      {modalSeen === 'delete' && (
         <SlideupModal isClose={isClose} handleClose={handleClose}>
           <ModalContents
             title="삭제하시겠습니까?"

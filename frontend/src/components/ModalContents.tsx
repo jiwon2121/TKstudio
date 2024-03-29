@@ -40,10 +40,9 @@ const Lists = styled.ul`
 
 interface Contents {
   content: string
-  handleClick?: any
-  handleDownload?: any
-  width?: number
-  height?: number
+  handleClick?: (() => void) | (() => Promise<void>)
+  // handleDownload?: any
+  // handlePurchase?: any
 }
 
 interface Props {
@@ -60,13 +59,12 @@ function ModalContents({
   handleCancel,
 }: Props) {
   const renderContents = contents.map(
-    ({ content, handleClick, handleDownload, width, height }, index) => {
+    ({ content, handleClick }, index) => {
       return (
         <li
           key={index}
           onClick={() => {
             handleClick ? handleClick() : null
-            handleDownload ? handleDownload(width, height) : null
             handleCancel()
           }}
         >
