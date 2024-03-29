@@ -53,12 +53,6 @@ const OriginalImg = styled.img`
   object-fit: contain;
 `
 
-const TextWrapper = styled.div`
-  font-size: x-large;
-  align-self: flex-start;
-  margin-bottom: 5px;
-`
-
 const CreatePageButton = {
   $height: '60px',
   $width: '100%',
@@ -199,7 +193,6 @@ function CreatePage() {
           <Button {...CreatePageButton} onClick={handleImageInputClick}>
             사진 {image ? '변경' : '추가'}
           </Button>
-          <TextWrapper>내 옵션 리스트</TextWrapper>
           <CreateOptionGenderTab
             optionGender={optionGender}
             setOptionGender={setOptionGender}

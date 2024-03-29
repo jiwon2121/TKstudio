@@ -2,7 +2,6 @@ import styled from 'styled-components'
 import OptionDetail from './OptionDetail'
 import { useEffect, useState } from 'react'
 import { GenderCategory } from '../page'
-import { useRouter } from 'next/navigation'
 import { fetchDataWithAuthorization } from '@/utils/api'
 
 const OptionListContainer = styled.div`
@@ -10,6 +9,14 @@ const OptionListContainer = styled.div`
   flex-wrap: wrap;
   width: 100%;
 `
+
+const StoreTextWrapper = styled.div`
+  width: 100%;
+  font-size: xx-large;
+  text-align: center;
+  padding: 50px;
+`
+
 export interface Option {
   optionId: number
   optionName: string
@@ -73,13 +80,13 @@ function OptionList({ categorySort, showMine }: OptionListProp) {
 
   return (
     <OptionListContainer>
-      {isLoading && <h1>옵션 리스트 로딩중입니다.</h1>}
+      {isLoading && <StoreTextWrapper>불러오는 중...</StoreTextWrapper>}
       {showList?.length > 0 &&
         showList?.map((option: Option) => (
           <OptionDetail key={option.optionId} {...option} />
         ))}
       {!isLoading && showList?.length == 0 && (
-        <h1>해당 조건의 상품이 없습니다.</h1>
+        <StoreTextWrapper>해당 조건의 옵션이 없습니다.</StoreTextWrapper>
       )}
     </OptionListContainer>
   )

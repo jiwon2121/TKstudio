@@ -36,7 +36,6 @@ function StorePage() {
 
   return (
     <MainContainer>
-      <h1>옵션 스토어</h1>
       <ContentContainer>
         <ShowMineTab showMine={showMine} handleMineChange={handleMineChange} />
         <CategoryList

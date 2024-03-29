@@ -18,9 +18,10 @@ const CreateOptionDetailImageWrapper = styled.img`
 `
 
 const CreateOptionDetailTextWrapper = styled.div`
-  display: flex;
-  padding: 4px;
+  width: 100%;
+  text-align: center;
   font-size: small;
+  padding: 8px 0px;
 `
 interface OptionDetailStyleProp {
   $selected: boolean
