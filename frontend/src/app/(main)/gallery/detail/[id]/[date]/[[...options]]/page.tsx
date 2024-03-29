@@ -13,11 +13,12 @@ import EmptyButton from './_components/EmptyButton'
 import IconWrapper from './_components/IconWrapper'
 import OptionsWrapper from './_components/OptionsWrapper'
 import Main from './_components/Main'
+import DateP from './_components/DateP'
 import { fetchDataWithAuthorization as fetchAuth } from '@/utils/api'
 
 function GalleryDetailPage() {
   const router = useRouter()
-  const { id, options } = useParams()
+  const { id, date, options } = useParams()
 
   const baseUrl = process.env.NEXT_PUBLIC_BACK_URL
   const originalUrl = `${baseUrl}/api/v1/image/getImage/originalImage/${id}`
@@ -240,6 +241,7 @@ function GalleryDetailPage() {
           />
         </SlideupModal>
       )}
+      <DateP>촬영일 {date}</DateP>
       <OptionsWrapper>{renderOptions()}</OptionsWrapper>
       <canvas ref={canvas} style={{ display: 'none' }} />
     </Main>

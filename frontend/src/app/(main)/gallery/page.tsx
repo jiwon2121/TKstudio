@@ -32,10 +32,13 @@ function GalleryPage() {
       const optString = picInfo[index].optionName
         ? `/${picInfo[index].optionName}`
         : ''
+
+      const date = picInfo[index].createdTime.slice(0, 10).replaceAll('-', '.')
+
       return (
         <Link
           key={index}
-          href={`/gallery/detail/${picInfo[index].imageInfoId}${optString}`}
+          href={`/gallery/detail/${picInfo[index].imageInfoId}/${date}${optString}`}
           style={{
             width: '100%',
             aspectRatio: '1/1',
