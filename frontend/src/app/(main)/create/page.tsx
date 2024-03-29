@@ -6,7 +6,7 @@ import { GalleryContext } from '../_components/ContextProvider'
 
 import styled from 'styled-components'
 import Button from '@/components/Button'
-import { MainGreen } from '@@/assets/styles/pallete'
+import { MainGreen, Black } from '@@/assets/styles/pallete'
 import { useRouter } from 'next/navigation'
 import CreateOptionGenderTab from './_components/CreateOptionGenderTab'
 import { GenderCategory } from '../store/page'
@@ -59,7 +59,7 @@ const ModalWrapper = styled.div`
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.75);
+  background-color: ${Black} 80;
   display: flex;
   justify-content: center;
   align-items: center;
