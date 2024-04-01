@@ -85,7 +85,6 @@ function LandingPage() {
     }
   }
 
-  useEffect
   useEffect(() => {
     window.addEventListener('beforeinstallprompt', handleBeforeInstallPrompt)
 

@@ -48,7 +48,6 @@ const Background = styled.div<{ $isClose: boolean }>`
   background-color: ${Black}80;
   width: 100vw;
   height: 100vh;
-  z-index: 1;
   top: 0;
   animation-name: ${(props) => (props.$isClose ? FadeOut : FadeIn)};
   animation-timing-function: ease-out;
