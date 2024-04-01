@@ -19,6 +19,8 @@ interface Props {
   $cursor?: 'auto' | 'default' | 'none' | 'pointer'
   $fontSize?: string
   $active?: Active
+  $fontWeight?: string | number
+  $wordSpacing?: string
 }
 
 const Button = styled.button<Props>`
@@ -34,6 +36,8 @@ const Button = styled.button<Props>`
   padding: ${(props) => (props.$padding ? props.$padding : '5px 10px')};
   cursor: ${(props) => (props.$cursor ? props.$cursor : 'pointer')};
   font-size: ${(props) => (props.$fontSize ? props.$fontSize : '1rem')};
+  font-weight: ${(props) => (props.$fontWeight ? props.$fontWeight : '')};
+  word-spacing: ${(props) => (props.$wordSpacing? props.$wordSpacing : '')};
   &:active {
     background-color: ${(props) =>
       props.$active?.$backgroundColor

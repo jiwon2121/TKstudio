@@ -1,17 +1,17 @@
 'use client'
 
-import CreateOptionList from './_components/CreateOptionList'
 import { ChangeEvent, FormEvent, useRef, useState, useContext } from 'react'
-import { GalleryContext } from '../_components/ContextProvider'
-
-import styled from 'styled-components'
-import Button from '@/components/Button'
-import { MainGreen, Black } from '@@/assets/styles/pallete'
 import { useRouter } from 'next/navigation'
-import CreateOptionGenderTab from './_components/CreateOptionGenderTab'
+import styled from 'styled-components'
+import { GalleryContext } from '../_components/ContextProvider'
 import { GenderCategory } from '../store/page'
-import { fetchDataWithAuthorization } from '@/utils/api'
+import CreateOptionList from './_components/CreateOptionList'
+import CreateOptionGenderTab from './_components/CreateOptionGenderTab'
 import Ddalkkak from './_components/Lottiddlkkak'
+import { fetchDataWithAuthorization } from '@/utils/api'
+import Button from '@/components/Button'
+import AlertModal from '@/components/AlertModal'
+import { MainGreen, Black } from '@@/assets/styles/pallete'
 
 const MainWrapper = styled.main`
   display: flex;
@@ -75,8 +75,9 @@ const ModalContent = styled.div`
 const CreatePageButton = {
   $height: '60px',
   $width: '100%',
-  $fontWeight: 'bolder',
+  $fontWeight: 'bold',
   $margin: '10px',
+  $fontSize: '1.5rem',
 }
 
 function CreatePage() {
@@ -90,6 +91,7 @@ function CreatePage() {
   const [selectedOptionId, setSelectedOptionId] = useState<number>(0)
   const [optionGender, setOptionGender] = useState<GenderCategory>('ALL')
   const [isLoading, setIsLoading] = useState(false) // isLoading 상태 추가
+  const [alertMessage, setAlertMessage] = useState<string>('')
 
   const maxWidth = 1024 // 최대 너비
   const maxHeight = 1024 // 최대 높이
@@ -99,6 +101,10 @@ function CreatePage() {
   function handleImageInputClick(event: any) {
     event?.preventDefault()
     imageInputRef.current?.click()
+  }
+
+  function handleClose() {
+    setAlertMessage('')
   }
 
   async function handleFileInputChange(event: ChangeEvent<HTMLInputElement>) {
@@ -184,14 +190,22 @@ function CreatePage() {
       createOption,
     )
 
-    if (!res!.ok) {
-      alert('생성 실패!')
-      setIsLoading(false) // 로딩 상태를 false로 변경
-      throw new Error('이미지 생성 실패!')
+    setIsLoading(false)
+    if (res!.status === 200) {
+      const createdImageId = res?.headers.get('imageInfoId')
+      reset()
+      router.push(`/create/result?imageId=${createdImageId}`)
+    } else if (res!.status === 400) {
+      const json = await res?.json()
+      if (json.message === '탐지된 얼굴이 2개 이상입니다.') {
+        setAlertMessage('사람이 너무 많아요')
+      } else if (json.message === '얼굴이 없습니다.') {
+        setAlertMessage('사람을 찾을 수 없어요')
+      }
+      console.log(json)
+    } else {
+      setAlertMessage('다시 시도해 주세요')
     }
-    const createdImageId = res?.headers.get('imageInfoId')
-    reset()
-    router.push(`/create/result?imageId=${createdImageId}`)
   }
 
   return (
@@ -225,20 +239,25 @@ function CreatePage() {
             setSelectedOptionId={setSelectedOptionId}
           />
 
+          <Button {...CreatePageButton} $wordSpacing="2rem">
+            딸 깍
+          </Button>
+
           {/* 로딩 상태에 따라 모달을 렌더링 */}
           {isLoading && (
-            <ModalWrapper>
+            <ModalWrapper
+              onClick={(e) => {
+                e.stopPropagation()
+              }}
+            >
               <ModalContent>
                 <Ddalkkak />
               </ModalContent>
             </ModalWrapper>
           )}
 
-          {/* 로딩 상태가 아닐 때는 일반적으로 버튼을 렌더링 */}
-          {!isLoading && (
-            <Button {...CreatePageButton} type="submit">
-              딸깍
-            </Button>
+          {alertMessage && (
+            <AlertModal handleClose={handleClose}>{alertMessage}</AlertModal>
           )}
         </ImgRequestForm>
       </ContentContainer>
