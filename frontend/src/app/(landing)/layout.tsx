@@ -1,10 +1,9 @@
-import Animation from './_components/LandingLogo'
+import Background from './_components/Background'
 
 function IndexLayout({ children }: LayoutProps) {
   return (
     <main>
-      <Animation />
-      {children}
+      <Background>{children}</Background>
     </main>
   )
 }

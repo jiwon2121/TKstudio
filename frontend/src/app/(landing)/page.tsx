@@ -7,14 +7,15 @@ import SlideupModal from '@/components/SlideupModal'
 import LogoSmall from '@@/assets/icons/logo-small.svg'
 import XIcon from '@@/assets/icons/x.svg'
 import AlertIcon from '@@/assets/icons/triangle-alert.svg'
+import DownloadIcon from '@@/assets/icons/download.svg'
 import InstallWrapper from './_components/InstallWrapper'
 import XWrapper from './_components/XWrapper'
 import InstallHeader from './_components/InstallHeader'
 import InstallLogo from './_components/InstallLogo'
 import ContentsWrapper from './_components/ContentsWrapper'
+import { MainYellow, White } from '@@/assets/styles/pallete'
 
 function LandingPage() {
-  // const router = useRouter()
   const [device, setDevice] = useState<string | null>(null)
   const [deferredPrompt, setDeferredPrompt] = useState<any>(null)
   const [seen, setSeen] = useState<boolean>(false)
@@ -45,7 +46,7 @@ function LandingPage() {
     if (device === 'web') {
       return (
         <ContentsWrapper>
-          <AlertIcon width="2rem" height="2rem" />
+          <AlertIcon width="2rem" height="2rem" color={MainYellow} />
           <p>모바일로 접속해 주세요</p>
         </ContentsWrapper>
       )
@@ -60,12 +61,15 @@ function LandingPage() {
             handleClose()
           }}
         >
-          앱 다운로드
+          앱 다운로드 
+          <span style={{ verticalAlign: 'middle' }}>
+            <DownloadIcon width="1.5rem" height="1.5rem" color={White} />
+          </span>
         </Button>
       ) : (
         <ContentsWrapper>
-          <AlertIcon width="2rem" height="2rem" />
-          <p>앱을 이용해 주세요</p>
+          <AlertIcon width="2rem" height="2rem" color={MainYellow} />
+          <p>앱으로 접속해 주세요</p>
         </ContentsWrapper>
       )
     } else if (device === 'iphone') {

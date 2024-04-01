@@ -24,6 +24,9 @@ interface Props {
 }
 
 const Button = styled.button<Props>`
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: ${(props) => (props.$width ? props.$width : 'auto')};
   height: ${(props) => (props.$height ? props.$height : 'auto')};
   color: ${(props) => (props.$color ? props.$color : White)};
