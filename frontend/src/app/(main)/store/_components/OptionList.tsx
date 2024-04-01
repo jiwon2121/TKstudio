@@ -21,11 +21,7 @@ export interface Option {
   optionId: number
   optionName: string
   cost: number
-  optionS3Url: string
-  description: string
   purchased: boolean
-  categoryId: number
-  createdTime: string
   gender: 'MALE' | 'FEMALE'
 }
 
