@@ -27,7 +27,9 @@ const FadeInImage = styled.div`
   width: auto;
   height: auto;
   overflow: hidden;
+  opacity: 0;
   animation: ${fadeIn} 3s forwards;
+  animation-delay: 0s;
 `
 
 const Result = function () {
@@ -35,6 +37,7 @@ const Result = function () {
   const router = useRouter()
   const [imageData, setImageData] = useState<string>('')
   const { reset } = useContext(GalleryContext)
+  const [imageLoaded, setImageLoaded] = useState<boolean>(false)
 
   const handleDelete = async () => {
     const accessToken = localStorage.getItem('accessToken') as string
@@ -59,7 +62,7 @@ const Result = function () {
         if (response.ok) {
           console.log('삭제 성공')
           alert('삭제 하였습니다.')
-          router.push('/create')
+          router.replace('/create')
           // 필요한 경우 추가적인 처리
         } else {
           console.error('삭제 실패')
@@ -118,17 +121,34 @@ const Result = function () {
     getImage()
   }, [router, reset])
 
+  useEffect(() => {
+    if (imageData) {
+      setImageLoaded(true)
+    }
+  }, [imageData])
+
   return (
     <MainWrapper>
-      <FadeInImage>
-        <ImageWrapper
-          src={imageData}
-          alt="AI완성 사진"
-          $width="300px"
-          origin={true}
-        />
-      </FadeInImage>
-
+      {!imageLoaded ? ( // 이미지가 로드되지 않았을 때 placeholder 표시
+        <div
+          style={{
+            width: '300px',
+            height: '400px',
+            textAlign: 'center',
+          }}
+        >
+          인화 중입니다 !
+        </div>
+      ) : (
+        <FadeInImage>
+          <ImageWrapper
+            src={imageData}
+            alt="AI완성 사진"
+            $width="300px"
+            origin={true}
+          />
+        </FadeInImage>
+      )}
       <div>
         <Button
           onClick={() => {
