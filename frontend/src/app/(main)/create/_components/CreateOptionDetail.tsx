@@ -1,6 +1,8 @@
 import styled from 'styled-components'
 import { Option } from '../../store/_components/OptionList'
 import { Black, White, MainRed } from '@@/assets/styles/pallete'
+import { useEffect, useState } from 'react'
+import { fetchDataWithAuthorization } from '@/utils/api'
 
 const CreateOptionDetailContainer = styled.div<OptionDetailStyleProp>`
   white-space: nowrap;
@@ -15,6 +17,13 @@ const CreateOptionDetailContainer = styled.div<OptionDetailStyleProp>`
 const CreateOptionDetailImageWrapper = styled.img`
   width: 120px;
   aspect-ratio: 3/4;
+`
+const CreateNoImageWrapper = styled.div`
+  width: 120px;
+  aspect-ratio: 3/4;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `
 
 const CreateOptionDetailTextWrapper = styled.div`
@@ -35,10 +44,10 @@ interface CreateOptionDetailProps extends Option {
 function CreateOptionDetail({
   optionId,
   optionName,
-  optionS3Url,
   selectedOptionId,
   setSelectedOptionId,
 }: CreateOptionDetailProps) {
+  const [optionImageUrl, setOptionImageUrl] = useState<string>()
   function handleSelectOption(selectedId: number) {
     if (selectedId == selectedOptionId) {
       setSelectedOptionId(0)
@@ -46,6 +55,25 @@ function CreateOptionDetail({
       setSelectedOptionId(selectedId)
     }
   }
+
+  async function getOptionImage(optionId: number) {
+    const accessToken = localStorage.getItem('accessToken') as string
+    const refreshToken = localStorage.getItem('refreshToken') as string
+    const url =
+      process.env.NEXT_PUBLIC_BACK_URL + '/api/v1/option/image/' + optionId
+    const optionImageResponse = await fetchDataWithAuthorization(
+      url,
+      accessToken,
+      refreshToken,
+    )
+    const optionImageBlob = (await optionImageResponse?.blob()) as Blob
+    const imageUrl = URL.createObjectURL(optionImageBlob)
+    setOptionImageUrl(imageUrl)
+  }
+
+  useEffect(() => {
+    getOptionImage(optionId)
+  }, [])
 
   return (
     <CreateOptionDetailContainer
@@ -55,7 +83,12 @@ function CreateOptionDetail({
       onClick={() => handleSelectOption(optionId)}
       $selected={optionId == selectedOptionId}
     >
-      <CreateOptionDetailImageWrapper src={optionS3Url} />
+      {optionImageUrl ? (
+        <CreateOptionDetailImageWrapper src={optionImageUrl} />
+      ) : (
+        <CreateNoImageWrapper>불러오는 중</CreateNoImageWrapper>
+      )}
+
       <CreateOptionDetailTextWrapper>
         {optionName}
       </CreateOptionDetailTextWrapper>

@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { useState } from 'react'
+import { use, useEffect, useState } from 'react'
 import { Option } from './OptionList'
 import { White, MainRed } from '@@/assets/styles/pallete'
 import { useRouter } from 'next/navigation'
@@ -34,6 +34,14 @@ const ImageWrapper = styled.img`
   border-width: 1px 1px 0px 1px;
 `
 
+const NoImageWrapper = styled.div`
+  width: 100%;
+  aspect-ratio: 3/4;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`
+
 const OptionDetailTextWrapper = styled.div<PurchasedOptionStyleProp>`
   display: flex;
   flex-direction: column;
@@ -58,6 +66,7 @@ function OptionDetail(props: Option) {
   const router = useRouter()
   const [modalSeen, setModalSeen] = useState<boolean>(false)
   const [isClose, setIsClose] = useState<boolean>(true)
+  const [optionImageUrl, setOptionImageUrl] = useState<string>()
 
   async function getPayUrl(optionId: number) {
     const accessToken = localStorage.getItem('accessToken') as string
@@ -121,6 +130,25 @@ function OptionDetail(props: Option) {
     setIsClose(false)
   }
 
+  async function getOptionImage(optionId: number) {
+    const accessToken = localStorage.getItem('accessToken') as string
+    const refreshToken = localStorage.getItem('refreshToken') as string
+    const url =
+      process.env.NEXT_PUBLIC_BACK_URL + '/api/v1/option/image/' + optionId
+    const optionImageResponse = await fetchDataWithAuthorization(
+      url,
+      accessToken,
+      refreshToken,
+    )
+    const optionImageBlob = (await optionImageResponse?.blob()) as Blob
+    const imageUrl = URL.createObjectURL(optionImageBlob)
+    setOptionImageUrl(imageUrl)
+  }
+
+  useEffect(() => {
+    getOptionImage(props.optionId)
+  }, [])
+
   return (
     <>
       <OptionDetailWrapper
@@ -129,7 +157,11 @@ function OptionDetail(props: Option) {
         }}
         onClick={() => handleModalOpen()}
       >
-        <ImageWrapper src={props.optionS3Url} alt="optionImg" />
+        {optionImageUrl ? (
+          <ImageWrapper src={optionImageUrl} alt="optionImg" />
+        ) : (
+          <NoImageWrapper>불러오는 중</NoImageWrapper>
+        )}
         <OptionDetailTextWrapper $purchased={props.purchased}>
           <OptionNameWrapper>{props.optionName}</OptionNameWrapper>
           <OptionCostWrapper>
