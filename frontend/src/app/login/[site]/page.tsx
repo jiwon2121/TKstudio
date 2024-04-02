@@ -1,17 +1,23 @@
 'use client'
 import { useRouter, useParams, notFound } from 'next/navigation'
 import { useCallback, useEffect, useState } from 'react'
+import styled from 'styled-components'
+import Lottie from 'react-lottie-player'
+import Login from '@@/assets/lottie/landing_logo.json'
+import AlertModal from '@/components/AlertModal'
 
-interface ResponseType {
-  ok: boolean
-  error?: any
-}
+const Wrapper = styled.div`
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`
 
 const Redirect = function () {
   const router = useRouter()
-  const [result, setResult] = useState('')
   const { site } = useParams()
-  console.log(site)
+  const [modalShow, setModalShow] = useState<boolean>(false)
+
   const loginHandler = useCallback(
     async (code: any) => {
       try {
@@ -43,12 +49,12 @@ const Redirect = function () {
           }
 
           // 쿠키에 저장하거나 필요한 작업 수행
-          router.push('/home')
+          router.replace('/home')
         } else {
           // 실패한 경우에 대한 처리
           console.error('Request failed:', responseData.error)
           // 에러 페이지로 리다이렉트
-          // router.push('/notifications/authentication-failed');
+          router.replace('/login')
         }
       } catch (error) {
         console.error('Error:', error)
@@ -61,20 +67,32 @@ const Redirect = function () {
     if (site === 'kakao' || 'naver') {
       const params = new URLSearchParams(window.location.search)
       const code = params.get('code')
-      console.log('Auth Code:', code)
-      setResult(String(code))
       if (code) {
         loginHandler(code)
       } else {
-        alert('동의를 하지않아 로그인이 되지 않았습니다.')
-        router.push('/login')
+        setModalShow(true)
       }
     } else {
       notFound()
     }
   }, [loginHandler, site, router])
 
-  return <div>{result ? '로그인중입니다' : '다시 시도해주세요'}</div>
+  return (
+    <>
+      <Wrapper>
+        <Lottie loop animationData={Login} play />
+      </Wrapper>
+      {modalShow && (
+        <AlertModal
+          handleClose={() => {
+            router.replace('/login')
+          }}
+        >
+          동의를 하지않아 로그인이 되지 않았습니다
+        </AlertModal>
+      )}
+    </>
+  )
 }
 
 export default Redirect

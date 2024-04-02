@@ -22,8 +22,8 @@ const Lists = styled.ul`
     border-bottom: 1px solid ${LightGray};
     box-sizing: border-box;
     font-size: 1.25rem;
-    height: 3rem;
-    padding: 0.5rem 0;
+    height: 3.5rem;
+    padding: 0.75rem 0 0.5rem 0 ;
 
     &:first-child {
       color: ${Black};
