@@ -3,10 +3,11 @@ import Button from '@/components/Button'
 import ImageWrapper from '@/components/ImageWrapper'
 import { useRouter } from 'next/navigation'
 import styled, { keyframes } from 'styled-components'
-import { MainRed } from '@@/assets/styles/pallete'
+import { MainRed, MainGreen } from '@@/assets/styles/pallete'
 import { useEffect, useState, useContext } from 'react'
 import { GalleryContext } from '../../_components/ContextProvider'
 import { fetchDataWithAuthorization } from '@/utils/api'
+import AlertModal from '@/components/AlertModal'
 
 const MainWrapper = styled.main`
   display: flex;
@@ -36,8 +37,18 @@ const FadeInImage = styled.div`
 const Result = function () {
   const router = useRouter()
   const [imageData, setImageData] = useState<string>('')
+  const [alertMessage, setAlertMessage] = useState<string>('')
+  const [alertColor, setAlertColor] = useState<string>(MainRed)
   const { reset } = useContext(GalleryContext)
   const [imageLoaded, setImageLoaded] = useState<boolean>(false)
+
+  const handleClose = () => {
+    if (alertMessage === '삭제되었습니다') {
+      router.replace('/create')
+    } else {
+      setAlertMessage('')
+    }
+  }
 
   const handleDelete = async () => {
     try {
@@ -62,12 +73,11 @@ const Result = function () {
 
       if (response) {
         if (response.ok) {
-          console.log('삭제 성공')
-          alert('삭제 하였습니다.')
-          router.replace('/create')
+          setAlertColor(MainGreen)
+          setAlertMessage('삭제되었습니다')
         } else {
-          console.error('삭제 실패')
-          alert('다시 시도해주세요')
+          setAlertColor(MainRed)
+          setAlertMessage('다시 시도해주세요')
         }
       } else {
         console.error('네트워크 오류: 응답이 null입니다.')
@@ -142,57 +152,66 @@ const Result = function () {
   }, [imageData])
 
   return (
-    <MainWrapper>
-      {!imageLoaded ? (
+    <>
+      <MainWrapper>
+        {!imageLoaded ? (
+          <div
+            style={{
+              width: '300px',
+              height: '400px',
+            }}
+          />
+        ) : (
+          <FadeInImage>
+            <ImageWrapper
+              src={imageData}
+              alt="AI완성 사진"
+              $width="300px"
+              origin={true}
+            />
+          </FadeInImage>
+        )}
         <div
           style={{
-            width: '300px',
-            height: '400px',
-            textAlign: 'center',
+            width: '100%',
+            display: 'flex',
+            justifyContent: 'center',
+            marginTop: '10px',
           }}
         >
-          인화 중입니다 !
+          <Button
+            onClick={() => {
+              alert('저장되었습니다.')
+              router.push('/gallery')
+            }}
+            $padding="0.5rem 1.5rem"
+            $fontSize="1.5rem"
+            $margin="20px"
+          >
+            확인
+          </Button>
+          <Button
+            onClick={handleDelete}
+            $backgroundColor={MainRed}
+            $padding="0.5rem 1.5rem"
+            $fontSize="1.5rem"
+            $margin="20px"
+          >
+            삭제
+          </Button>
         </div>
-      ) : (
-        <FadeInImage>
-          <ImageWrapper
-            src={imageData}
-            alt="AI완성 사진"
-            $width="300px"
-            origin={true}
-          />
-        </FadeInImage>
+      </MainWrapper>
+      {alertMessage !== '' && (
+        <AlertModal
+          alertColor={alertColor}
+          cancelButtonColor={alertColor}
+          handleClose={handleClose}
+          cancelMessage='확인'
+        >
+          {alertMessage}
+        </AlertModal>
       )}
-      <div
-        style={{
-          width: '100%',
-          display: 'flex',
-          justifyContent: 'center',
-          marginTop: '10px',
-        }}
-      >
-        <Button
-          onClick={() => {
-            alert('저장되었습니다.')
-            router.push('/gallery')
-          }}
-          $padding="0.5rem 1.5rem"
-          $fontSize="1.5rem"
-          $margin="20px"
-        >
-          확인
-        </Button>
-        <Button
-          onClick={handleDelete}
-          $backgroundColor={MainRed}
-          $padding="0.5rem 1.5rem"
-          $fontSize="1.5rem"
-          $margin="20px"
-        >
-          삭제
-        </Button>
-      </div>
-    </MainWrapper>
+    </>
   )
 }
 

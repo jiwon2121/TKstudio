@@ -19,7 +19,7 @@ function StartPage() {
         $fontWeight='bold'
         $backgroundColor={MainRed}
       >
-        시작하기
+          시작하기
       </Button>
     </>
   )
