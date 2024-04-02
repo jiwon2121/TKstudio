@@ -62,8 +62,8 @@ const PopupDiv = styled.div`
 const ButtonsWrapper = styled.div`
   display: flex;
   width: 75%;
-  flex-direction: row-reverse;
-  justify-content: space-between;
+  gap: 1.5rem;
+  justify-content: center;
   align-items: center;
 `
 
@@ -71,6 +71,8 @@ interface Props {
   children: React.ReactNode
   confirm?: string
   alertColor?: string
+  cancelButtonColor?: string
+  cancelMessage?: string
   handleClose: (() => Promise<void>) | (() => void)
   handleConfirm?: (() => Promise<void>) | (() => void)
 }
@@ -79,6 +81,8 @@ function AlertModal({
   children,
   confirm,
   alertColor = MainRed,
+  cancelButtonColor = MainRed,
+  cancelMessage = '닫기',
   handleClose,
   handleConfirm,
 }: Props) {
@@ -110,21 +114,10 @@ function AlertModal({
             <CircleAlert color={alertColor} width="40px" height="40px" />
             {children}
             <ButtonsWrapper>
-              <Button
-                $fontSize="1.25rem"
-                $padding="6px 15px"
-                $backgroundColor={MainRed}
-                onClick={(e) => {
-                  e.stopPropagation()
-                  handleClose()
-                }}
-              >
-                닫기
-              </Button>
               {confirm && (
                 <Button
                   $fontSize="1.25rem"
-                  $padding="6px 15px"
+                  $padding="8px 15px"
                   $backgroundColor={MainGreen}
                   onClick={() => {
                     handleConfirm ? handleConfirm() : null
@@ -134,6 +127,17 @@ function AlertModal({
                   {confirm}
                 </Button>
               )}
+              <Button
+                $fontSize="1.25rem"
+                $padding="8px 15px"
+                $backgroundColor={cancelButtonColor}
+                onClick={(e) => {
+                  e.stopPropagation()
+                  handleClose()
+                }}
+              >
+                {cancelMessage}
+              </Button>
             </ButtonsWrapper>
           </>
         )}

@@ -159,12 +159,14 @@ function CreatePage() {
     event.preventDefault()
 
     if (!image) {
-      alert('사진을 첨부해주세요')
+      setAlertMessage('사진이 없어요')
+      // alert('사진을 첨부해주세요')
       return
     }
 
     if (!selectedOptionId) {
-      alert('옵션을 선택해주세요')
+      setAlertMessage('옵션을 선택해주세요')
+      // alert('옵션을 선택해주세요')
       return
     }
 
