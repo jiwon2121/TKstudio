@@ -23,7 +23,7 @@ const Lists = styled.ul`
     box-sizing: border-box;
     font-size: 1.25rem;
     height: 3.5rem;
-    padding: 0.75rem 0 0.5rem 0 ;
+    padding: 0.75rem 0 0.5rem 0;
 
     &:first-child {
       color: ${Black};
@@ -69,7 +69,8 @@ function ModalContents({
           handleClick ? handleClick() : null
           handleCancel()
         }}
-      >{content}
+      >
+        {content}
       </Li>
     )
   })

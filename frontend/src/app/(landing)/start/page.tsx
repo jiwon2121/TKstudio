@@ -2,7 +2,7 @@
 
 import { useRouter } from 'next/navigation'
 import Button from '@/components/Button'
-import { MainYellow, MainOrange, MainRed } from '@@/assets/styles/pallete'
+import { MainRed } from '@@/assets/styles/pallete'
 
 function StartPage() {
   const router = useRouter()
@@ -16,10 +16,10 @@ function StartPage() {
         $fontSize="1.5rem"
         $margin="1rem 0 0 0"
         $padding="0.5rem 1rem"
-        $fontWeight='bold'
+        $fontWeight="bold"
         $backgroundColor={MainRed}
       >
-          시작하기
+        시작하기
       </Button>
     </>
   )

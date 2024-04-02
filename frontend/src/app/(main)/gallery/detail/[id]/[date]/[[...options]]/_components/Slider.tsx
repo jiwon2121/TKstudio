@@ -2,7 +2,7 @@
 
 import styled from 'styled-components'
 import ImageWrapper from '@/components/ImageWrapper'
-import { useState, useContext } from 'react'
+import { useState } from 'react'
 import { White, Black } from '@@/assets/styles/pallete'
 
 const SliderWrapper = styled.div`

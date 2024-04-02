@@ -25,8 +25,6 @@ function GalleryDetailPage() {
   const processedUrl = `${baseUrl}/api/v1/image/getImage/processedImage/${id}`
 
   const [images, setImages] = useState<Array<string>>([])
-  const [downloadSeen, setDownloadSeen] = useState<boolean>(false)
-  const [deleteSeen, setDeleteSeen] = useState<boolean>(false)
   const [modalSeen, setModalSeen] = useState<null | 'download' | 'delete'>(null)
   const [isClose, setIsClose] = useState<boolean>(true)
 
@@ -50,19 +48,15 @@ function GalleryDetailPage() {
   const handleClose = async () => {
     setIsClose(true)
     await new Promise((resolve) => setTimeout(resolve, 300))
-    // setDownloadSeen(false)
-    // setDeleteSeen(false)
     setModalSeen(null)
   }
 
   const handleDownloadOpen = () => {
-    // setDownloadSeen(true)
     setModalSeen('download')
     setIsClose(false)
   }
 
   const handleDeleteOpen = () => {
-    // setDeleteSeen(true)
     setModalSeen('delete')
     setIsClose(false)
   }
@@ -169,25 +163,25 @@ function GalleryDetailPage() {
       content: '96 X 128',
       handleClick: () => {
         handleDownload(96, 128)
-      }
+      },
     },
     {
       content: '192 X 256',
       handleClick: () => {
         handleDownload(192, 256)
-      }
+      },
     },
     {
       content: '384 X 512',
       handleClick: () => {
         handleDownload(384, 512)
-      }
+      },
     },
     {
       content: '768 X 1024',
       handleClick: () => {
         handleDownload(768, 1024)
-      }
+      },
     },
   ]
 
@@ -237,7 +231,7 @@ function GalleryDetailPage() {
             title="삭제하시겠습니까?"
             contents={[{ content: '삭제', handleClick: handleDelete }]}
             handleCancel={handleClose}
-            cancel='취소'
+            cancel="취소"
           />
         </SlideupModal>
       )}

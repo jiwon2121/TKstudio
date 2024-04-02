@@ -1,4 +1,5 @@
 'use client'
+
 import Button from '@/components/Button'
 import ImageWrapper from '@/components/ImageWrapper'
 import { useRouter } from 'next/navigation'
@@ -205,7 +206,7 @@ const Result = function () {
           alertColor={alertColor}
           cancelButtonColor={alertColor}
           handleClose={handleClose}
-          cancelMessage='확인'
+          cancelMessage="확인"
         >
           {alertMessage}
         </AlertModal>

@@ -6,7 +6,7 @@ import LogOut from '@@/assets/icons/log-out.svg'
 import styled from 'styled-components'
 import AlertModal from '@/components/AlertModal'
 import { useState } from 'react'
-import { MainGreen, MainOrange, MainYellow } from '@@/assets/styles/pallete'
+import { MainYellow } from '@@/assets/styles/pallete'
 
 const HeaderWrapper = styled.header`
   display: flex;
@@ -59,12 +59,19 @@ function Header() {
           <LogOut />
         </LogoutButton>
       </HeaderWrapper>
-      
-      {modalShow &&
-      <AlertModal confirm='로그아웃' handleClose={() => {SetModalShow(false)}} alertColor={MainYellow} handleConfirm={handleLogout}>
-        로그아웃 하시겠습니까?
-      </AlertModal>
-      }
+
+      {modalShow && (
+        <AlertModal
+          confirm="로그아웃"
+          handleClose={() => {
+            SetModalShow(false)
+          }}
+          alertColor={MainYellow}
+          handleConfirm={handleLogout}
+        >
+          로그아웃 하시겠습니까?
+        </AlertModal>
+      )}
     </>
   )
 }

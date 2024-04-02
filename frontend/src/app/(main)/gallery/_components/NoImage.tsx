@@ -25,7 +25,7 @@ function NoImage() {
   return (
     <NoImageWrapper>
       <IconWrapper>
-        <Camera width='80%' height='80%'/>
+        <Camera width="80%" height="80%" />
       </IconWrapper>
       <h2>등록된 사진이 없습니다</h2>
     </NoImageWrapper>

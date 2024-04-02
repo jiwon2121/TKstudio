@@ -88,7 +88,7 @@ const Redirect = function () {
             router.replace('/login')
           }}
         >
-          동의를 하지않아 로그인이 되지 않았습니다
+          동의를 하지 않아 로그인이 되지 않았습니다
         </AlertModal>
       )}
     </>
