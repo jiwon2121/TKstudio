@@ -19,18 +19,18 @@ function Carousel({ images }: Props) {
   const [page, setPage] = useState<number>(1)
   const [reset, setReset] = useState<boolean>(false)
   const [startX, setStartX] = useState<number>(0)
-  const [translateX, setTranslateX] = useState<string>('-70vw')
+  const [translateX, setTranslateX] = useState<string>('-80vw')
 
   const handlePrev = () => {
     setIndex((prev) => prev - 1)
-    setTranslateX(`-${(index - 1) * 70}vw`)
+    setTranslateX(`-${(index - 1) * 80}vw`)
 
     if (index == 1) {
       setPage(endIdx)
       setTimeout(() => {
         setReset(true)
         setIndex(endIdx)
-        setTranslateX(`-${endIdx * 70}vw`)
+        setTranslateX(`-${endIdx * 80}vw`)
       }, 350)
     } else {
       setPage((prev) => prev - 1)
@@ -38,13 +38,13 @@ function Carousel({ images }: Props) {
   }
   const handleNext = useCallback(() => {
     setIndex((prev) => prev + 1)
-    setTranslateX(`-${(index + 1) * 70}vw`)
+    setTranslateX(`-${(index + 1) * 80}vw`)
     if (index == endIdx) {
       setPage(1)
       setTimeout(() => {
         setReset(true)
         setIndex(1)
-        setTranslateX(`-${1 * 70}vw`)
+        setTranslateX(`-${1 * 80}vw`)
       }, 350)
     } else {
       setPage((prev) => prev + 1)
@@ -89,7 +89,7 @@ function Carousel({ images }: Props) {
           onClick={() => {
             setIndex(i)
             setPage(i)
-            setTranslateX(`-${i * 70}vw`)
+            setTranslateX(`-${i * 80}vw`)
           }}
         />,
       )
@@ -105,7 +105,7 @@ function Carousel({ images }: Props) {
 
   const changeStart = useCallback(() => {
     if (!changeRef.current) {
-      changeRef.current = setInterval(callback, 3000)
+      changeRef.current = setInterval(callback, 4000)
     }
   }, [callback])
 
@@ -131,7 +131,7 @@ function Carousel({ images }: Props) {
       }}
       onTouchMove={(e) => {
         const currentX: number = e.touches[0].clientX
-        setTranslateX(`calc(${-70 * page}vw - ${startX - currentX}px)`)
+        setTranslateX(`calc(${-80 * page}vw - ${startX - currentX}px)`)
       }}
       onTouchEnd={(e) => {
         setReset(false)
@@ -146,7 +146,7 @@ function Carousel({ images }: Props) {
           }
           setStartX(0)
         } else {
-          setTranslateX(`${-70 * page}vw`)
+          setTranslateX(`${-80 * page}vw`)
         }
         changeStart()
       }}
@@ -154,26 +154,6 @@ function Carousel({ images }: Props) {
       <CarouselWrapper $translateX={translateX} $reset={reset}>
         {renderImage()}
       </CarouselWrapper>
-      <PrevButton
-        onClick={() => {
-          changeStop()
-          handlePrev()
-          setReset(false)
-          changeStart()
-        }}
-      >
-        <ChevronLeftIcon />
-      </PrevButton>
-      <NextButton
-        onClick={() => {
-          changeStop
-          handleNext()
-          setReset(false)
-          changeStart()
-        }}
-      >
-        <ChevronRightIcon />
-      </NextButton>
       <Pagination $idx={page}>{renderPage(images.length)}</Pagination>
     </CarouselMain>
   )

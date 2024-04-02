@@ -6,6 +6,7 @@ const Main = styled.main`
   align-items: center;
   flex-direction: column;
   width: 100vw;
+  height: calc(100vh - 4rem - 50px);
 `
 
 export default Main

@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import styled, { keyframes } from 'styled-components'
-import { White, Black, MainRed } from '@@/assets/styles/pallete'
+import { White, Black, MainRed, MainGreen } from '@@/assets/styles/pallete'
 import CircleAlert from '@@/assets/icons/circle-alert.svg'
 import Button from './Button'
 
@@ -59,12 +59,29 @@ const PopupDiv = styled.div`
   z-index: 101;
 `
 
+const ButtonsWrapper = styled.div`
+  display: flex;
+  width: 75%;
+  flex-direction: row-reverse;
+  justify-content: space-between;
+  align-items: center;
+`
+
 interface Props {
   children: React.ReactNode
+  confirm?: string
+  alertColor?: string
   handleClose: (() => Promise<void>) | (() => void)
+  handleConfirm?: (() => Promise<void>) | (() => void)
 }
 
-function AlertModal({ children, handleClose }: Props) {
+function AlertModal({
+  children,
+  confirm,
+  alertColor = MainRed,
+  handleClose,
+  handleConfirm,
+}: Props) {
   const [show, setShow] = useState<boolean>(false)
   const Wait = async () => {
     await new Promise(() =>
@@ -90,19 +107,34 @@ function AlertModal({ children, handleClose }: Props) {
       >
         {show && (
           <>
-            <CircleAlert color={MainRed} width="40px" height="40px" />
+            <CircleAlert color={alertColor} width="40px" height="40px" />
             {children}
-            <Button
-              $fontSize="1.25rem"
-              $padding="6px 15px"
-              $backgroundColor={MainRed}
-              onClick={(e) => {
-                e.stopPropagation()
-                handleClose()
-              }}
-            >
-              닫기
-            </Button>
+            <ButtonsWrapper>
+              <Button
+                $fontSize="1.25rem"
+                $padding="6px 15px"
+                $backgroundColor={MainRed}
+                onClick={(e) => {
+                  e.stopPropagation()
+                  handleClose()
+                }}
+              >
+                닫기
+              </Button>
+              {confirm && (
+                <Button
+                  $fontSize="1.25rem"
+                  $padding="6px 15px"
+                  $backgroundColor={MainGreen}
+                  onClick={() => {
+                    handleConfirm ? handleConfirm() : null
+                    handleClose()
+                  }}
+                >
+                  {confirm}
+                </Button>
+              )}
+            </ButtonsWrapper>
           </>
         )}
       </PopupDiv>
