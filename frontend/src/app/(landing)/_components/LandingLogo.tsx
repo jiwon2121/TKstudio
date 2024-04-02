@@ -2,7 +2,7 @@
 
 import React from 'react'
 import Lottie from 'react-lottie-player'
-import Lottielanding from '@@/assets/lottie/landing_logo.json' // 로티 애니메이션 JSON 파일 경로
+import Lottielanding from '@@/assets/lottie/landing_logo.json'
 
 export default function Animation() {
   return (

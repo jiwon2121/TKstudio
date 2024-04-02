@@ -17,11 +17,3 @@ const Button = styled.button`
   padding: 0;
   border: none;
 `
-
-export const PrevButton = styled(Button)`
-  left: 5%;
-`
-
-export const NextButton = styled(Button)`
-  right: 5%;
-`

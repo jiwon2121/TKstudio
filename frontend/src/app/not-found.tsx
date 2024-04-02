@@ -2,7 +2,7 @@
 
 import React from 'react'
 import Lottie from 'react-lottie-player'
-import Lottienot from '@@/assets/lottie/notfound.json' // 로티 애니메이션 JSON 파일 경로
+import Lottienot from '@@/assets/lottie/notfound.json'
 import styled from 'styled-components'
 
 const Wrapper = styled.div`

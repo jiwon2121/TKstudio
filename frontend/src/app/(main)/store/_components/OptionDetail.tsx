@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { use, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Option } from './OptionList'
 import { White, MainRed } from '@@/assets/styles/pallete'
 import { useRouter } from 'next/navigation'

@@ -1,11 +1,8 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
 import Image, { StaticImageData } from 'next/image'
-import ChevronLeftIcon from '@@/assets/icons/chevron-left.svg'
-import ChevronRightIcon from '@@/assets/icons/chevron-right.svg'
 import CarouselMain from './_atom/CarouselMain'
 import CarouselWrapper from './_atom/CarouselWrapper'
 import CarouselSlide from './_atom/CarouselSlide'
-import { PrevButton, NextButton } from './_atom/CarouselButton'
 import Pagination from './_atom/Pagination'
 
 interface Props {
