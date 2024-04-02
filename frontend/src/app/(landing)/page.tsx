@@ -53,16 +53,16 @@ function LandingPage() {
     } else if (device === 'android') {
       return deferredPrompt ? (
         <Button
-          $fontSize="1.5rem"
-          $padding="0.5rem 1rem"
+          $fontSize="1rem"
+          $padding="0.5rem 1.5rem"
           $borderRadius="1rem"
           onClick={() => {
             handleInstallClick()
             handleClose()
           }}
         >
-          앱 다운로드 
-          <span style={{ verticalAlign: 'middle' }}>
+          다운로드
+          <span style={{ verticalAlign: 'middle', paddingLeft: '0.5rem' }}>
             <DownloadIcon width="1.5rem" height="1.5rem" color={White} />
           </span>
         </Button>

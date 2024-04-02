@@ -56,7 +56,6 @@ const IntroDiv = styled.div<{ $backgroundColor: string; $color?: string }>`
   background-color: ${(props) => props.$backgroundColor};
   color: ${(props) => (props.$color ? props.$color : White)};
   padding: 5vw 0;
-  gap: 10%;
 
   span {
     justify-content: center;
@@ -67,6 +66,7 @@ const IntroDiv = styled.div<{ $backgroundColor: string; $color?: string }>`
   @media screen and (max-width: 512px) {
     flex-direction: column;
     height: 100vh;
+    gap: 32px;
 
     img {
       width: 70%;
@@ -79,18 +79,22 @@ const IntroDiv = styled.div<{ $backgroundColor: string; $color?: string }>`
   }
 
   @media screen and (min-width: 513px) {
+    gap: min(10%, 300px);
     img {
       height: 90vh;
       width: auto;
     }
 
     span {
-      width: 450px;
+      width: 300px;
+      font-size: 1.7rem;
     }
   }
 `
 
-const Content = styled.span`
+const Content = styled.div`
+  display: flex;
+  flex-direction: column;
   font-size: 1.5rem;
   font-weight: bold;
 `
@@ -128,13 +132,13 @@ function Background({ children }: Props) {
           >
             내 손안에 사진관
           </span>
-          <span style={{ color: White }}>클릭 한번으로 간편하게</span>
+          <span style={{ color: White }}>클릭 한 번으로 간편하게</span>
           {children}
         </div>
         <div
           style={{
             position: 'absolute',
-            bottom: '32px',
+            bottom: '12%',
             left: '50%',
             transform: 'translateX(-50%)',
           }}
@@ -143,15 +147,24 @@ function Background({ children }: Props) {
         </div>
       </MainDiv>
       <IntroDiv $backgroundColor={MainGreen}>
-        <Content>원하는 옷으로 증명사진을 찍어보세요</Content>
+        <Content>
+          <span>원하는 스타일로</span>
+          <span>증명사진을 찍어보세요</span>
+        </Content>
         <Image src={Body1} alt="body1" priority={true} />
       </IntroDiv>
       <IntroDiv $backgroundColor={White} $color={Black}>
-        <Content>나만의 증명사진 아카이브를 만들어 보세요</Content>
+        <Content>
+          <span>마음껏 사진을 찍고</span>
+          <span>비교해 보세요</span>
+        </Content>
         <Image src={Body2} alt="body2" priority={true} />
       </IntroDiv>
       <IntroDiv $backgroundColor={MainOrange}>
-        <Content>사진을 저장하고 공유해 보세요</Content>
+        <Content>
+          <span>사진을 저장하고</span>
+          <span>공유해 보세요</span>
+        </Content>
         <Image src={Body3} alt="body3" priority={true} />
       </IntroDiv>
     </>
