@@ -157,7 +157,6 @@ function CreatePage() {
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
-    setIsLoading(true) // 로딩 상태를 true로 변경
 
     if (!image) {
       alert('사진을 첨부해주세요')
@@ -169,6 +168,7 @@ function CreatePage() {
       return
     }
 
+    setIsLoading(true) // 로딩 상태를 true로 변경
     const accessToken = localStorage.getItem('accessToken') as string
     const refreshToken = localStorage.getItem('refreshToken') as string
 
