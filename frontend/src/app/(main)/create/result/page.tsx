@@ -181,7 +181,6 @@ const Result = function () {
         >
           <Button
             onClick={() => {
-              alert('저장되었습니다.')
               router.push('/gallery')
             }}
             $padding="0.5rem 1.5rem"
