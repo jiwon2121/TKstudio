@@ -202,25 +202,25 @@
 
 ## 아키텍처 다이어그램
 
-<img src="./gif/아키텍처%20다이어그램.png" alt="아키텍처" width="700px"/>
+<img src="./gif/아키텍처%20다이어그램.png" alt="아키텍처" width="600px"/>
 
 ## ERD
 
-<img src="./gif/ERD.png" alt="ERD" width="700px" />
+<img src="./gif/ERD.png" alt="ERD" width="600px" />
 
 ## 시퀀스 다이어그램
 
 ### 로그인
 
-![로그인](/gif/로그인%20시퀀스%20다이어그램.png)
+<img src="./gif/로그인%20시퀀스%20다이어그램.png" alt="로그인" width="400px" />
 
 ### 인증/인가
 
-![인증/인가](/gif/인증_인가%20시퀀스%20다이어그램.png)
+<img src="./gif/인증_인가%20시퀀스%20다이어그램.png" alt="인증/인가" width="400px" />
 
 ### 결제
 
-![결제](/gif/결제%20시퀀스%20다이어그램.png)
+<img src="./gif/결제%20시퀀스%20다이어그램.png" alt="결제" width="400px" />
 
 ### 디렉토리 구조
 
