@@ -154,35 +154,71 @@
 📦backend
  ┣ 📂gradle
  ┃ ┗ 📂wrapper
- ┣ 📂logs
- ┃ ┗ 📂error
  ┗ 📂src
+   ┣ 📂generated
+   ┃ ┗ 📂main
+   ┃   ┗ 📂grpc
+   ┃     ┗ 📂com
+   ┃       ┗ 📂ssafy
+   ┃         ┗ 📂pjt
+   ┃           ┗ 📂grpc
+   ┃   ┗ 📂java
+   ┃     ┗ 📂com
+   ┃       ┗ 📂ssafy
+   ┃         ┗ 📂pjt
+   ┃           ┗ 📂grpc
    ┣ 📂main
-   ┃ ┣ 📂java
+   ┃ ┗ 📂java
    ┃ ┃ ┗ 📂com
    ┃ ┃   ┗ 📂ssafy
    ┃ ┃     ┗ 📂gallery
+   ┃ ┃       ┣ 📂auth
+   ┃ ┃       ┃ ┣ 📂exception
+   ┃ ┃       ┃ ┣ 📂handler
+   ┃ ┃       ┃ ┗ 📂jwt
+   ┃ ┃       ┃  ┣ 📂filter
+   ┃ ┃       ┃  ┗ 📂util
    ┃ ┃       ┣ 📂common
    ┃ ┃       ┃ ┣ 📂exception
-   ┃ ┃       ┃ ┗ 📂response
+   ┃ ┃       ┃ ┣ 📂response
+   ┃ ┃       ┃ ┗ 📂stub
    ┃ ┃       ┣ 📂config
-   ┃ ┃       ┣ 📂example
+   ┃ ┃       ┣ 📂image
    ┃ ┃       ┃ ┣ 📂controller
+   ┃ ┃       ┃ ┣ 📂exception
    ┃ ┃       ┃ ┣ 📂model
    ┃ ┃       ┃ ┣ 📂repository
    ┃ ┃       ┃ ┗ 📂service
+   ┃ ┃       ┣ 📂oauth
+   ┃ ┃       ┃ ┣ 📂client
+   ┃ ┃       ┃ ┣ 📂config
+   ┃ ┃       ┃ ┣ 📂dto
+   ┃ ┃       ┃ ┗ 📂type
+   ┃ ┃       ┣ 📂option
+   ┃ ┃       ┃ ┣ 📂controller
+   ┃ ┃       ┃ ┣ 📂dto
+   ┃ ┃       ┃ ┣ 📂exception
+   ┃ ┃       ┃ ┣ 📂model
+   ┃ ┃       ┃ ┣ 📂repository
+   ┃ ┃       ┃ ┗ 📂service
+   ┃ ┃       ┣ 📂redis
+   ┃ ┃       ┃ ┣ 📂dto
+   ┃ ┃       ┃ ┗ 📂repository
    ┃ ┃       ┗ 📂user
    ┃ ┃         ┣ 📂controller
+   ┃ ┃         ┣ 📂exception
    ┃ ┃         ┣ 📂model
    ┃ ┃         ┣ 📂repository
    ┃ ┃         ┗ 📂service
+   ┃ ┣ 📂proto
    ┃ ┗ 📂resources
-   ┃   ┗ 📂static
    ┗ 📂test
      ┗ 📂java
        ┗ 📂com
          ┗ 📂ssafy
            ┗ 📂gallery
+             ┗ 📂image
+               ┗ 📂repository
 ```
 
 </div>
@@ -195,9 +231,16 @@
 
 ```shell
 📦ai_backend
- ┣ 📜.gitignore
- ┣ 📜main.py
- ┗ 📜requirements.txt
+ ┣ 📂image
+ ┃ ┣ 📂female
+ ┃ ┗ 📂male
+ ┗ 📂src
+   ┣ 📂proto
+   ┃ ┣ 📜image.proto
+   ┃ ┣ 📜image_pb2.py
+   ┃ ┗ 📜image_pb2_grpc.py
+   ┣ 📜grpc_ai_server.py
+   ┗ 📜inswapper_128.onnx
 ```
 
 </div>
