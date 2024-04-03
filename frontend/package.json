@@ -15,6 +15,9 @@
     "next": "14.1.1",
     "react": "^18",
     "react-dom": "^18",
+    "react-lottie-player": "^2.0.0",
+    "react-transition-group": "^4.4.5",
+    "sharp": "^0.33.2",
     "styled-components": "^6.1.8"
   },
   "devDependencies": {
@@ -26,9 +29,11 @@
     "@storybook/nextjs": "^7.6.17",
     "@storybook/react": "^7.6.17",
     "@storybook/test": "^7.6.17",
+    "@svgr/webpack": "^8.1.0",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
+    "@types/react-transition-group": "^4",
     "eslint": "^8",
     "eslint-config-next": "14.1.1",
     "eslint-plugin-storybook": "^0.8.0",
@@ -36,5 +41,5 @@
     "typescript": "^5",
     "webpack": "^5.90.3"
   },
-  "packageManager": "yarn@4.1.0"
+  "packageManager": "yarn@4.1.1"
 }

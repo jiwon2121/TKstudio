@@ -1,0 +1,82 @@
+@font-face {
+  font-family: 'GmarketSans';
+  font-weight: 300;
+  src: url('../../public/assets/fonts/GmarketSansLight.otf') format('otf'),
+    url('../../public/assets/fonts/GmarketSansTTFLight.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'GmarketSans';
+  font-weight: 400;
+  src: url('../../public/assets/fonts/GmarketSansMedium.otf') format('otf'),
+    url('../../public/assets/fonts/GmarketSansTTFMedium.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'GmarketSans';
+  font-weight: 700;
+  src: url('../../public/assets/fonts/GmarketSansBold.otf') format('otf'),
+    url('../../public/assets/fonts/GmarketSansTTFBold.ttf') format('truetype');
+}
+
+body {
+  font-family: 'GmarketSans', apple-system, BlinkMacSystemFont, 'Segoe UI',
+    'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans',
+    'Helvetica Neue', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: #FDFFFD;
+  color: #0D0D0D;
+}
+
+button {
+  font-family: 'GmarketSans', apple-system, BlinkMacSystemFont, 'Segoe UI',
+    'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans',
+    'Helvetica Neue', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+input {
+  font-family: 'GmarketSans', apple-system, BlinkMacSystemFont, 'Segoe UI',
+    'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans',
+    'Helvetica Neue', sans-serif;
+
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+button {
+  font-family: 'GmarketSans', apple-system, BlinkMacSystemFont, 'Segoe UI',
+    'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans',
+    'Helvetica Neue', sans-serif;
+
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+canvas {
+  font-family: 'GmarketSans', apple-system, BlinkMacSystemFont, 'Segoe UI',
+    'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans',
+    'Helvetica Neue', sans-serif;
+
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+tspan {
+  font-family: 'GmarketSans', apple-system, BlinkMacSystemFont, 'Segoe UI',
+    'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans',
+    'Helvetica Neue', sans-serif;
+
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+text {
+  font-family: 'GmarketSans', apple-system, BlinkMacSystemFont, 'Segoe UI',
+    'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans',
+    'Helvetica Neue', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}

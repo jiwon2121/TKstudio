@@ -21,7 +21,7 @@ public class ApiResponse<T> {
     }
 
     public static ApiResponse<?> error(String message) {
-        return new ApiResponse<>("error", message, null);
+        return new ApiResponse<>("fail", message, null);
     }
 
     @Builder

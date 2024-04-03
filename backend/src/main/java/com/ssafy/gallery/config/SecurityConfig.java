@@ -1,50 +1,72 @@
 package com.ssafy.gallery.config;
 
-import com.ssafy.gallery.user.service.OAuth2Service;
+import com.ssafy.gallery.auth.handler.CustomAccessDeniedHandler;
+import com.ssafy.gallery.auth.handler.CustomAuthenticationEntryPoint;
+import com.ssafy.gallery.auth.jwt.filter.JwtAuthenticationFilter;
+import com.ssafy.gallery.auth.jwt.util.JwtUtil;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+
+import java.util.Arrays;
+import java.util.Collections;
 
 @Configuration
 @EnableWebSecurity
+@RequiredArgsConstructor
 public class SecurityConfig {
 
-    private static final String[] AUTH_WHITELIST = {
-            "/api/**", "/graphiql", "/graphql",
-            "/swagger-ui/**", "/api-docs", "/swagger-ui-custom.html",
-            "/v3/api-docs/**", "/api-docs/**", "/swagger-ui.html"
+    @Autowired
+    private JwtUtil jwtUtil;
+    private final CustomAccessDeniedHandler accessDeniedHandler;
+    private final CustomAuthenticationEntryPoint authenticationEntryPoint;
+
+    private static final String[] AUTH_BLACKLIST = {
+            "/api/v1/user/logout", "/api/v1/option/list", "/api/v1/option/category", "/api/v1/option/payment/ready",
+            "api/v1/option/image/**", "/api/v1/image/create", "/api/v1/image/delete", "/api/v1/image/getImageInfos",
+            "/api/v1/image/getImage/originalImage","/api/v1/image/getImage/thumbnailImage","/api/v1/image/getImage/processedImage"
     };
 
-    private final OAuth2Service oAuth2Service;
-
-    public SecurityConfig(OAuth2Service oAuth2Service) {
-        this.oAuth2Service = oAuth2Service;
+    // 특정 HTTP 요청에 대한 웹 기반 보안 구성
+    @Bean
+    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+        http
+                .csrf(AbstractHttpConfigurer::disable)
+                .cors(corsConfigurer -> corsConfigurer.configurationSource(corsConfigurationSource()))
+                .addFilterBefore(new JwtAuthenticationFilter(jwtUtil), UsernamePasswordAuthenticationFilter.class)
+                .httpBasic(AbstractHttpConfigurer::disable)
+                .formLogin(AbstractHttpConfigurer::disable)
+                .authorizeHttpRequests((authorize) -> authorize
+                        .requestMatchers(AUTH_BLACKLIST).authenticated()
+                        .anyRequest().permitAll())
+                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+                .exceptionHandling((exceptionHandling) -> exceptionHandling
+                        .authenticationEntryPoint(authenticationEntryPoint)
+                        .accessDeniedHandler(accessDeniedHandler));
+        return http.build();
     }
 
-    @Bean
-    public SecurityFilterChain filterChain(HttpSecurity httpSecurity) throws Exception {
-        return httpSecurity
-                .authorizeHttpRequests(
-                        authorize -> authorize
-                                .shouldFilterAllDispatcherTypes(false)
-                                .requestMatchers(AUTH_WHITELIST)
-                                .permitAll()
-                                .anyRequest()
-                                .authenticated()
-                )
-                .httpBasic().disable()
-                .formLogin().disable()  // 폼 로그인 사용 X
-                .logout().disable() // 로그아웃 사용 X
-                .cors().disable()
-                .csrf().disable() // csrf 보안 설정 사용 X
-                .oauth2Login() // OAuth2를 통한 로그인 사용
-                .defaultSuccessUrl("/api/v1/user/loginInfo", true) // 로그인 성공시 이동할 URL
-                .userInfoEndpoint() // 사용자가 로그인에 성공하였을 경우,
-                .userService(oAuth2Service) // 해당 서비스 로직을 타도록 설정
-                .and().and()
-                .build();
+    // ⭐️ CORS 설정
+    CorsConfigurationSource corsConfigurationSource() {
+        return request -> {
+            CorsConfiguration config = new CorsConfiguration();
+            config.setAllowedHeaders(Collections.singletonList("*"));
+            config.setAllowedMethods(Collections.singletonList("*"));
+            config.setAllowedOriginPatterns(Arrays.asList("https://j10a101.p.ssafy.io", "http://localhost:3000", "https://online-pay.kakao.com"));
+            config.setAllowCredentials(true);
+            config.addExposedHeader("accessToken");
+            config.addExposedHeader("refreshToken");
+            config.addExposedHeader("imageInfoId");
+            return config;
+        };
     }
 }

@@ -1,36 +1,93 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# 딸깍사진관 Frontend
 
-## Getting Started
+## 프로젝트 소개
 
-First, run the development server:
+이 프로젝트는 Next.js를 사용한 프론트엔드 웹 애플리케이션입니다. 해당 README는 프로젝트에 대한 기본 정보와 시작 방법, 사용된 기술 스택에 관한 정보를 포함하고 있습니다.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+## 요구사항
+
+```txt
+Node - 20.10.0 LTS
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 시작하기
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### 1. yarn 설치
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+```bash
+npm install --global yarn
+```
 
-## Learn More
+### 2. 의존성 설치
 
-To learn more about Next.js, take a look at the following resources:
+```bash
+yarn
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### 3. 개발 서버 실행
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+[Port No. 3000](<(http://localhost:3000)>)
 
-## Deploy on Vercel
+```bash
+yarn dev
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## 사용된 기술 스택
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+```txt
+NEXT.js - 14.1.1
+React - ^18.0.0
+typescript - 5.2.3
+yarn - 4.1.1
+node - 20.10.0 LTS
+next-pwa - 10.2.5
+storybook - 7.6.17
+styled-components - 6.1.8
+```
+## 디렉토리 구조
+<details>
+<summary>펼치기</summary>
+&emsp;📦frontend<br>
+&emsp; ┣ 📂.next<br>
+&emsp; ┣ 📂.storybook<br>
+&emsp; ┣ 📂.yarn<br>
+&emsp; ┣ 📂node_modules<br>
+&emsp; ┣ 📂public<br>
+&emsp; ┃ ┗ 📂assets<br>
+&emsp; ┃   ┣ 📂fonts<br>
+&emsp; ┃   ┣ 📂icons<br>
+&emsp; ┃   ┣ 📂images<br>
+&emsp; ┃   ┣ 📂lottie<br>
+&emsp; ┃   ┗ 📂styles<br>
+&emsp; ┗ 📂src<br>
+&emsp;   ┣ 📂app<br>
+&emsp;   ┃ ┣ 📂(landing)<br>
+&emsp;   ┃ ┃ ┣ 📂start<br>
+&emsp;   ┃ ┃ ┗ 📂_components<br>
+&emsp;   ┃ ┣ 📂(main)<br>
+&emsp;   ┃ ┃ ┣ 📂create<br>
+&emsp;   ┃ ┃ ┃ ┣ 📂result<br>
+&emsp;   ┃ ┃ ┃ ┗ 📂_components<br>
+&emsp;   ┃ ┃ ┣ 📂gallery<br>
+&emsp;   ┃ ┃ ┃ ┣ 📂detail<br>
+&emsp;   ┃ ┃ ┃ ┃ ┗ 📂[id]<br>
+&emsp;   ┃ ┃ ┃ ┃  ┗ 📂[date]<br>
+&emsp;   ┃ ┃ ┃ ┃    ┗ 📂[[...options]]<br>
+&emsp;   ┃ ┃ ┃ ┃       ┗ 📂_components<br>
+&emsp;   ┃ ┃ ┃ ┗ 📂_components<br>
+&emsp;   ┃ ┃ ┣ 📂home<br>
+&emsp;   ┃ ┃ ┃ ┗ 📂_component<br>
+&emsp;   ┃ ┃ ┃   ┗ 📂_atom<br>
+&emsp;   ┃ ┃ ┣ 📂store<br>
+&emsp;   ┃ ┃ ┃ ┗ 📂_components<br>
+&emsp;   ┃ ┃ ┗ 📂_components<br>
+&emsp;   ┃ ┃   ┗ 📂_molecules<br>
+&emsp;   ┃ ┣ 📂lib<br>
+&emsp;   ┃ ┗ 📂login<br>
+&emsp;   ┃   ┗ 📂[site]<br>
+&emsp;   ┣ 📂components<br>
+&emsp;   ┣ 📂stories<br>
+&emsp;   ┣ 📂types<br>
+&emsp;   ┗ 📂utils<br>
+</details>
+

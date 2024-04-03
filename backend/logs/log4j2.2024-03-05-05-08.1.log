@@ -1,1 +1,0 @@
-[2024-03-05 17:08:51.059]  WARN 2144 --- [nio-8080-exec-2] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.bind.MissingServletRequestParameterException: Required request parameter 'error' for method parameter type String is not present]
