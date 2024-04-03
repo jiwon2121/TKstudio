@@ -1,3 +1,0 @@
-[2024-03-05 16:39:55.498]  INFO 11692 --- [nio-8080-exec-1] o.a.c.c.C.[.[.[/]                        : Initializing Spring DispatcherServlet 'dispatcherServlet'
-[2024-03-05 16:39:55.501]  INFO 11692 --- [nio-8080-exec-1] o.s.w.s.DispatcherServlet                : Initializing Servlet 'dispatcherServlet'
-[2024-03-05 16:39:55.502]  INFO 11692 --- [nio-8080-exec-1] o.s.w.s.DispatcherServlet                : Completed initialization in 1 ms

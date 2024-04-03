@@ -11,8 +11,8 @@ import org.springframework.context.annotation.Configuration;
 
 @OpenAPIDefinition(
         info = @Info(
-                title = "Example API Docs",
-                description = "Description",
+                title = "딸깍사진관 API Docs",
+                description = "딸깍사진관 서비스 API 명세서",
                 version = "v1"
         )
 )

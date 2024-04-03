@@ -1,4 +1,0 @@
-[2024-03-04 17:57:36.610]  INFO 12188 --- [nio-8080-exec-2] o.a.c.c.C.[.[.[/]                        : Initializing Spring DispatcherServlet 'dispatcherServlet'
-[2024-03-04 17:57:36.611]  INFO 12188 --- [nio-8080-exec-2] o.s.w.s.DispatcherServlet                : Initializing Servlet 'dispatcherServlet'
-[2024-03-04 17:57:36.612]  INFO 12188 --- [nio-8080-exec-2] o.s.w.s.DispatcherServlet                : Completed initialization in 1 ms
-[2024-03-04 17:57:42.770]  WARN 12188 --- [nio-8080-exec-4] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.bind.MissingServletRequestParameterException: Required request parameter 'paramValue' for method parameter type Long is present but converted to null]

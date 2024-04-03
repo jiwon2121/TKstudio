@@ -1,7 +1,0 @@
-[2024-03-05 16:32:00.085]  INFO 11692 --- [  restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
-[2024-03-05 16:32:00.102]  INFO 11692 --- [  restartedMain] o.a.c.h.Http11NioProtocol                : Starting ProtocolHandler ["http-nio-8080"]
-[2024-03-05 16:32:00.116]  INFO 11692 --- [  restartedMain] o.s.b.w.e.t.TomcatWebServer              : Tomcat started on port 8080 (http) with context path ''
-[2024-03-05 16:32:00.122]  INFO 11692 --- [  restartedMain] c.s.g.GalleryApplication                 : Started GalleryApplication in 2.589 seconds (process running for 3.182)
-[2024-03-05 16:32:25.194]  INFO 11692 --- [nio-8080-exec-1] o.a.c.c.C.[.[.[/]                        : Initializing Spring DispatcherServlet 'dispatcherServlet'
-[2024-03-05 16:32:25.195]  INFO 11692 --- [nio-8080-exec-1] o.s.w.s.DispatcherServlet                : Initializing Servlet 'dispatcherServlet'
-[2024-03-05 16:32:25.196]  INFO 11692 --- [nio-8080-exec-1] o.s.w.s.DispatcherServlet                : Completed initialization in 1 ms

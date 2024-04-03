@@ -1,36 +1,50 @@
 package com.ssafy.gallery.user.model;
 
+import com.ssafy.gallery.oauth.dto.Domain;
 import jakarta.persistence.*;
-import lombok.*;
-import org.hibernate.annotations.DynamicUpdate;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+
+import java.time.LocalDateTime;
+
+import static lombok.AccessLevel.PROTECTED;
 
 @Entity
-@Getter
-@DynamicUpdate // Entity update시, 원하는 데이터만 update하기 위함
-@AllArgsConstructor
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Builder
+@AllArgsConstructor
+@NoArgsConstructor(access = PROTECTED)
+@Getter
+@Table(name = "user",
+        uniqueConstraints = {
+                @UniqueConstraint(
+                        name = "domain_unique",
+                        columnNames = {
+                                "domain_user_key",
+                                "domain_name"
+                        }
+                ),
+        }
+)
 public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "user_id")
-    private Long id;
+    private int userId;
 
-    @Column(name = "username", nullable = false)
-    private String username; // 로그인한 사용자의 이름
+    @Embedded
+    private Domain domain;
 
-    @Column(name = "email", nullable = false)
-    private String email; // 로그인한 사용자의 이메일
+    @Column(name = "nickname", columnDefinition = "VARCHAR(50) CHARACTER SET UTF8")
+    private String nickname;
+    private String email;
+    private String gender;
 
-    @Column(name = "provider", nullable = false)
-    private String provider; // 사용자가 로그인한 서비스(ex) google, naver..)
+    private LocalDateTime registerTime;
 
-    // 사용자의 이름이나 이메일을 업데이트하는 메소드
-    public User updateUser(String username, String email) {
-        this.username = username;
-        this.email = email;
-
-        return this;
+    @PrePersist
+    protected void onCreate() {
+        registerTime = LocalDateTime.now();
     }
 }

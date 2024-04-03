@@ -12,29 +12,29 @@
             <PatternLayout pattern="${COLOR_PATTERN}"/>
         </Console>
 
-        <RollingFile name="RollingFileAppender">
-            <FileName>${LOG_PATH}/log4j2.log</FileName>
-            <FilePattern>${LOG_PATH}/log4j2.%d{yyyy-MM-dd-hh-mm}.%i.log</FilePattern>
-            <PatternLayout>
-                <Pattern>${DEFAULT_PATTERN}</Pattern>
-            </PatternLayout>
-            <Policies>
-                <SizeBasedTriggeringPolicy size="100MB"/>
-                <TimeBasedTriggeringPolicy interval="1" modulate="true"/>
-            </Policies>
-        </RollingFile>
+<!--        <RollingFile name="RollingFileAppender">-->
+<!--            <FileName>${LOG_PATH}/log4j2.log</FileName>-->
+<!--            <FilePattern>${LOG_PATH}/log4j2.%d{yyyy-MM-dd-hh-mm}.%i.log</FilePattern>-->
+<!--            <PatternLayout>-->
+<!--                <Pattern>${DEFAULT_PATTERN}</Pattern>-->
+<!--            </PatternLayout>-->
+<!--            <Policies>-->
+<!--                <SizeBasedTriggeringPolicy size="100MB"/>-->
+<!--                <TimeBasedTriggeringPolicy interval="1" modulate="true"/>-->
+<!--            </Policies>-->
+<!--        </RollingFile>-->
 
-        <RollingFile name="RollingFileErrorAppender">
-            <FileName>${LOG_PATH}/log4j2_error.log</FileName>
-            <FilePattern>${LOG_PATH}/log4j2_error.%d{yyyy-MM-dd-hh-mm}.%i.log</FilePattern>
-            <PatternLayout>
-                <Pattern>${DEFAULT_PATTERN}</Pattern>
-            </PatternLayout>
-            <Policies>
-                <SizeBasedTriggeringPolicy size="100MB"/>
-                <TimeBasedTriggeringPolicy interval="1" modulate="true"/>
-            </Policies>
-        </RollingFile>
+<!--        <RollingFile name="RollingFileErrorAppender">-->
+<!--            <FileName>${LOG_PATH}/log4j2_error.log</FileName>-->
+<!--            <FilePattern>${LOG_PATH}/log4j2_error.%d{yyyy-MM-dd-hh-mm}.%i.log</FilePattern>-->
+<!--            <PatternLayout>-->
+<!--                <Pattern>${DEFAULT_PATTERN}</Pattern>-->
+<!--            </PatternLayout>-->
+<!--            <Policies>-->
+<!--                <SizeBasedTriggeringPolicy size="100MB"/>-->
+<!--                <TimeBasedTriggeringPolicy interval="1" modulate="true"/>-->
+<!--            </Policies>-->
+<!--        </RollingFile>-->
     </Appenders>
 
 
@@ -42,45 +42,45 @@
         <!-- Root : 일반적인 로그 정책, 반드시 하나 정의해야함 -->
         <Root level="INFO" additivity="false">
             <AppenderRef ref="ConsoleAppender"/>
-            <AppenderRef ref="RollingFileAppender"/>
-            <AppenderRef ref="RollingFileErrorAppender" level="ERROR"/>
+<!--            <AppenderRef ref="RollingFileAppender"/>-->
+<!--            <AppenderRef ref="RollingFileErrorAppender" level="ERROR"/>-->
         </Root>
 
         <!-- springframework logger -->
         <Logger name="org.springframework" level="INFO" additivity="false">
             <AppenderRef ref="ConsoleAppender"/>
-            <AppenderRef ref="RollingFileAppender"/>
+<!--            <AppenderRef ref="RollingFileAppender"/>-->
         </Logger>
 
         <!-- jdbc logger -->
         <Logger name="jdbc.sqlonly" level="OFF" additivity="false">
             <AppenderRef ref="ConsoleAppender"/>
-            <AppenderRef ref="RollingFileAppender"/>
+<!--            <AppenderRef ref="RollingFileAppender"/>-->
         </Logger>
 
         <Logger name="jdbc.sqltiming" level="INFO" additivity="false">
             <AppenderRef ref="ConsoleAppender"/>
-            <AppenderRef ref="RollingFileAppender"/>
+<!--            <AppenderRef ref="RollingFileAppender"/>-->
         </Logger>
 
         <Logger name="jdbc.resultsettable" level="INFO" additivity="false">
             <AppenderRef ref="ConsoleAppender"/>
-            <AppenderRef ref="RollingFileAppender"/>
+<!--            <AppenderRef ref="RollingFileAppender"/>-->
         </Logger>
 
         <Logger name="jdbc.audit" level="OFF" additivity="false">
             <AppenderRef ref="ConsoleAppender"/>
-            <AppenderRef ref="RollingFileAppender"/>
+<!--            <AppenderRef ref="RollingFileAppender"/>-->
         </Logger>
 
         <Logger name="jdbc.resultset" level="OFF" additivity="false">
             <AppenderRef ref="ConsoleAppender"/>
-            <AppenderRef ref="RollingFileAppender"/>
+<!--            <AppenderRef ref="RollingFileAppender"/>-->
         </Logger>
 
         <Logger name="jdbc.connection" level="OFF" additivity="false">
             <AppenderRef ref="ConsoleAppender"/>
-            <AppenderRef ref="RollingFileAppender"/>
+<!--            <AppenderRef ref="RollingFileAppender"/>-->
         </Logger>
     </Loggers>
 </Configuration>

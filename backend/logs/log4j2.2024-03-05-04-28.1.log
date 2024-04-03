@@ -1,4 +1,0 @@
-[2024-03-05 16:28:43.320]  INFO 15892 --- [nio-8080-exec-1] o.a.c.c.C.[.[.[/]                        : Initializing Spring DispatcherServlet 'dispatcherServlet'
-[2024-03-05 16:28:43.321]  INFO 15892 --- [nio-8080-exec-1] o.s.w.s.DispatcherServlet                : Initializing Servlet 'dispatcherServlet'
-[2024-03-05 16:28:43.322]  INFO 15892 --- [nio-8080-exec-1] o.s.w.s.DispatcherServlet                : Completed initialization in 1 ms
-[2024-03-05 16:28:43.779]  INFO 15892 --- [nio-8080-exec-8] o.s.a.AbstractOpenApiResource            : Init duration for springdoc-openapi is: 161 ms
