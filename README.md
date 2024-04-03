@@ -21,6 +21,7 @@
 📢 본 프로젝트는 2024 Samsung Software Academy For Youth 10기 공통 프로젝트 일환으로 진행되었습니다.
 
 ## 개발 기간
+
 2024.02.26 ~ 2024.04.04 (6주)
 
 ## Features
@@ -74,7 +75,30 @@
 - 상단의 필터를 통해 전체 / 남성 / 여성 으로 필터링 가능
 - 구매한 상품 탭에서 내가 구매한 상품을 확인
 
+## 아키텍처 다이어그램
+
+![아키텍처](/gif/아키텍처%20다이어그램.png)
+
+## ERD
+
+![ERD](/gif/ERD.png)
+
+## 시퀀스 다이어그램
+
+### 로그인
+
+![로그인](/gif/로그인%20시퀀스%20다이어그램.png)
+
+### 인증/인가
+
+![인증/인가](/gif/인증_인가%20시퀀스%20다이어그램.png)
+
+### 결제
+
+![결제](/gif/결제%20시퀀스%20다이어그램.png)
+
 ### Directory Structure
+
 <h3> 
 <details>
 <summary>frontend</summary>
@@ -117,6 +141,7 @@
 │  └─📂visit
 └─📂stores
 ```
+
 </div>
 </details>
 
@@ -174,5 +199,6 @@
  ┣ 📜main.py
  ┗ 📜requirements.txt
 ```
+
 </div>
 </details>
