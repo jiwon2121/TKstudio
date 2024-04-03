@@ -129,6 +129,66 @@
 📦backend
  ┣ 📂gradle
  ┃ ┗ 📂wrapper
+<<<<<<< HEAD
+ ┗ 📂src
+   ┣ 📂generated
+   ┃ ┗ 📂main
+   ┃   ┗ 📂grpc
+   ┃     ┗ 📂com
+   ┃       ┗ 📂ssafy
+   ┃         ┗ 📂pjt
+   ┃           ┗ 📂grpc
+   ┃   ┗ 📂java
+   ┃     ┗ 📂com
+   ┃       ┗ 📂ssafy
+   ┃         ┗ 📂pjt
+   ┃           ┗ 📂grpc
+   ┣ 📂main
+   ┃ ┗ 📂java
+   ┃ ┃ ┗ 📂com
+   ┃ ┃   ┗ 📂ssafy
+   ┃ ┃     ┗ 📂gallery
+   ┃ ┃       ┣ 📂auth
+   ┃ ┃       ┃ ┣ 📂exception
+   ┃ ┃       ┃ ┣ 📂handler
+   ┃ ┃       ┃ ┗ 📂jwt
+   ┃ ┃       ┃  ┣ 📂filter
+   ┃ ┃       ┃  ┗ 📂util
+   ┃ ┃       ┣ 📂common
+   ┃ ┃       ┃ ┣ 📂exception
+   ┃ ┃       ┃ ┣ 📂response
+   ┃ ┃       ┃ ┗ 📂stub
+   ┃ ┃       ┣ 📂config
+   ┃ ┃       ┣ 📂image
+   ┃ ┃       ┃ ┣ 📂controller
+   ┃ ┃       ┃ ┣ 📂exception
+   ┃ ┃       ┃ ┣ 📂model
+   ┃ ┃       ┃ ┣ 📂repository
+   ┃ ┃       ┃ ┗ 📂service
+   ┃ ┃       ┣ 📂oauth
+   ┃ ┃       ┃ ┣ 📂client
+   ┃ ┃       ┃ ┣ 📂config
+   ┃ ┃       ┃ ┣ 📂dto
+   ┃ ┃       ┃ ┗ 📂type
+   ┃ ┃       ┣ 📂option
+   ┃ ┃       ┃ ┣ 📂controller
+   ┃ ┃       ┃ ┣ 📂dto
+   ┃ ┃       ┃ ┣ 📂exception
+   ┃ ┃       ┃ ┣ 📂model
+   ┃ ┃       ┃ ┣ 📂repository
+   ┃ ┃       ┃ ┗ 📂service
+   ┃ ┃       ┣ 📂redis
+   ┃ ┃       ┃ ┣ 📂dto
+   ┃ ┃       ┃ ┗ 📂repository
+   ┃ ┃       ┗ 📂user
+   ┃ ┃         ┣ 📂controller
+   ┃ ┃         ┣ 📂exception
+   ┃ ┃         ┣ 📂model
+   ┃ ┃         ┣ 📂repository
+   ┃ ┃         ┗ 📂service
+   ┃ ┣ 📂proto
+   ┃ ┗ 📂resources
+=======
  ┣ 📂logs
  ┃ ┗ 📂error
  ┗ 📂src
@@ -153,11 +213,17 @@
    ┃ ┃         ┗ 📂service
    ┃ ┗ 📂resources
    ┃   ┗ 📂static
+>>>>>>> 997f5a5a6e853956b4f97dc984593ece46df5a40
    ┗ 📂test
      ┗ 📂java
        ┗ 📂com
          ┗ 📂ssafy
            ┗ 📂gallery
+<<<<<<< HEAD
+             ┗ 📂image
+               ┗ 📂repository
+=======
+>>>>>>> 997f5a5a6e853956b4f97dc984593ece46df5a40
 ```
 
 </div>
@@ -170,9 +236,22 @@
 
 ```shell
 📦ai_backend
+<<<<<<< HEAD
+ ┣ 📂image
+ ┃ ┣ 📂female
+ ┃ ┗ 📂male
+ ┗ 📂src
+   ┣ 📂proto
+   ┃ ┣ 📜image.proto
+   ┃ ┣ 📜image_pb2.py
+   ┃ ┗ 📜image_pb2_grpc.py
+   ┣ 📜grpc_ai_server.py
+   ┗ 📜inswapper_128.onnx
+=======
  ┣ 📜.gitignore
  ┣ 📜main.py
  ┗ 📜requirements.txt
+>>>>>>> 997f5a5a6e853956b4f97dc984593ece46df5a40
 ```
 </div>
 </details>
