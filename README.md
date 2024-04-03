@@ -6,24 +6,150 @@
 ### 내 손 안에 사진관 딸깍사진관
 
 </div>
-<div align="center">
+📢 본 프로젝트는 2024 Samsung Software Academy For Youth 10기 특화 프로젝트 일환으로 진행되었습니다.
 
-![NGINX](https://img.shields.io/badge/NGINX-1.25.3-green)
-![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.2.3-brightgreen)
-![Ubuntu](https://img.shields.io/badge/Ubuntu-20.04.6%20LTS-orange)
-![Node.js](https://img.shields.io/badge/Node.js-20.10.0%20LTS-brightgreen)
-![Yarn](https://img.shields.io/badge/Yarn-4.1.1-yellow)
-![Next.js](https://img.shields.io/badge/Next.js-14.1.1-black)
-![JVM](https://img.shields.io/badge/JVM-Docker%20image%20openjdk:17--slim-blue)
-
-</div>
-
-📢 본 프로젝트는 2024 Samsung Software Academy For Youth 10기 공통 프로젝트 일환으로 진행되었습니다.
+## 프로젝트 소개
+- 딸깍사진관은 사용자의 얼굴이 들어간 사진을 바탕으로 증명사진을 제작해주는 서비스입니다.
+- 준비되지 않은 사진이어도 헤어스타일과 옷을 적절하게 바꾸어 제작해줍니다.
+- 다양한 선택지의 옷 옵션을 적용하여 제작할 수 있으며, 추가 옵션을 구입할 수도 있습니다.
 
 ## 개발 기간
 2024.02.26 ~ 2024.04.04 (6주)
 
-## Features
+## 팀원
+
+<table>
+    <tr height="140px">
+        <td align="center" width="150px">
+            <a href="https://github.com/gimjiyong"><img height="100px" width="100px" src="https://avatars.githubusercontent.com/u/47100178?v=4"/></a>
+            <br />
+            <a href="https://github.com/gimjiyong">김지용</a>
+        </td>
+        <td align="center" width="150px">
+            <a href="https://github.com/gardengo"><img height="100px" width="100px" src="https://avatars.githubusercontent.com/u/48192100?v=4"/></a>
+            <br />
+            <a href="https://github.com/gardengo">고정원</a>
+        </td>
+        <td align="center" width="150px">
+            <a href="https://github.com/neongseoman"><img height="100px" width="100px" src="https://avatars.githubusercontent.com/u/47319362?v=4"/></a>
+            <br />
+            <a href="https://github.com/neongseoman">박근수</a>
+        </td>
+        <td align="center" width="150px">
+            <a href="https://github.com/ooonjae"><img height="100px" width="100px" src="https://avatars.githubusercontent.com/u/87305425?v=4"/></a>
+            <br />
+            <a href="https://github.com/ooonjae">이운재</a>
+        </td>
+        <td align="center" width="150px">
+            <a href="https://github.com/jiwon2121"><img height="100px" width="100px" src="https://avatars.githubusercontent.com/u/104180067?v=4"/></a>
+            <br />
+            <a href="https://github.com/jiwon2121">이지원</a>
+        </td>
+        <td align="center" width="130px">
+            <a href="https://github.com/jinddobaegi"><img height="100px" width="100px" src="https://avatars.githubusercontent.com/u/139422554?v=4"/></a>
+            <br />
+            <a href="https://github.com/jinddobaegi">정진영</a>
+        </td>
+      <tr height="50px">
+        <td align="center">    
+          내용
+        </td>
+        </td>
+        <td align="center">
+            <div>백엔드</div>
+            <div>로그인, 결제</div>
+        </td>
+        <td align="center">
+            내용
+        </td>
+        <td align="center">
+            내용
+        </td>
+        <td align="center">
+            내용
+        </td>
+        <td align="center">
+          내용
+        </td>
+    </tr>
+    </tr>
+</table>
+
+## 개발 환경
+
+-   **IDE** : `IntelliJ IDEA`, `Vidsual Studeo Code`
+-   **FE** : `NEXT.js 14.1.1` `React 18.0.0` `TypeScript 5.2.3` `yarn 4.1.1` `Node.js 20.10.0` `next-pwa 10.2.5` `storybook 7.6.17` `styled-components 6.1.8`
+-   **BE** : `Java 17` `Gradle 7.5` `Spring Boot 3.2.3` `Spring Security 6.2.2` `Spring Data JPA 3.2.3` `Spring Cloud AWS 2.2.6` `gRPC 1.16.0`
+-   **AI** : `python 3.9.13` `insightface 0.7.3` `opencv-python 4.9.0.80` `grpcio 1.62.0` `numpy 1.26.4`
+-   **INFRA** : `Ubuntu 20.04.6` `Docker 25.0.4` `jenkins 2.448` `NginX 1.18.0` `mariaDB 11.3.2` `Redis 7.2.4`
+
+## 기술 스택
+
+### Front-end
+
+<div>
+<img src ="https://img.shields.io/badge/next.js-000000.svg?&style=for-the-badge&logo=nextdotjs&logoColor=white"/>
+<img src ="https://img.shields.io/badge/typescript-3178C6.svg?&style=for-the-badge&logo=typescript&logoColor=white"/>
+<img src ="https://img.shields.io/badge/yarn-2C8EBB.svg?&style=for-the-badge&logo=yarn&logoColor=white"/>
+<img src="https://img.shields.io/badge/node.js-339933?style=for-the-badge&logo=nodedotjs&logoColor=white">
+<img src="https://img.shields.io/badge/PWA-5A0FC8?style=for-the-badge&logo=pwa">
+<img src="https://img.shields.io/badge/storybook-FF4785?style=for-the-badge&logo=storybook&logoColor=white">
+<img src ="https://img.shields.io/badge/styledcomponents-DB7093.svg?&style=for-the-badge&logo=styledcomponents&logoColor=white"/>
+
+
+</div>
+
+### Back-end
+
+<div>
+<img src="https://img.shields.io/badge/java-e11f21?style=for-the-badge&logo=java&logoColor=white">
+<img src="https://img.shields.io/badge/Gradle-02303A?style=for-the-badge&logo=Gradle&logoColor=white"/>
+<img src="https://img.shields.io/badge/spring boot-6DB33F?style=for-the-badge&logo=springboot&logoColor=white">
+<img src="https://img.shields.io/badge/spring security-6DB33F?style=for-the-badge&logo=springsecurity&logoColor=white">
+<img src="https://img.shields.io/badge/Spring Data JPA-6DB33F?style=for-the-badge&logo=jpa&logoColor=white"/>
+<img src="https://img.shields.io/badge/Spring Cloud AWS-6DB33F?style=for-the-badge&logo=jpa&logoColor=white"/>
+<img src="https://img.shields.io/badge/JWT-000000?style=for-the-badge&logo=JSON%20web%20tokens&logoColor=white"/>
+<img src="https://img.shields.io/badge/grpc-5ec6c1?style=for-the-badge&logo=grpc&logoColor=white"/>
+</div>
+
+### AI
+
+<div>
+<img src="https://img.shields.io/badge/python-3776AB?style=for-the-badge&logo=python&logoColor=white"/>
+<img src="https://img.shields.io/badge/numpy-013243?style=for-the-badge&logo=numpy&logoColor=white"/>
+<img src="https://img.shields.io/badge/opencv-5C3EE8?style=for-the-badge&logo=opencv&logoColor=white"/>
+<img src="https://img.shields.io/badge/pytorch-EE4C2C?style=for-the-badge&logo=pytorch&logoColor=white"/>
+<img src="https://img.shields.io/badge/insightface-2ba8de?style=for-the-badge"/>
+<img src="https://img.shields.io/badge/diffusers-ffd000?style=for-the-badge"/>
+<img src="https://img.shields.io/badge/amazons3-569A31?style=for-the-badge&logo=amazons3&logoColor=white"/>
+</div>
+
+### Infra
+
+<div>
+<img src="https://img.shields.io/badge/amazonec2-FF9900?style=for-the-badge&logo=amazonec2&logoColor=white">
+<img src="https://img.shields.io/badge/docker-2496ED?style=for-the-badge&logo=docker&logoColor=white">
+<img src="https://img.shields.io/badge/jenkins-D24939?style=for-the-badge&logo=jenkins&logoColor=white">
+<img src="https://img.shields.io/badge/nginx-009639?style=for-the-badge&logo=nginx&logoColor=white">
+<img src="https://img.shields.io/badge/maraidb-003545?style=for-the-badge&logo=mariadb&logoColor=white">
+<img src="https://img.shields.io/badge/redis-DC382D?style=for-the-badge&logo=redis&logoColor=white">
+<img src="https://img.shields.io/badge/amazons3-569A31?style=for-the-badge&logo=amazons3&logoColor=white">
+</div>
+
+### 협업Tools
+
+<div>
+<img src="https://img.shields.io/badge/gitlab-FC6D26?style=for-the-badge&logo=gitlab&logoColor=white">
+<img src="https://img.shields.io/badge/mattermost-0058CC?style=for-the-badge&logo=mattermost&logoColor=white">
+<img src="https://img.shields.io/badge/jira-0052CC?style=for-the-badge&logo=jira&logoColor=white">
+<img src="https://img.shields.io/badge/notion-000000?style=for-the-badge&logo=notion&logoColor=white">
+<img src="https://img.shields.io/badge/figma-F24E1E?style=for-the-badge&logo=figma&logoColor=white">
+
+</div>
+
+<br />
+
+## 주요 기능
 
 ### 어플리케이션 접속 화면
 
@@ -74,7 +200,30 @@
 - 상단의 필터를 통해 전체 / 남성 / 여성 으로 필터링 가능
 - 구매한 상품 탭에서 내가 구매한 상품을 확인
 
-### Directory Structure
+## 아키텍처 다이어그램
+
+![아키텍처](/gif/아키텍처%20다이어그램.png)
+
+## ERD
+
+![ERD](/gif/ERD.png)
+
+## 시퀀스 다이어그램
+
+### 로그인
+
+![로그인](/gif/로그인%20시퀀스%20다이어그램.png)
+
+### 인증/인가
+
+![인증/인가](/gif/인증_인가%20시퀀스%20다이어그램.png)
+
+### 결제
+
+![결제](/gif/결제%20시퀀스%20다이어그램.png)
+
+### 디렉토리 구조
+
 <h3> 
 <details>
 <summary>frontend</summary>
@@ -117,6 +266,7 @@
 │  └─📂visit
 └─📂stores
 ```
+
 </div>
 </details>
 
@@ -132,18 +282,18 @@
  ┗ 📂src
    ┣ 📂generated
    ┃ ┗ 📂main
-   ┃   ┗ 📂grpc
-   ┃     ┗ 📂com
-   ┃       ┗ 📂ssafy
-   ┃         ┗ 📂pjt
-   ┃           ┗ 📂grpc
+   ┃   ┣ 📂grpc
+   ┃   ┃ ┗ 📂com
+   ┃   ┃   ┗ 📂ssafy
+   ┃   ┃     ┗ 📂pjt
+   ┃   ┃       ┗ 📂grpc
    ┃   ┗ 📂java
    ┃     ┗ 📂com
    ┃       ┗ 📂ssafy
    ┃         ┗ 📂pjt
    ┃           ┗ 📂grpc
    ┣ 📂main
-   ┃ ┗ 📂java
+   ┃ ┣ 📂java
    ┃ ┃ ┗ 📂com
    ┃ ┃   ┗ 📂ssafy
    ┃ ┃     ┗ 📂gallery
@@ -217,5 +367,6 @@
    ┣ 📜grpc_ai_server.py
    ┗ 📜inswapper_128.onnx
 ```
+
 </div>
 </details>
