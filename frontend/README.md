@@ -44,3 +44,50 @@ next-pwa - 10.2.5
 storybook - 7.6.17
 styled-components - 6.1.8
 ```
+## 디렉토리 구조
+<details>
+<summary>펼치기</summary>
+&emsp;📦frontend<br>
+&emsp; ┣ 📂.next<br>
+&emsp; ┣ 📂.storybook<br>
+&emsp; ┣ 📂.yarn<br>
+&emsp; ┣ 📂node_modules<br>
+&emsp; ┣ 📂public<br>
+&emsp; ┃ ┗ 📂assets<br>
+&emsp; ┃   ┣ 📂fonts<br>
+&emsp; ┃   ┣ 📂icons<br>
+&emsp; ┃   ┣ 📂images<br>
+&emsp; ┃   ┣ 📂lottie<br>
+&emsp; ┃   ┗ 📂styles<br>
+&emsp; ┗ 📂src<br>
+&emsp;   ┣ 📂app<br>
+&emsp;   ┃ ┣ 📂(landing)<br>
+&emsp;   ┃ ┃ ┣ 📂start<br>
+&emsp;   ┃ ┃ ┗ 📂_components<br>
+&emsp;   ┃ ┣ 📂(main)<br>
+&emsp;   ┃ ┃ ┣ 📂create<br>
+&emsp;   ┃ ┃ ┃ ┣ 📂result<br>
+&emsp;   ┃ ┃ ┃ ┗ 📂_components<br>
+&emsp;   ┃ ┃ ┣ 📂gallery<br>
+&emsp;   ┃ ┃ ┃ ┣ 📂detail<br>
+&emsp;   ┃ ┃ ┃ ┃ ┗ 📂[id]<br>
+&emsp;   ┃ ┃ ┃ ┃  ┗ 📂[date]<br>
+&emsp;   ┃ ┃ ┃ ┃    ┗ 📂[[...options]]<br>
+&emsp;   ┃ ┃ ┃ ┃       ┗ 📂_components<br>
+&emsp;   ┃ ┃ ┃ ┗ 📂_components<br>
+&emsp;   ┃ ┃ ┣ 📂home<br>
+&emsp;   ┃ ┃ ┃ ┗ 📂_component<br>
+&emsp;   ┃ ┃ ┃   ┗ 📂_atom<br>
+&emsp;   ┃ ┃ ┣ 📂store<br>
+&emsp;   ┃ ┃ ┃ ┗ 📂_components<br>
+&emsp;   ┃ ┃ ┗ 📂_components<br>
+&emsp;   ┃ ┃   ┗ 📂_molecules<br>
+&emsp;   ┃ ┣ 📂lib<br>
+&emsp;   ┃ ┗ 📂login<br>
+&emsp;   ┃   ┗ 📂[site]<br>
+&emsp;   ┣ 📂components<br>
+&emsp;   ┣ 📂stories<br>
+&emsp;   ┣ 📂types<br>
+&emsp;   ┗ 📂utils<br>
+</details>
+
