@@ -202,11 +202,11 @@
 
 ## 아키텍처 다이어그램
 
-<img src="./gif/아키텍처%20다이어그램.png" alt="아키텍처" width="100px"/>
+<img src="./gif/아키텍처%20다이어그램.png" alt="아키텍처" width="300px"/>
 
 ## ERD
 
-<img src="./gif/ERD.png" alt="ERD" />
+<img src="./gif/ERD.png" alt="ERD" width="300px" />
 
 ## 시퀀스 다이어그램
 
