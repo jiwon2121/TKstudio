@@ -1,0 +1,44 @@
+syntax = "proto3";
+
+package com.ssafy.pjt.grpc;
+
+// In dir 'src/proto'
+// python -m grpc_tools.protoc --python_out=. --grpc_python_out=. --proto_path=. ./image.proto
+
+service CreateImage {
+  rpc sendImage (OriginalImageInfo) returns (ProcessedImageInfo);
+}
+
+message OriginalImageInfo {
+  bytes originalImage = 1;
+  Options options = 2;
+}
+
+message ProcessedImageInfo {
+  // 처리된 이미지 데이터
+  bytes processedImage = 1;
+  // 처리된 이미지를 다운로드 받을 수 있는 URL (성공 시)
+  ResponseUrl responseUrl = 2;
+  // 처리 결과를 나타내는 enum
+  ImageProcessingResult result = 3;
+}
+
+message Options {
+  string optionName = 1;
+  int32 sex = 2;  // 0: male, 1: female
+}
+
+message ResponseUrl {
+  string originalImageUrl = 1;
+  string processedImageUrl = 2;
+  string thumbnailImageUrl = 3;
+}
+
+enum ImageProcessingResult {
+  // 처리 성공
+  SUCCESS = 0;
+  // 처리 실패
+  NO_FACE = 1;
+  // 처리 오류 (예: 잘못된 이미지 형식)
+  MANY_FACE = 2;
+}

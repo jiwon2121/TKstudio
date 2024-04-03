@@ -112,6 +112,18 @@
 <img src="https://img.shields.io/badge/grpc-5ec6c1?style=for-the-badge&logo=grpc&logoColor=white"/>
 </div>
 
+### AI
+
+<div>
+<img src="https://img.shields.io/badge/python-3776AB?style=for-the-badge&logo=python&logoColor=white"/>
+<img src="https://img.shields.io/badge/numpy-013243?style=for-the-badge&logo=numpy&logoColor=white"/>
+<img src="https://img.shields.io/badge/opencv-5C3EE8?style=for-the-badge&logo=opencv&logoColor=white"/>
+<img src="https://img.shields.io/badge/pytorch-EE4C2C?style=for-the-badge&logo=pytorch&logoColor=white"/>
+<img src="https://img.shields.io/badge/insightface-2ba8de?style=for-the-badge"/>
+<img src="https://img.shields.io/badge/diffusers-ffd000?style=for-the-badge"/>
+<img src="https://img.shields.io/badge/amazons3-569A31?style=for-the-badge&logo=amazons3&logoColor=white"/>
+</div>
+
 ### Infra
 
 <div>
