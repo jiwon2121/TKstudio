@@ -56,7 +56,7 @@
         </td>
         </td>
         <td align="center">
-            <div>백엔드, 인프라</div>
+            <div style="font-weight:bold;">백엔드, 인프라</div>
             <div>로그인, 인증/인가, 결제</div>
             <div>CI/CD, HTTPS, 리버스 프록시</div>
         </td>
