@@ -56,6 +56,7 @@
         <td align="center">    
           <div><b>팀장, 프론트엔드</b></div>
           <div>사진 생성, 옵션스토어, 결제</div>
+          <div>사진 리사이징, JWT 갱신</div>
         </td>
         </td>
         <td align="center">
