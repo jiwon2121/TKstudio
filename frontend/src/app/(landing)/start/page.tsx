@@ -3,12 +3,13 @@
 import { useRouter } from 'next/navigation'
 import Button from '@/components/Button'
 import { MainRed } from '@@/assets/styles/pallete'
+import Background from '../_components/Background'
 
 function StartPage() {
   const router = useRouter()
 
   return (
-    <>
+    <Background>
       <Button
         onClick={() => {
           router.push('/login')
@@ -21,7 +22,7 @@ function StartPage() {
       >
         시작하기
       </Button>
-    </>
+    </Background>
   )
 }
 

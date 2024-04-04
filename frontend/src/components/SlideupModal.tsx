@@ -64,7 +64,6 @@ const Modal = styled.div<{ $isClose: boolean }>`
   border-radius: 25px 25px 0 0;
   left: 50%;
   transform: translate(-50%);
-  z-index: 2;
   padding: 0;
   margin: 0;
 

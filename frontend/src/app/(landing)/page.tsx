@@ -14,6 +14,7 @@ import InstallHeader from './_components/InstallHeader'
 import InstallLogo from './_components/InstallLogo'
 import ContentsWrapper from './_components/ContentsWrapper'
 import { MainYellow, White } from '@@/assets/styles/pallete'
+import Background from './_components/Background'
 
 function LandingPage() {
   const [device, setDevice] = useState<string | null>(null)
@@ -115,6 +116,7 @@ function LandingPage() {
 
   return (
     <>
+      <Background />
       {seen && (
         <SlideupModal isClose={isClose} handleClose={handleClose}>
           <InstallWrapper>
