@@ -19,7 +19,7 @@
 ## 팀원
 
 <table>
-  <tr height="140px">
+  <tr>
         <td align="center" width="16%">
             <a href="https://github.com/gimjiyong"><img width="75%" src="https://avatars.githubusercontent.com/u/47100178?v=4"/></a>
             <br />
@@ -50,13 +50,13 @@
             <br />
             <a href="https://github.com/jinddobaegi">정진영</a>
         </td>
-      <tr height="50px">
+      <tr>
         <td align="center">    
           내용
         </td>
         </td>
         <td align="center">
-            <div style="font-weight:bold;">백엔드, 인프라</div>
+            <div><b>백엔드, 인프라</b></div>
             <div>로그인, 인증/인가, 결제</div>
             <div>CI/CD, HTTPS, 리버스 프록시</div>
         </td>
