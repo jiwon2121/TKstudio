@@ -21,32 +21,32 @@
 <table>
   <tr height="140px">
         <td align="center" width="16%">
-            <a href="https://github.com/gimjiyong"><img width="14%" src="https://avatars.githubusercontent.com/u/47100178?v=4"/></a>
+            <a href="https://github.com/gimjiyong"><img width="75%" src="https://avatars.githubusercontent.com/u/47100178?v=4"/></a>
             <br />
             <a href="https://github.com/gimjiyong">김지용</a>
         </td>
         <td align="center" width="16%">
-            <a href="https://github.com/gardengo"><img width="14%" src="https://avatars.githubusercontent.com/u/48192100?v=4"/></a>
+            <a href="https://github.com/gardengo"><img width="75%" src="https://avatars.githubusercontent.com/u/48192100?v=4"/></a>
             <br />
             <a href="https://github.com/gardengo">고정원</a>
         </td>
         <td align="center" width="16%">
-            <a href="https://github.com/neongseoman"><img width="14%" src="https://avatars.githubusercontent.com/u/47319362?v=4"/></a>
+            <a href="https://github.com/neongseoman"><img width="75%" src="https://avatars.githubusercontent.com/u/47319362?v=4"/></a>
             <br />
             <a href="https://github.com/neongseoman">박근수</a>
         </td>
         <td align="center" width="16%">
-            <a href="https://github.com/ooonjae"><img width="14%" src="https://avatars.githubusercontent.com/u/87305425?v=4"/></a>
+            <a href="https://github.com/ooonjae"><img width="75%" src="https://avatars.githubusercontent.com/u/87305425?v=4"/></a>
             <br />
             <a href="https://github.com/ooonjae">이운재</a>
         </td>
         <td align="center" width="16%">
-            <a href="https://github.com/jiwon2121"><img width="14%" src="https://avatars.githubusercontent.com/u/104180067?v=4"/></a>
+            <a href="https://github.com/jiwon2121"><img width="75%" src="https://avatars.githubusercontent.com/u/104180067?v=4"/></a>
             <br />
             <a href="https://github.com/jiwon2121">이지원</a>
         </td>
         <td align="center" width="16%">
-            <a href="https://github.com/jinddobaegi"><img height="100px" width="100px" src="https://avatars.githubusercontent.com/u/139422554?v=4"/></a>
+            <a href="https://github.com/jinddobaegi"><img width="75%" src="https://avatars.githubusercontent.com/u/139422554?v=4"/></a>
             <br />
             <a href="https://github.com/jinddobaegi">정진영</a>
         </td>
