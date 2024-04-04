@@ -129,7 +129,6 @@
 📦backend
  ┣ 📂gradle
  ┃ ┗ 📂wrapper
-<<<<<<< HEAD
  ┗ 📂src
    ┣ 📂generated
    ┃ ┗ 📂main
@@ -188,42 +187,13 @@
    ┃ ┃         ┗ 📂service
    ┃ ┣ 📂proto
    ┃ ┗ 📂resources
-=======
- ┣ 📂logs
- ┃ ┗ 📂error
- ┗ 📂src
-   ┣ 📂main
-   ┃ ┣ 📂java
-   ┃ ┃ ┗ 📂com
-   ┃ ┃   ┗ 📂ssafy
-   ┃ ┃     ┗ 📂gallery
-   ┃ ┃       ┣ 📂common
-   ┃ ┃       ┃ ┣ 📂exception
-   ┃ ┃       ┃ ┗ 📂response
-   ┃ ┃       ┣ 📂config
-   ┃ ┃       ┣ 📂example
-   ┃ ┃       ┃ ┣ 📂controller
-   ┃ ┃       ┃ ┣ 📂model
-   ┃ ┃       ┃ ┣ 📂repository
-   ┃ ┃       ┃ ┗ 📂service
-   ┃ ┃       ┗ 📂user
-   ┃ ┃         ┣ 📂controller
-   ┃ ┃         ┣ 📂model
-   ┃ ┃         ┣ 📂repository
-   ┃ ┃         ┗ 📂service
-   ┃ ┗ 📂resources
-   ┃   ┗ 📂static
->>>>>>> 997f5a5a6e853956b4f97dc984593ece46df5a40
    ┗ 📂test
      ┗ 📂java
        ┗ 📂com
          ┗ 📂ssafy
            ┗ 📂gallery
-<<<<<<< HEAD
              ┗ 📂image
                ┗ 📂repository
-=======
->>>>>>> 997f5a5a6e853956b4f97dc984593ece46df5a40
 ```
 
 </div>
@@ -236,7 +206,6 @@
 
 ```shell
 📦ai_backend
-<<<<<<< HEAD
  ┣ 📂image
  ┃ ┣ 📂female
  ┃ ┗ 📂male
@@ -247,11 +216,6 @@
    ┃ ┗ 📜image_pb2_grpc.py
    ┣ 📜grpc_ai_server.py
    ┗ 📜inswapper_128.onnx
-=======
- ┣ 📜.gitignore
- ┣ 📜main.py
- ┗ 📜requirements.txt
->>>>>>> 997f5a5a6e853956b4f97dc984593ece46df5a40
 ```
 </div>
 </details>
