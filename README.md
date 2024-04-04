@@ -64,7 +64,8 @@
             <div>CI/CD, HTTPS, 리버스 프록시</div>
         </td>
         <td align="center">
-            내용
+            <div><b>백엔드</b></div>
+            <div>이미지 서비스, gRPC</div>
         </td>
         <td align="center">
             내용
