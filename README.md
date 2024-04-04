@@ -90,7 +90,7 @@
 - **IDE** : `IntelliJ IDEA`, `Visual Studio Code`
 - **FE** : `NEXT.js 14.1.1` `React 18.0.0` `TypeScript 5.2.3` `yarn 4.1.1` `Node.js 20.10.0` `next-pwa 10.2.5` `storybook 7.6.17` `styled-components 6.1.8`
 - **BE** : `Java 17` `Gradle 7.5` `Spring Boot 3.2.3` `Spring Security 6.2.2` `Spring Data JPA 3.2.3` `Spring Cloud AWS 2.2.6` `gRPC 1.16.0`
-- **AI** : `python 3.9.13` `insightface 0.7.3` `opencv-python 4.9.0.80` `grpcio 1.62.0` `numpy 1.26.4`
+- **AI** : `python 3.9.13` `insightface 0.7.3` `opencv-python 4.9.0.80` `grpcio 1.62.0` `numpy 1.26.4` `diffusers 0.27.2` `pillow 10.2.0` `torch 2.2.0`
 - **INFRA** : `Ubuntu 20.04.6` `Docker 25.0.4` `jenkins 2.448` `NginX 1.18.0` `mariaDB 11.3.2` `Redis 7.2.4`
 
 ## 기술 스택
@@ -131,6 +131,7 @@
 <img src="https://img.shields.io/badge/insightface-2ba8de?style=for-the-badge"/>
 <img src="https://img.shields.io/badge/diffusers-ffd000?style=for-the-badge"/>
 <img src="https://img.shields.io/badge/grpc-5ec6c1?style=for-the-badge&logo=grpc&logoColor=white"/>
+<img src="https://img.shields.io/badge/pillow-3776AB?style=for-the-badge"/>
 </div>
 
 ### Infra
