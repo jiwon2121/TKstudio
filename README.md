@@ -52,7 +52,8 @@
         </td>
       <tr>
         <td align="center">    
-          내용
+          <div><b>프론트엔드</b></div>
+          <div>사진 생성, 옵션스토어, 결제</div>
         </td>
         </td>
         <td align="center">
