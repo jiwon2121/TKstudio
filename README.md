@@ -9,11 +9,13 @@
 📢 본 프로젝트는 2024 Samsung Software Academy For Youth 10기 특화 프로젝트 일환으로 진행되었습니다.
 
 ## 프로젝트 소개
+
 - 딸깍사진관은 사용자의 얼굴이 들어간 사진을 바탕으로 증명사진을 제작해주는 서비스입니다.
 - 준비되지 않은 사진이어도 헤어스타일과 옷을 적절하게 바꾸어 제작해줍니다.
 - 다양한 선택지의 옷 옵션을 적용하여 제작할 수 있으며, 추가 옵션을 구입할 수도 있습니다.
 
 ## 개발 기간
+
 2024.02.26 ~ 2024.04.04 (6주)
 
 ## 팀원
@@ -79,11 +81,11 @@
 
 ## 개발 환경
 
--   **IDE** : `IntelliJ IDEA`, `Vidsual Studeo Code`
--   **FE** : `NEXT.js 14.1.1` `React 18.0.0` `TypeScript 5.2.3` `yarn 4.1.1` `Node.js 20.10.0` `next-pwa 10.2.5` `storybook 7.6.17` `styled-components 6.1.8`
--   **BE** : `Java 17` `Gradle 7.5` `Spring Boot 3.2.3` `Spring Security 6.2.2` `Spring Data JPA 3.2.3` `Spring Cloud AWS 2.2.6` `gRPC 1.16.0`
--   **AI** : `python 3.9.13` `insightface 0.7.3` `opencv-python 4.9.0.80` `grpcio 1.62.0` `numpy 1.26.4`
--   **INFRA** : `Ubuntu 20.04.6` `Docker 25.0.4` `jenkins 2.448` `NginX 1.18.0` `mariaDB 11.3.2` `Redis 7.2.4`
+- **IDE** : `IntelliJ IDEA`, `Visual Studio Code`
+- **FE** : `NEXT.js 14.1.1` `React 18.0.0` `TypeScript 5.2.3` `yarn 4.1.1` `Node.js 20.10.0` `next-pwa 10.2.5` `storybook 7.6.17` `styled-components 6.1.8`
+- **BE** : `Java 17` `Gradle 7.5` `Spring Boot 3.2.3` `Spring Security 6.2.2` `Spring Data JPA 3.2.3` `Spring Cloud AWS 2.2.6` `gRPC 1.16.0`
+- **AI** : `python 3.9.13` `insightface 0.7.3` `opencv-python 4.9.0.80` `grpcio 1.62.0` `numpy 1.26.4`
+- **INFRA** : `Ubuntu 20.04.6` `Docker 25.0.4` `jenkins 2.448` `NginX 1.18.0` `mariaDB 11.3.2` `Redis 7.2.4`
 
 ## 기술 스택
 
@@ -97,7 +99,6 @@
 <img src="https://img.shields.io/badge/PWA-5A0FC8?style=for-the-badge&logo=pwa">
 <img src="https://img.shields.io/badge/storybook-FF4785?style=for-the-badge&logo=storybook&logoColor=white">
 <img src ="https://img.shields.io/badge/styledcomponents-DB7093.svg?&style=for-the-badge&logo=styledcomponents&logoColor=white"/>
-
 
 </div>
 
@@ -209,6 +210,10 @@
 ## ERD
 
 <img src="./gif/ERD.png" alt="ERD" width="600px" />
+
+## 와이어프레임
+
+<img src="./gif/와이어프레임.png" alt="와이어프레임" width="600px" height="600px" />
 
 ## 시퀀스 다이어그램
 
