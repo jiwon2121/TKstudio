@@ -65,7 +65,8 @@
         </td>
         <td align="center">
             <div><b>백엔드</b></div>
-            <div>이미지 서비스, gRPC</div>
+            <div>이미지 서비스 API, gRPC</div>
+            <div>Python CI/CD</div>
         </td>
         <td align="center">
             <div><b>프론트엔드, AI</b></div>
