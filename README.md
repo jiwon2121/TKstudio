@@ -19,33 +19,33 @@
 ## 팀원
 
 <table>
-    <tr height="140px">
-        <td align="center" width="150px">
+  <tr height="140px">
+        <td align="center" width="16%">
             <a href="https://github.com/gimjiyong"><img height="100px" width="100px" src="https://avatars.githubusercontent.com/u/47100178?v=4"/></a>
             <br />
             <a href="https://github.com/gimjiyong">김지용</a>
         </td>
-        <td align="center" width="150px">
+        <td align="center" width="16%">
             <a href="https://github.com/gardengo"><img height="100px" width="100px" src="https://avatars.githubusercontent.com/u/48192100?v=4"/></a>
             <br />
             <a href="https://github.com/gardengo">고정원</a>
         </td>
-        <td align="center" width="150px">
+        <td align="center" width="16%">
             <a href="https://github.com/neongseoman"><img height="100px" width="100px" src="https://avatars.githubusercontent.com/u/47319362?v=4"/></a>
             <br />
             <a href="https://github.com/neongseoman">박근수</a>
         </td>
-        <td align="center" width="150px">
+        <td align="center" width="16%">
             <a href="https://github.com/ooonjae"><img height="100px" width="100px" src="https://avatars.githubusercontent.com/u/87305425?v=4"/></a>
             <br />
             <a href="https://github.com/ooonjae">이운재</a>
         </td>
-        <td align="center" width="150px">
+        <td align="center" width="16%">
             <a href="https://github.com/jiwon2121"><img height="100px" width="100px" src="https://avatars.githubusercontent.com/u/104180067?v=4"/></a>
             <br />
             <a href="https://github.com/jiwon2121">이지원</a>
         </td>
-        <td align="center" width="130px">
+        <td align="center" width="16%">
             <a href="https://github.com/jinddobaegi"><img height="100px" width="100px" src="https://avatars.githubusercontent.com/u/139422554?v=4"/></a>
             <br />
             <a href="https://github.com/jinddobaegi">정진영</a>
@@ -72,8 +72,8 @@
         <td align="center">
           내용
         </td>
-    </tr>
-    </tr>
+      </tr>
+  </tr>
 </table>
 
 ## 개발 환경
