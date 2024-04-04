@@ -54,7 +54,7 @@
         </td>
       <tr>
         <td align="center">    
-          <div><b>프론트엔드</b></div>
+          <div><b>팀장, 프론트엔드</b></div>
           <div>사진 생성, 옵션스토어, 결제</div>
         </td>
         </td>
@@ -67,13 +67,17 @@
             내용
         </td>
         <td align="center">
-            내용
+            <div><b>프론트엔드, AI</b></div>
+          <div>사진 결과, 로그인, 사진생성, 옵션이미지 생성(AI)</div>
         </td>
         <td align="center">
-            내용
+            <div><b>프론트엔드팀장</b></div>
+          <div>갤러리, 랜딩페이지, 메인페이지</div>
+          <div>다운로드및 공유, 공통컴포넌트, PWA</div>
         </td>
         <td align="center">
-          내용
+          <div><b>AI팀장</b></div>
+          <div>gRPC, 옵션 이미지 생성(AI), 얼굴 합성(AI)</div>
         </td>
       </tr>
   </tr>
