@@ -6,7 +6,6 @@
 ### 내 손 안에 사진관 딸깍사진관
 
 </div>
-📢 본 프로젝트는 2024 Samsung Software Academy For Youth 10기 특화 프로젝트 일환으로 진행되었습니다.
 
 ## 프로젝트 소개
 
