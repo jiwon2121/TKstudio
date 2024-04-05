@@ -1,10 +1,9 @@
 'use client'
 
 import { useRouter } from 'next/navigation'
-import kakaologin2 from '@@/assets/images/kakaologin2.png'
-import naverlogin2 from '@@/assets/images/naverlogin2.png'
-import glogo from '@@/assets/images/g-logo.png'
-import Image from 'next/image'
+import KakaoIcon from '@@/assets/icons/kakao.svg'
+import NaverIcon from '@@/assets/icons/naver.svg'
+import GoogleIcon from '@@/assets/icons/google.svg'
 import { useEffect } from 'react'
 import styled from 'styled-components'
 import { MainGreen } from '@@/assets/styles/pallete'
@@ -21,7 +20,10 @@ const MainWrapper = styled.main`
   justify-content: space-evenly;
   align-items: center;
   box-sizing: border-box;
-  margin: 10vh auto;
+  position: fixed;
+  top: 50vh;
+  left: 50vw;
+  transform: translate(-50%, -50%);
 `
 
 const Login = function () {
@@ -52,13 +54,13 @@ const Login = function () {
       <Logo />
       <div style={{ display: 'flex', gap: '20px' }}>
         <Link href={kakaourl}>
-          <Image alt="카톡로그인" src={kakaologin2} width={64}></Image>
+          <KakaoIcon />
         </Link>
         <Link href={naverurl}>
-          <Image alt="네이버로그인" src={naverlogin2} width={64}></Image>
+          <NaverIcon />
         </Link>
         <Link href={googleurl}>
-          <Image alt="구글로그인" src={glogo} width={64}></Image>
+          <GoogleIcon />
         </Link>
       </div>
     </MainWrapper>
