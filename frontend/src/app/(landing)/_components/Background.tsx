@@ -10,6 +10,7 @@ import Body3 from '@@/assets/images/Body3.png'
 import { MainGreen, MainOrange, Black, White } from '@@/assets/styles/pallete'
 import DownIcon from '@@/assets/icons/chevrons-down.svg'
 import Logo from '@@/assets/icons/logo.svg'
+import SmallLogo from '@@/assets/icons/logo-small.svg'
 
 const MainDiv = styled.div`
   position: relative;
@@ -48,7 +49,11 @@ const MainDiv = styled.div`
   }
 `
 
-const IntroDiv = styled.div<{ $backgroundColor: string; $color?: string }>`
+const IntroDiv = styled.div<{
+  $backgroundColor: string
+  $color?: string
+  $reverse?: boolean
+}>`
   position: relative;
   display: flex;
   justify-content: center;
@@ -56,8 +61,9 @@ const IntroDiv = styled.div<{ $backgroundColor: string; $color?: string }>`
   background-color: ${(props) => props.$backgroundColor};
   color: ${(props) => (props.$color ? props.$color : White)};
   height: 100vh;
+  flex-direction: ${(props) => (props.$reverse ? 'row-reverse' : 'row')};
 
-  span {
+  > span {
     justify-content: center;
     align-items: center;
     display: flex;
@@ -69,23 +75,24 @@ const IntroDiv = styled.div<{ $backgroundColor: string; $color?: string }>`
     gap: 32px;
 
     img {
-      width: 70%;
-      height: auto;
+      width: auto;
+      height: 70%;
     }
 
-    span {
+    > span {
       width: 80vw;
     }
   }
 
   @media screen and (min-width: 513px) {
-    gap: min(10%, 300px);
+    gap: max(3%, 50px);
+
     img {
       height: 90vh;
       width: auto;
     }
 
-    span {
+    > span {
       width: 300px;
       font-size: 1.7rem;
     }
@@ -150,9 +157,11 @@ const DownWrapper = styled.div`
 
 interface Props {
   children?: React.ReactNode
+  start?: boolean
 }
 
-function Background({ children }: Props) {
+function Background({ children, start }: Props) {
+  const endPage = start ? 4 : 3
   const [page, setPage] = useState<number>(0)
   const [translateY, setTranslateY] = useState<string>('0')
   const [isTouch, setIsTouch] = useState<boolean>(false)
@@ -171,7 +180,7 @@ function Background({ children }: Props) {
         }
         isMove.current = true
         if (e.deltaY > 0) {
-          setPage((prev) => Math.min(3, prev + 1))
+          setPage((prev) => Math.min(endPage, prev + 1))
         } else if (e.deltaY < 0) {
           setPage((prev) => Math.max(0, prev - 1))
         }
@@ -186,7 +195,9 @@ function Background({ children }: Props) {
       onTouchMove={(e) => {
         const diff = e.touches[0].clientY - startY.current
         setTranslateY(
-          `max(min(calc(-${100 * page}vh + ${diff}px), 0vh), -300vh)`,
+          `max(min(calc(-${100 * page}vh + ${diff}px), 0vh), -${
+            endPage * 100
+          }vh)`,
         )
       }}
       onTouchEnd={(e) => {
@@ -201,7 +212,7 @@ function Background({ children }: Props) {
         if (diff > 0) {
           setPage((prev) => Math.max(0, prev - 1))
         } else if (diff < 0) {
-          setPage((prev) => Math.min(3, prev + 1))
+          setPage((prev) => Math.min(endPage, prev + 1))
         }
         setTimeout(() => {
           isMove.current = false
@@ -249,7 +260,7 @@ function Background({ children }: Props) {
           </Content>
           <Image src={Body1} alt="body1" priority={true} />
         </IntroDiv>
-        <IntroDiv $backgroundColor={White} $color={Black}>
+        <IntroDiv $backgroundColor={White} $color={Black} $reverse={true}>
           <Content>
             <span>마음껏 사진을 찍고</span>
             <span>비교해 보세요</span>
@@ -263,6 +274,20 @@ function Background({ children }: Props) {
           </Content>
           <Image src={Body3} alt="body3" priority={true} />
         </IntroDiv>
+        {start && (
+          <IntroDiv $backgroundColor={White} $color={Black}>
+            <Content>
+              <span>
+                <span style={{ verticalAlign: 'middle' }}>
+                  <SmallLogo height="1.7rem" />
+                </span>{' '}
+                에서
+              </span>
+              <span>증명사진을 찍어 보세요</span>
+            </Content>
+            {children}
+          </IntroDiv>
+        )}
       </Wrapper>
     </Display>
   )

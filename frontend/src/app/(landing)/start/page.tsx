@@ -9,7 +9,7 @@ function StartPage() {
   const router = useRouter()
 
   return (
-    <Background>
+    <Background start={true}>
       <Button
         onClick={() => {
           router.push('/login')
